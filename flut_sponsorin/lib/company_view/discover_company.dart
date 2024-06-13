@@ -1,16 +1,27 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:flut_sponsorin/company_view/discover_company_home.dart';
+import 'package:flut_sponsorin/company_view/list_submitted_events.dart';
+import 'package:flut_sponsorin/company_view/profile_company.dart';
+import 'package:flut_sponsorin/company_view/upcoming_events.dart';
+import 'package:flut_sponsorin/company_view/upload_status.dart';
 import 'package:flutter/material.dart';
 
-class homePage extends StatefulWidget {
-  const homePage({super.key});
+class discover_company extends StatefulWidget {
+  const discover_company({super.key});
 
   @override
-  State<homePage> createState() => _homePageState();
+  State<discover_company> createState() => _homePageState();
 }
 
-class _homePageState extends State<homePage> {
+class _homePageState extends State<discover_company> {
   int _page = 0;
-
+  final List<Widget> _pages = [
+    discover_company_home(),
+    upcoming_events(),
+    upload_status(),
+    list_submitted_events(),
+    profile_company(),
+  ];
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -38,11 +49,9 @@ class _homePageState extends State<homePage> {
               ),
             ),
           ),
-          body: Center(
-            child: Text(
-              'Hello, Flutter!',
-              style: TextStyle(fontSize: 24, color: Colors.black),
-            ),
+          body: IndexedStack(
+            index: _page,
+            children: _pages,
           ),
           bottomNavigationBar: CurvedNavigationBar(
             items: const [
@@ -69,6 +78,11 @@ class _homePageState extends State<homePage> {
             ],
             color: Colors.black87,
             backgroundColor: Colors.transparent,
+            onTap: (index) {
+              setState(() {
+                _page = index;
+              });
+            },
           ),
         ),
       ],

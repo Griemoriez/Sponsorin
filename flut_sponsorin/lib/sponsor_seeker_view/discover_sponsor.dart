@@ -1,15 +1,27 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:flut_sponsorin/sponsor_seeker_view/discovery_sponsor_home.dart';
+import 'package:flut_sponsorin/sponsor_seeker_view/list_company.dart';
+import 'package:flut_sponsorin/sponsor_seeker_view/list_submission.dart';
+import 'package:flut_sponsorin/sponsor_seeker_view/profile_sponsor.dart';
+import 'package:flut_sponsorin/sponsor_seeker_view/submit_proposal.dart';
 import 'package:flutter/material.dart';
 
-class homePage extends StatefulWidget {
-  const homePage({super.key});
+class discover_sponsor extends StatefulWidget {
+  const discover_sponsor({super.key});
 
   @override
-  State<homePage> createState() => _homePageState();
+  State<discover_sponsor> createState() => _discover_spponsor_state();
 }
 
-class _homePageState extends State<homePage> {
+class _discover_spponsor_state extends State<discover_sponsor> {
   int _page = 0;
+  final List<Widget> _pages = [
+    discover_sponsor_home(),
+    list_company(),
+    submit_proposal(),
+    list_submission(),
+    profile_sponsor(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +50,9 @@ class _homePageState extends State<homePage> {
               ),
             ),
           ),
-          body: Center(
-            child: Text(
-              'Hello, Flutter!',
-              style: TextStyle(fontSize: 24, color: Colors.black),
-            ),
+          body: IndexedStack(
+            index: _page,
+            children: _pages,
           ),
           bottomNavigationBar: CurvedNavigationBar(
             items: const [
@@ -69,6 +79,11 @@ class _homePageState extends State<homePage> {
             ],
             color: Colors.black87,
             backgroundColor: Colors.transparent,
+            onTap: (index) {
+              setState(() {
+                _page = index;
+              });
+            },
           ),
         ),
       ],
