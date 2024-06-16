@@ -9,7 +9,7 @@ class list_submission extends StatelessWidget {
       child: Center(
             child: Text(
               'List Submission',
-              style: TextStyle(fontSize: 24, color: Colors.black),
+              style: TextStyle(fontSize: 24, color: Colors.red),
             ),
           ),
     );
