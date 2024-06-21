@@ -42,10 +42,22 @@ class _homePageState extends State<discover_company> {
             title: Padding(
               padding: const EdgeInsets.only(top: 20),
               child: Center(
-                child: Text(
-                  "Sponsorin",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
+                child: Text.rich(
+                  TextSpan(
+                      style: TextStyle(
+                          color: Color(0xff008037),
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold),
+                      text: 'Sponsor',
+                      children: [
+                        TextSpan(
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                                fontSize: 25),
+                            text: 'in')
+                      ]),
+                )
               ),
             ),
           ),

@@ -1,3 +1,4 @@
+import 'package:flut_sponsorin/components/upcoming_event_card.dart';
 import 'package:flutter/material.dart';
 
 class discover_company_home extends StatelessWidget {
@@ -6,12 +7,7 @@ class discover_company_home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Center(
-            child: Text(
-              'Discovery Home',
-              style: TextStyle(fontSize: 24, color: Colors.black),
-            ),
-          ),
+      child: Center(child: upcoming_events_card()),
     );
   }
 }
