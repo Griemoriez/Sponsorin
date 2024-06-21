@@ -20,7 +20,7 @@ class _discover_spponsor_state extends State<discover_sponsor> {
     list_company(),
     submit_proposal(),
     list_submission(),
-    profile_sponsor(),
+    ProfileSponsor(),
   ];
 
   @override
