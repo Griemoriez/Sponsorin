@@ -1,4 +1,5 @@
 import 'package:flut_sponsorin/home.dart';
+import 'package:flut_sponsorin/sponsor_seeker_view/discover_sponsor.dart';
 import 'package:flutter/material.dart';
 import 'package:flut_sponsorin/login.dart';
 
@@ -15,7 +16,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'SponsorIn',
-      home: login(),
+      home: discover_sponsor(),
     );
   }
 }

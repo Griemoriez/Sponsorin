@@ -7,7 +7,7 @@ environment:
   sdk: '>=3.3.0 <4.0.0'
 
 dependencies:
-  
+  url_launcher: ^6.0.7
   curved_navigation_bar: ^1.0.3
   flutter:
     sdk: flutter
