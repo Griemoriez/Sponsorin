@@ -17,7 +17,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'SponsorIn',
-      home: discover_company(),
+      home: splashScreen(),
     );
   }
 }
