@@ -1,63 +1,21 @@
-import 'package:flut_sponsorin/company_view/discover_company.dart';
-import 'package:flut_sponsorin/signup.dart';
-import 'package:flut_sponsorin/sponsor_seeker_view/discover_sponsor.dart';
+import 'package:flut_sponsorin/login.dart';
 import 'package:flutter/material.dart';
 
-class login extends StatefulWidget {
-  login({super.key});
+class SignupAsCompany extends StatefulWidget {
+  const SignupAsCompany({super.key});
 
   @override
-  State<login> createState() => _loginState();
+  State<SignupAsCompany> createState() => _SignupAsCompanyState();
 }
 
-class _loginState extends State<login> {
-  List<Map<String, dynamic>> list_user = [
-    {'username': 'admin', 'password': 'qwerty', 'role': 'company'},
-    {'username': 'petra', 'password': '12345', 'role': 'company'},
-    {'username': 'irgl', 'password': '12345', 'role': 'sponsor'}
-  ];
+class _SignupAsCompanyState extends State<SignupAsCompany> {
+  final TextEditingController _tfFullName = TextEditingController();
 
-  final TextEditingController _tfUsername = TextEditingController();
-
+  final TextEditingController _tfEmail = TextEditingController();
   final TextEditingController _tfPassword = TextEditingController();
 
-  void handle_login() {
-    String username = _tfUsername.text;
-    String password = _tfPassword.text;
-
-    for (var user in list_user) {
-      if (user['username'] == username && user['password'] == password) {
-        if (user['role'] == 'company') {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => discover_company()),
-          );
-        } else if (user['role'] == 'sponsor') {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => discover_sponsor()),
-          );
-        }
-        return;
-      }
-    }
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Login Failed'),
-        content: Text('Invalid username or password'),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text('OK'),
-          ),
-        ],
-      ),
-    );
-  }
-
+  final TextEditingController _tfConfirmPassword = TextEditingController();
+  final TextEditingController _tfIdCard = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -76,11 +34,18 @@ class _loginState extends State<login> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Image(image: AssetImage('lib/assets/logo.png')),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 30),
                     child: Text(
-                      "Login",
+                      "Sign Up",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 30),
+                    child: Text(
+                      "Company / Sponsor",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                     ),
@@ -88,9 +53,23 @@ class _loginState extends State<login> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 30.0),
                     child: TextField(
-                      controller: _tfUsername,
+                      controller: _tfFullName,
                       decoration: InputDecoration(
-                        labelText: 'Email / phone numbers',
+                        labelText: 'Full Name',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                    child: TextField(
+                      controller: _tfEmail,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        labelText: 'Email / Phone number',
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30.0),
                         ),
@@ -104,7 +83,7 @@ class _loginState extends State<login> {
                       controller: _tfPassword,
                       obscureText: true,
                       decoration: InputDecoration(
-                        labelText: 'Password',
+                        labelText: 'New Password',
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30.0),
                         ),
@@ -114,25 +93,34 @@ class _loginState extends State<login> {
                   SizedBox(height: 20),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text("Don't have an account yet?"),
+                    child: TextField(
+                      controller: _tfConfirmPassword,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        labelText: 'Confirm Password',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                      ),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 30.0, vertical: 10),
                     child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => signup()));
-                        },
-                        child: Text(
-                          "Sign up here",
-                          style: TextStyle(color: Colors.blue),
+                        alignment: Alignment.centerLeft,
+                        child: Text("minimum 8 characters password")),
+                  ),
+                  SizedBox(height: 10),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                    child: TextField(
+                      controller: _tfIdCard,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        labelText: 'ID Card (person in charge)',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30.0),
                         ),
                       ),
                     ),
@@ -144,7 +132,7 @@ class _loginState extends State<login> {
                       alignment: Alignment.centerRight,
                       child: ElevatedButton(
                         onPressed: () {
-                          handle_login();
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => login()));
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Color(0xff008037),
