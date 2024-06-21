@@ -132,7 +132,7 @@ class _SignupAsCompanyState extends State<SignupAsCompany> {
                       alignment: Alignment.centerRight,
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => login()));
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginScreen()));
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Color(0xff008037),

@@ -6,7 +6,7 @@ class submit_proposal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Center(
+      child: const Center(
             child: Text(
               'submit proposal',
               style: TextStyle(fontSize: 24, color: Colors.black),

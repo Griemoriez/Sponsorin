@@ -6,7 +6,7 @@ class upload_status extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Center(
+      child: const Center(
             child: Text(
               'Upload Status',
               style: TextStyle(fontSize: 24, color: Colors.black),

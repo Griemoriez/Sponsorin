@@ -6,7 +6,7 @@ class discover_sponsor_home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Center(
+      child: const Center(
             child: Text(
               'Discovery Home',
               style: TextStyle(fontSize: 24, color: Colors.black),

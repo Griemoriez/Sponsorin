@@ -16,7 +16,7 @@ class _homePageState extends State<homePage> {
     return Stack(
       children: [
         Container(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage("lib/assets/BG.jpg"),
               fit: BoxFit.cover,
@@ -28,8 +28,8 @@ class _homePageState extends State<homePage> {
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
-            title: const Padding(
-              padding: EdgeInsets.only(top: 20),
+            title: Padding(
+              padding: const EdgeInsets.only(top: 20),
               child: Center(
                 child: Text(
                   "Sponsorin",
@@ -38,7 +38,7 @@ class _homePageState extends State<homePage> {
               ),
             ),
           ),
-          body: const Center(
+          body: Center(
             child: Text(
               'Hello, Flutter!',
               style: TextStyle(fontSize: 24, color: Colors.black),

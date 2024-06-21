@@ -6,7 +6,7 @@ class profile_sponsor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Center(
+      child: const Center(
             child: Text(
               'profile Sponsor',
               style: TextStyle(fontSize: 24, color: Colors.black),
