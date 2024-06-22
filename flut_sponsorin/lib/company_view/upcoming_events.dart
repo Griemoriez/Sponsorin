@@ -14,7 +14,7 @@ class upcoming_events extends StatelessWidget {
             child: Column(
               children: [
                 const Padding(
-                  padding: EdgeInsets.only(top: 10, bottom: 15),
+                  padding: EdgeInsets.only(top: 2.0, bottom: 15),
                   child: TextField(
                     decoration: InputDecoration(
                       focusColor: Colors.orange,
@@ -42,7 +42,8 @@ class upcoming_events extends StatelessWidget {
                               backgroundColor: Color(0xff008037),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(15)),
-                              padding: EdgeInsets.all(20)),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 10.0, horizontal: 10.0)),
                           onPressed: () {},
                           child: Text(
                             "All Events",
@@ -51,32 +52,14 @@ class upcoming_events extends StatelessWidget {
                         )),
                   ],
                 ),
-                upcoming_events_card(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "All Events",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                    Align(
-                        alignment: Alignment.centerRight,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(0xff008037),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15)),
-                              padding: EdgeInsets.all(20)),
-                          onPressed: () {},
-                          child: Text(
-                            "Sort By",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        )),
-                  ],
+                SizedBox(
+                  height: 520, // Sesuaikan tinggi sesuai kebutuhan
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 3,
+                    itemBuilder: (context, index) => upcoming_events_card(),
+                  ),
                 ),
-                overall_event_card()
               ],
             ),
           )),
