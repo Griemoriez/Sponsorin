@@ -176,4 +176,3 @@ class _discover_company_homeState extends State<discover_company_home> {
       );
   }
 }
-
