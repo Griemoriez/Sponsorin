@@ -6,7 +6,7 @@ class list_submitted_events extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Center(
+      child: const Center(
             child: Text(
               'List Submitted',
               style: TextStyle(fontSize: 24, color: Colors.black),

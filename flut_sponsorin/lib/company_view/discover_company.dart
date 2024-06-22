@@ -16,18 +16,18 @@ class discover_company extends StatefulWidget {
 class _homePageState extends State<discover_company> {
   int _page = 0;
   final List<Widget> _pages = [
-    discover_company_home(),
-    upcoming_events(),
-    upload_status(),
-    list_submitted_events(),
-    profile_company(),
+    const discover_company_home(),
+    const upcoming_events(),
+    const upload_status(),
+    const list_submitted_events(),
+    const profile_company(),
   ];
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage("lib/assets/BG.jpg"),
               fit: BoxFit.cover,
@@ -39,8 +39,8 @@ class _homePageState extends State<discover_company> {
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
-            title: Padding(
-              padding: const EdgeInsets.only(top: 20),
+            title: const Padding(
+              padding: EdgeInsets.only(top: 20),
               child: Center(
                 child: Text.rich(
                   TextSpan(
