@@ -1,3 +1,4 @@
+import 'package:flut_sponsorin/company_view/detail_submitted_events.dart';
 import 'package:flut_sponsorin/company_view/discover_company.dart';
 import 'package:flut_sponsorin/home.dart';
 import 'package:flut_sponsorin/signup.dart';

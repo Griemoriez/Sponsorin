@@ -6,11 +6,11 @@ class upcoming_events_card extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(10.0),
+      padding: EdgeInsets.all(35.0),
       child: Container(
-        width: 250,
+        width: 350,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Align(
               alignment: Alignment.topRight,
@@ -28,14 +28,14 @@ class upcoming_events_card extends StatelessWidget {
             ),
             Card(
               elevation: 4.0,
-              color: Colors.amber[50],
+              color: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
               child: Padding(
                 padding: EdgeInsets.all(10.0),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Image(
                       image: AssetImage('lib/assets/irgl.png'),
@@ -73,9 +73,7 @@ class upcoming_events_card extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(top: 16.0),
                       child: ElevatedButton(
-                        onPressed: () {
-                          // Add your onPressed code here!
-                        },
+                        onPressed: () {},
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.green,
                           shape: RoundedRectangleBorder(
