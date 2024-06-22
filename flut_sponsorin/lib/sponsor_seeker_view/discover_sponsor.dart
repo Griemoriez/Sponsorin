@@ -6,21 +6,21 @@ import 'package:flut_sponsorin/sponsor_seeker_view/profile_sponsor.dart';
 import 'package:flut_sponsorin/sponsor_seeker_view/submit_proposal.dart';
 import 'package:flutter/material.dart';
 
-class discover_sponsor extends StatefulWidget {
-  const discover_sponsor({super.key});
+class discover_event extends StatefulWidget {
+  const discover_event({super.key});
 
   @override
-  State<discover_sponsor> createState() => _discover_spponsor_state();
+  State<discover_event> createState() => _discover_spponsor_state();
 }
 
-class _discover_spponsor_state extends State<discover_sponsor> {
+class _discover_spponsor_state extends State<discover_event> {
   int _page = 0;
   final List<Widget> _pages = [
-    discover_sponsor_home(),
-    list_company(),
-    submit_proposal(),
-    list_submission(),
-    profile_sponsor(),
+    const discover_sponsor_home(),
+    const list_company(),
+    const submit_proposal(),
+    const list_submission(),
+    const profile_sponsor(),
   ];
 
   @override
@@ -28,7 +28,7 @@ class _discover_spponsor_state extends State<discover_sponsor> {
     return Stack(
       children: [
         Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage("lib/assets/BG.jpg"),
               fit: BoxFit.cover,
@@ -40,8 +40,8 @@ class _discover_spponsor_state extends State<discover_sponsor> {
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
-            title: Padding(
-              padding: const EdgeInsets.only(top: 20),
+            title: const Padding(
+              padding: EdgeInsets.only(top: 20),
               child: Center(
                 child: Text(
                   "Sponsorin",

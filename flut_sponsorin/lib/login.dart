@@ -2,171 +2,131 @@ import 'package:flut_sponsorin/company_view/discover_company.dart';
 import 'package:flut_sponsorin/signup.dart';
 import 'package:flut_sponsorin/sponsor_seeker_view/discover_sponsor.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'models/user.dart';
 
-class login extends StatefulWidget {
-  login({super.key});
+class LoginScreen extends StatefulWidget {
+  LoginScreen({super.key});
 
   @override
-  State<login> createState() => _loginState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _loginState extends State<login> {
-  List<Map<String, dynamic>> list_user = [
-    {'username': 'admin', 'password': 'qwerty', 'role': 'company'},
-    {'username': 'petra', 'password': '12345', 'role': 'company'},
-    {'username': 'irgl', 'password': '12345', 'role': 'sponsor'}
-  ];
-
-  final TextEditingController _tfUsername = TextEditingController();
-
+class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController _tfPhoneOrEmail = TextEditingController();
   final TextEditingController _tfPassword = TextEditingController();
+  late Box<User> userBox;
 
-  void handle_login() {
-    String username = _tfUsername.text;
+  void handle_login() async {
+    String emailOrPhone = _tfPhoneOrEmail.text;
     String password = _tfPassword.text;
 
-    for (var user in list_user) {
-      if (user['username'] == username && user['password'] == password) {
-        if (user['role'] == 'company') {
+    userBox = Hive.box<User>('userBox');
+    bool loginSuccess = false;
+
+    for (var key in userBox.keys) {
+      var user = userBox.get(key) as User;
+
+      if ((user.email == emailOrPhone || user.phone == emailOrPhone) && user.password == password) {
+        loginSuccess = true;
+
+        if (user.role == 'sponsor') {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => discover_event()),
+          );
+        } else if (user.role == 'seeker') {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => discover_company()),
           );
-        } else if (user['role'] == 'sponsor') {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => discover_sponsor()),
-          );
         }
-        return;
+
+        break;
       }
     }
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Login Failed'),
-        content: Text('Invalid username or password'),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text('OK'),
-          ),
-        ],
-      ),
-    );
+
+    if (!loginSuccess) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('Login Failed'),
+          content: Text('Invalid Credentials or Password'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('OK'),
+            ),
+          ],
+        ),
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("lib/assets/startupandroid.png"),
-                  fit: BoxFit.cover)),
-        ),
-        Scaffold(
-          backgroundColor: Colors.transparent,
-          body: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Image(image: AssetImage('lib/assets/logo.png')),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 30),
-                    child: Text(
-                      "Login",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-                    ),
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              TextField(
+                controller: _tfPhoneOrEmail,
+                decoration: InputDecoration(
+                  labelText: 'Email / Phone Number',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30.0),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                    child: TextField(
-                      controller: _tfUsername,
-                      decoration: InputDecoration(
-                        labelText: 'Email / phone numbers',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30.0),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                    child: TextField(
-                      controller: _tfPassword,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        labelText: 'Password',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30.0),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text("Don't have an account yet?"),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => signup()));
-                        },
-                        child: Text(
-                          "Sign up here",
-                          style: TextStyle(color: Colors.blue),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 30.0),
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          handle_login();
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xff008037),
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 50, vertical: 15),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30.0),
-                          ),
-                        ),
-                        child: Text(
-                          'Next',
-                          style: TextStyle(color: Colors.white, fontSize: 15),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ),
+              SizedBox(height: 20),
+              TextField(
+                controller: _tfPassword,
+                obscureText: true,
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
+              Align(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => signup()));
+                  },
+                  child: Text(
+                    "Don't Have an Account? Sign Up Here",
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  handle_login();
+                },
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                ),
+                child: Text('Next'),
+              ),
+            ],
           ),
-        )
-      ],
+        ),
+      ),
     );
   }
 }

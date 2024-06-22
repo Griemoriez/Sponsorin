@@ -6,7 +6,7 @@ class list_company extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Center(
+      child: const Center(
             child: Text(
               'List Company',
               style: TextStyle(fontSize: 24, color: Colors.black),
