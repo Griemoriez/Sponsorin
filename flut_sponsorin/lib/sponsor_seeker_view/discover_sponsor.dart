@@ -10,10 +10,10 @@ class discover_sponsor extends StatefulWidget {
   const discover_sponsor({super.key});
 
   @override
-  State<discover_sponsor> createState() => _discover_spponsor_state();
+  State<discover_sponsor> createState() => _discover_sponsor_state();
 }
 
-class _discover_spponsor_state extends State<discover_sponsor> {
+class _discover_sponsor_state extends State<discover_sponsor> {
   int _page = 0;
   final List<Widget> _pages = [
     discover_sponsor_home(),

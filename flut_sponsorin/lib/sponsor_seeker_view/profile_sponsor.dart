@@ -3,7 +3,6 @@ import 'profile_sponsor_home.dart';
 import 'profile_sponsor_about.dart';
 import 'profile_sponsor_past.dart';
 
-
 class ProfileSponsor extends StatelessWidget {
   const ProfileSponsor({Key? key}) : super(key: key);
 
@@ -11,8 +10,7 @@ class ProfileSponsor extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 4,
-      child: Scaffold(
-        body: Column(
+      child: Column(
           children: [
             Container(
               padding: EdgeInsets.all(16.0),
@@ -31,7 +29,7 @@ class ProfileSponsor extends StatelessWidget {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    'PT Mandira',
+                    'IRGL',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -39,7 +37,7 @@ class ProfileSponsor extends StatelessWidget {
                   ),
                   SizedBox(height: 5),
                   Text(
-                    'Banking',
+                    'Informatics Rally Games and Logic',
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.grey[600],
@@ -64,22 +62,19 @@ class ProfileSponsor extends StatelessWidget {
                 Tab(text: 'Home'),
                 Tab(text: 'About'),
                 Tab(text: 'Past Sponsorship'),
-                Tab(text: 'Events'),
               ],
             ),
             Expanded(
               child: TabBarView(
                 children: [
                   ProfileSponsorHome(),
-                  // ProfileSponsorAbout(),
-                  // ProfileSponsorPast(),
-                  Center(child: Text('Events Content')), // Placeholder for Events content
+                  ProfileSponsorAbout(),
+                  ProfileSponsorPast(),
                 ],
               ),
             ),
           ],
         ),
-      ),
-    );
+      );
   }
 }
