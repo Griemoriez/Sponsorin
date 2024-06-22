@@ -19,11 +19,11 @@ class detail_company extends StatelessWidget {
           backgroundColor: Colors.transparent,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
-            actions: [
-              IconButton(onPressed: () {
-              Navigator.pop(context);
-              }, icon: Icon(Icons.arrow_back))
-            ],
+            // actions: [
+            //   IconButton(onPressed: () {
+            //   Navigator.pop(context);
+            //   }, icon: Icon(Icons.arrow_back))
+            // ],
             title: const Padding(
               padding: EdgeInsets.only(top: 20),
               child: Center(
