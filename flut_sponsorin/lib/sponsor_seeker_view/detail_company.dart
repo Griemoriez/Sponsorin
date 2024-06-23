@@ -1,3 +1,5 @@
+import 'package:flut_sponsorin/sponsor_seeker_view/submit_proposal.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
@@ -47,7 +49,7 @@ class _DetailCompanyState extends State<detail_company>
               title: Container(
                 width: double.infinity,
                 alignment: Alignment.center,
-                child: Text.rich(
+                child: const Text.rich(
                   TextSpan(
                     style: TextStyle(
                       color: Color(0xff008037),
@@ -76,8 +78,8 @@ class _DetailCompanyState extends State<detail_company>
                 children: [
                   // Company Header
                   Container(
-                    padding: const EdgeInsets.all(16.0),
-                    decoration: BoxDecoration(
+                    padding:  const EdgeInsets.all(16.0),
+                    decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.vertical(
                         bottom: Radius.circular(16.0),
@@ -92,13 +94,13 @@ class _DetailCompanyState extends State<detail_company>
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CircleAvatar(
+                        const CircleAvatar(
                           radius: 40.0,
                           backgroundImage:
                               AssetImage('lib/assets/company_logo.jpg'),
                         ),
                         const SizedBox(height: 8.0),
-                        Text(
+                        const Text(
                           'PT Mandira',
                           style: TextStyle(
                             fontSize: 24.0,
@@ -119,7 +121,7 @@ class _DetailCompanyState extends State<detail_company>
                           labelColor: Colors.green,
                           unselectedLabelColor: Colors.grey,
                           indicatorColor: Colors.green,
-                          tabs: [
+                          tabs: const [
                             Tab(text: 'Home'),
                             Tab(text: 'About'),
                             Tab(text: 'Past Sponsorship'),
@@ -193,8 +195,8 @@ class _DetailCompanyState extends State<detail_company>
                           child: AboutCompany(),
                         ),
                         // Past Sponsorship Tab
-                        Padding(
-                          padding: const EdgeInsets.all(16.0),
+                        const Padding(
+                          padding: EdgeInsets.all(16.0),
                           child: Column(
                             children: [
                               SponsorCard(
@@ -217,70 +219,75 @@ class _DetailCompanyState extends State<detail_company>
                         ),
                         // Events Tab
                         Padding(
-  padding: const EdgeInsets.all(16.0),
-  child: Column(
-    children: [
-      SizedBox(
-        width: double.infinity, // Make the card take up the full width
-        child: Card(
-          elevation: 2.0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.0),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    CircleAvatar(
-                      backgroundImage: AssetImage('lib/assets/profile_picture.jpg'),
-                    ),
-                    SizedBox(width: 8.0),
-                    Expanded(
-                      child: Text(
-                        'Informatics Rally Games and Logic',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 11,
-                        ),
-                      ),
-                    ),
-                    Text(
-                      '3h ago',
-                      style: TextStyle(
-                        color: Colors.grey,
-                      ),
-                    ),
-                    SizedBox(width: 8.0),
-                    Icon(Icons.more_vert),
-                  ],
-                ),
-                SizedBox(height: 16.0),
-                // Event Image
-                Center(
-                  child: Image(
-                    image: AssetImage('lib/assets/irgl.png'),
-                    fit: BoxFit.contain,
-                    width: double.infinity,
-                  ),
-                ),
-                SizedBox(height: 16.0),
-                // Event Description
-                Text(
-                  'Jadi pemimpin dengan anggota yang banyak ',
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-      // Additional Cards...
-    ],
-  ),
-)
-
+                          padding: const EdgeInsets.all(16.0),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  width: double
+                                      .infinity, // Make the card take up the full width
+                                  child: Card(
+                                    elevation: 2.0,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(16.0),
+                                    ),
+                                    child: const Padding(
+                                      padding:  EdgeInsets.all(16.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              CircleAvatar(
+                                                backgroundImage: AssetImage(
+                                                    'lib/assets/profile_picture.jpg'),
+                                              ),
+                                              SizedBox(width: 8.0),
+                                              Expanded(
+                                                child: Text(
+                                                  'Informatics Rally Games and Logic',
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 11,
+                                                  ),
+                                                ),
+                                              ),
+                                              Text(
+                                                '3h ago',
+                                                style: TextStyle(
+                                                  color: Colors.grey,
+                                                ),
+                                              ),
+                                              SizedBox(width: 8.0),
+                                              Icon(Icons.more_vert),
+                                            ],
+                                          ),
+                                          SizedBox(height: 16.0),
+                                          // Event Image
+                                          Center(
+                                            child: Image(
+                                              image: AssetImage(
+                                                  'lib/assets/irgl.png'),
+                                              fit: BoxFit.contain,
+                                              width: double.infinity,
+                                            ),
+                                          ),
+                                          SizedBox(height: 16.0),
+                                          // Event Description
+                                          Text(
+                                            'Jadi pemimpin dengan anggota yang banyak ',
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                // Additional Cards...
+                              ],
+                            ),
+                          ),
+                        )
                       ],
                     ),
                   ),
@@ -288,7 +295,10 @@ class _DetailCompanyState extends State<detail_company>
               ),
             ),
             floatingActionButton: FloatingActionButton(
-              onPressed: () {},
+              onPressed: () {Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => submit_proposal()),
+                    );},
               backgroundColor: Colors.green,
               child: Icon(Icons.add),
             ),
