@@ -186,7 +186,7 @@ class _discover_sponsor_homeState extends State<discover_sponsor_home> {
         onPressed: () {
           // Navigator.push(
           //   context,
-          //   MaterialPageRoute(builder: (context) => create_post()),
+          //   MaterialPageRoute(builder: (context) => upload_status()),
           // );
         },
         backgroundColor: Colors.green,
