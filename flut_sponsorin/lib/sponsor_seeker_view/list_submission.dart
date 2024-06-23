@@ -1,21 +1,3 @@
-// import 'package:flutter/material.dart';
-
-// class list_submission extends StatelessWidget {
-//   const list_submission({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       child: Center(
-//             child: Text(
-//               'List Submission TEST',
-//               style: TextStyle(fontSize: 24, color: Colors.red),
-//             ),
-//           ),
-//     );
-//   }
-// }
-
 import 'package:flutter/material.dart';
 
 class list_submission extends StatefulWidget {
@@ -67,6 +49,73 @@ class _ListSubmissionState extends State<list_submission> {
     });
   }
 
+  void showDetailModal(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Container(
+            padding: EdgeInsets.all(16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'PROPOSAL DITERIMA',
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 16),
+                Text(
+                  'Dimohon untuk pihak acara dapat mengirimkan pesan pada Whatsapp yang tertera untuk melanjutkan ke proses selanjutnya',
+                  style: TextStyle(fontSize: 16),
+                ),
+                SizedBox(height: 16),
+                Text(
+                  'CP : 081-XXX-XXX-XXX',
+                  style: TextStyle(fontSize: 16),
+                ),
+                SizedBox(height: 16),
+                Text(
+                  '(Kevin Sadino)',
+                  style: TextStyle(fontSize: 16),
+                ),
+                SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('Close'),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void showInfoDialog(BuildContext context, String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Text(message),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Close'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -101,6 +150,7 @@ class _ListSubmissionState extends State<list_submission> {
                   proposal['companyName']!,
                   proposal['location']!,
                   proposal['status']!,
+                  context,
                 );
               },
             ),
@@ -110,7 +160,7 @@ class _ListSubmissionState extends State<list_submission> {
     );
   }
 
-  Widget buildProposalCard(String companyName, String location, String status) {
+  Widget buildProposalCard(String companyName, String location, String status, BuildContext context) {
     Color statusColor;
     // Menentukan warna berdasarkan nilai status
     if (status == 'ACCEPTED') {
@@ -175,6 +225,15 @@ class _ListSubmissionState extends State<list_submission> {
             ),
           ),
         ),
+        onTap: () {
+          if (status == 'ACCEPTED') {
+            showDetailModal(context);
+          } else if (status == 'PENDING') {
+            showInfoDialog(context, "Proposal anda sudah terkirim dan sedang dalam proses.");
+          } else if (status == 'DECLINED') {
+            showInfoDialog(context, "Proposal anda sudah ditolak oleh perusahaan.");
+          }
+        },
       ),
     );
   }

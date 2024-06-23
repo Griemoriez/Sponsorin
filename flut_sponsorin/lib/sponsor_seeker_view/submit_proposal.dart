@@ -57,6 +57,30 @@ class _SubmitProposalState extends State<submit_proposal> {
     }
   }
 
+  void _showSubmissionMessage() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          backgroundColor: Colors.green[200],
+          title: Text('Submission Successful'),
+          content: Text('You Have Updated Your Proposal!'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -113,18 +137,7 @@ class _SubmitProposalState extends State<submit_proposal> {
                 ),
                 readOnly: true,
               ),
-              SizedBox(height: 16),
-              TextFormField(
-                controller: _idCardController,
-                decoration: InputDecoration(
-                  labelText: 'National ID Card (Committee)',
-                  filled: true,
-                  fillColor: Colors.green[50],
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-              ),
+              
               SizedBox(height: 16),
               TextFormField(
                 controller: _uploadProposalController,
@@ -143,6 +156,7 @@ class _SubmitProposalState extends State<submit_proposal> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       // Handle form submission
+                      _showSubmissionMessage();
                     }
                   },
                   style: ElevatedButton.styleFrom(
