@@ -5,6 +5,7 @@ import 'package:flut_sponsorin/splashscreen.dart';
 import 'package:flut_sponsorin/sponsor_seeker_view/detail_company.dart';
 import 'package:flutter/material.dart';
 import 'package:flut_sponsorin/login.dart';
+import 'package:flut_sponsorin/sponsor_seeker_view/discover_sponsor.dart';
 
 void main() {
   runApp(const MainApp());
