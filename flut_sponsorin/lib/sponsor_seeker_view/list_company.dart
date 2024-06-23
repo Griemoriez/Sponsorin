@@ -76,7 +76,7 @@ class _ListCompanyState extends State<list_company> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => DetailCompany()),
+                      MaterialPageRoute(builder: (context) => detail_company()),
                     );
                   },
                   child: companyCard(company['name']!, company['location']!),
@@ -109,22 +109,6 @@ class _ListCompanyState extends State<list_company> {
         ),
         title: Text(name),
         subtitle: Text(location),
-      ),
-    );
-  }
-}
-
-class DetailCompany extends StatelessWidget {
-  const DetailCompany({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Detail Company'),
-      ),
-      body: Center(
-        child: Text('Detail Company Page'),
       ),
     );
   }
