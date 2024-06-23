@@ -4,6 +4,8 @@ import 'package:flut_sponsorin/company_view/list_submitted_events.dart';
 import 'package:flut_sponsorin/company_view/profile_company.dart';
 import 'package:flut_sponsorin/company_view/upcoming_events.dart';
 import 'package:flut_sponsorin/company_view/upload_status.dart';
+import 'package:flut_sponsorin/company_view/list_overall_events.dart';
+
 import 'package:flutter/material.dart';
 
 class discover_company extends StatefulWidget {
@@ -18,7 +20,7 @@ class _homePageState extends State<discover_company> {
   final List<Widget> _pages = [
     const discover_company_home(),
     const upcoming_events(),
-    const upload_status(),
+     upload_status(),
     const list_submitted_events(),
     const profile_company(),
   ];

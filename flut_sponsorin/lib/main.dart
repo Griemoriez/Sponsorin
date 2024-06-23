@@ -1,3 +1,5 @@
+import 'package:flut_sponsorin/company_view/discover_company.dart';
+import 'package:flut_sponsorin/company_view/upload_status.dart';
 import 'package:flut_sponsorin/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flut_sponsorin/login.dart';
@@ -36,11 +38,10 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'SponsorIn',
-      home: LoginScreen(),
+      home: discover_company(),
     );
   }
 }

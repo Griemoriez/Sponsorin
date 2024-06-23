@@ -1,5 +1,4 @@
-import 'package:flut_sponsorin/components/overall_event_card.dart';
-import 'package:flut_sponsorin/components/upcoming_event_card.dart';
+import 'package:flut_sponsorin/company_view/upload_status.dart';
 import 'package:flutter/material.dart';
 
 class discover_company_home extends StatefulWidget {
@@ -11,7 +10,7 @@ class discover_company_home extends StatefulWidget {
 
 class _discover_company_homeState extends State<discover_company_home> {
   bool isFavorite = false;
-  
+
   final List<Map<String, String>> cardData = [
     {
       'title': 'IRGL 2023',
@@ -63,118 +62,141 @@ class _discover_company_homeState extends State<discover_company_home> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                  top: 15.0, left: 15.0, right: 15.0, bottom: 18.0),
-              child: SizedBox(
-                height: 45.0,
-                width: double.infinity,
-                child: TextField(
-                  onChanged: (value) {
-                    _filterCards(value);
-                  },
-                  decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.search),
-                    hintText: 'Search here...',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
+    return Stack(
+      children: [
+        Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("lib/assets/BG.jpg"),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          body: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                      left: 17.0, top: 20.0, right: 17.0, bottom: 20.0),
+                  child: TextField(
+                    onChanged: (value) {
+                      _filterCards(value);
+                    },
+                    decoration: const InputDecoration(
+                      focusColor: Colors.orange,
+                      labelText: 'Search',
+                      prefixIcon: Icon(Icons.search),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          borderSide: BorderSide(color: Colors.orange)),
                     ),
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    fillColor: Colors.white,
-                    filled: true,
                   ),
                 ),
-              ),
-            ),
-            ListView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: filteredCardData.length,
-              itemBuilder: (context, index) {
-                final item = filteredCardData[index];
-                return Padding(
-                  padding: const EdgeInsets.only(right: 15.0, left: 15.0, bottom: 15.0),
-                  child: Card(
-                    elevation: 4,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      side: const BorderSide(
-                          color: Colors.grey, width: 1), // Menambahkan border
-                    ),
-                    child: Padding(
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: filteredCardData.length,
+                  itemBuilder: (context, index) {
+                    final item = filteredCardData[index];
+                    return Padding(
                       padding: const EdgeInsets.only(
-                          top: 15.0, left: 20.0, right: 20.0, bottom: 18.0),
-                      child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Row(
+                          right: 15.0, left: 15.0, bottom: 15.0),
+                      child: Card(
+                        elevation: 4,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          side: const BorderSide(
+                              color: Colors.grey,
+                              width: 1), // Menambahkan border
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              top: 15.0, left: 20.0, right: 20.0, bottom: 18.0),
+                          child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                CircleAvatar(
-                                  backgroundImage: AssetImage(
-                                      item['imagePath']!), // Ganti dengan path gambar Anda
-                                  radius: 20,
-                                ),
-                                SizedBox(width: 10),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                Row(
                                   children: <Widget>[
-                                    Text(
-                                      item['title']!,
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                    CircleAvatar(
+                                      backgroundImage: AssetImage(item[
+                                          'imagePath']!), // Ganti dengan path gambar Anda
+                                      radius: 20,
                                     ),
-                                    Text(
-                                      item['time']!,
-                                      style: TextStyle(
-                                        color: Colors.grey,
-                                        fontSize: 12,
-                                      ),
+                                    SizedBox(width: 10),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Text(
+                                          item['title']!,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Text(
+                                          item['time']!,
+                                          style: TextStyle(
+                                            color: Colors.grey,
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                      ],
                                     ),
+                                    Spacer(),
+                                    Icon(Icons.more_vert),
                                   ],
                                 ),
-                                Spacer(),
-                                Icon(Icons.more_vert),
-                              ],
-                            ),
-                            SizedBox(height: 10),
-                            Text(
-                              item['event']!,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            SizedBox(height: 5),
-                            Text(
-                              item['description']!,
-                            ),
-                            SizedBox(height: 10),
-                            Row(children: <Widget>[
-                              Icon(
-                                Icons.favorite_border,
-                                color: Colors.grey,
-                              ),
-                              SizedBox(width: 5),
-                              Text(
-                                'Like',
-                                style: TextStyle(
-                                  color: Colors.grey,
+                                SizedBox(height: 10),
+                                Text(
+                                  item['event']!,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                            ])
-                        ]),
-                    ),
-                  ),
-                );
-              },
+                                SizedBox(height: 5),
+                                Text(
+                                  item['description']!,
+                                ),
+                                SizedBox(height: 10),
+                                Row(children: <Widget>[
+                                  Icon(
+                                    Icons.favorite_border,
+                                    color: Colors.grey,
+                                  ),
+                                  SizedBox(width: 5),
+                                  Text(
+                                    'Like',
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                ])
+                              ]),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ],
             ),
-          ],
-        ),
-      );
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => upload_status()),
+              );
+            },
+            child: Icon(Icons.add),
+            backgroundColor: Colors.green,
+          ),
+        )
+      ],
+    );
   }
 }
