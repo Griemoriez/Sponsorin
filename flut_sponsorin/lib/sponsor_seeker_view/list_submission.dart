@@ -18,7 +18,55 @@
 
 import 'package:flutter/material.dart';
 
-class list_submission extends StatelessWidget {
+class list_submission extends StatefulWidget {
+  @override
+  _ListSubmissionState createState() => _ListSubmissionState();
+}
+
+class _ListSubmissionState extends State<list_submission> {
+  final TextEditingController _searchController = TextEditingController();
+  List<Map<String, String>> proposals = [
+    {
+      'companyName': 'PT Mandira',
+      'location': 'Surabaya, Indonesia',
+      'status': 'ACCEPTED'
+    },
+    {
+      'companyName': 'PT Lamuda',
+      'location': 'Jakarta, Indonesia',
+      'status': 'PENDING'
+    },
+    {
+      'companyName': 'PT Corknews',
+      'location': 'Surabaya, Indonesia',
+      'status': 'DECLINED'
+    },
+  ];
+  List<Map<String, String>> filteredProposals = [];
+
+  @override
+  void initState() {
+    super.initState();
+    filteredProposals = proposals;
+    _searchController.addListener(_filterProposals);
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  void _filterProposals() {
+    String query = _searchController.text.toLowerCase();
+    setState(() {
+      filteredProposals = proposals
+          .where((proposal) =>
+              proposal['companyName']!.toLowerCase().contains(query))
+          .toList();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -27,12 +75,16 @@ class list_submission extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TextField(
+            controller: _searchController,
             decoration: InputDecoration(
+              prefixIcon: const Icon(Icons.search),
               hintText: 'Search here...',
-              prefixIcon: Icon(Icons.search),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(15.0),
               ),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 10.0),
+              fillColor: Colors.white,
+              filled: true,
             ),
           ),
           SizedBox(height: 16),
@@ -41,14 +93,16 @@ class list_submission extends StatelessWidget {
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           Expanded(
-            child: ListView(
-              children: [
-                buildProposalCard(
-                    'PT Mandira', 'Surabaya, Indonesia', 'ACCEPTED'),
-                buildProposalCard('PT Lamuda', 'Jakarta, Indonesia', 'PENDING'),
-                buildProposalCard(
-                    'PT Corknews', 'Surabaya, Indonesia', 'DECLINED'),
-              ],
+            child: ListView.builder(
+              itemCount: filteredProposals.length,
+              itemBuilder: (context, index) {
+                var proposal = filteredProposals[index];
+                return buildProposalCard(
+                  proposal['companyName']!,
+                  proposal['location']!,
+                  proposal['status']!,
+                );
+              },
             ),
           ),
         ],
@@ -81,24 +135,13 @@ class list_submission extends StatelessWidget {
           children: [
             Text(location),
             SizedBox(height: 4),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   'Submitted 1d ago',
                   style: TextStyle(fontSize: 12, color: Colors.grey),
                 ),
-                // Container(
-                //   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                //   decoration: BoxDecoration(
-                //     color: statusColor,
-                //     borderRadius: BorderRadius.circular(8),
-                //   ),
-                //   child: Text(
-                //     status,
-                //     style: TextStyle(color: Colors.white),
-                //   ),
-                // ),
               ],
             ),
             Padding(
