@@ -1,21 +1,3 @@
-// import 'package:flutter/material.dart';
-
-// class list_submission extends StatelessWidget {
-//   const list_submission({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       child: Center(
-//             child: Text(
-//               'List Submission TEST',
-//               style: TextStyle(fontSize: 24, color: Colors.red),
-//             ),
-//           ),
-//     );
-//   }
-// }
-
 import 'package:flutter/material.dart';
 
 class list_submission extends StatefulWidget {
@@ -108,6 +90,91 @@ class _ListSubmissionState extends State<list_submission> with SingleTickerProvi
     });
   }
 
+  void showDetailModal(BuildContext context, String status) {
+    Color backgroundColor;
+    if (status == 'ACCEPTED') {
+      backgroundColor = Colors.green;
+    } else if (status == 'PENDING') {
+      backgroundColor = Colors.yellow;
+    } else if (status == 'DECLINED') {
+      backgroundColor = Colors.red;
+    } else {
+      backgroundColor = Colors.white; // Default color if status is unknown
+    }
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Container(
+            decoration: BoxDecoration(
+              color: backgroundColor,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            padding: EdgeInsets.all(16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Detail Proposal',
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 16),
+                Text(
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor.',
+                  style: TextStyle(fontSize: 16),
+                ),
+                SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('Close'),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void showInfoDialog(BuildContext context, String message, String status) {
+    Color backgroundColor;
+    if (status == 'PENDING') {
+      backgroundColor = Colors.yellow;
+    } else if (status == 'DECLINED') {
+      backgroundColor = Colors.red;
+    } else {
+      backgroundColor = Colors.white; // Default color if status is unknown
+    }
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: backgroundColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          content: Text(message),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Close'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -161,6 +228,7 @@ class _ListSubmissionState extends State<list_submission> with SingleTickerProvi
                         proposal['companyName']!,
                         proposal['location']!,
                         proposal['status']!,
+                        context
                       );
                     },
                   ),
@@ -172,6 +240,7 @@ class _ListSubmissionState extends State<list_submission> with SingleTickerProvi
                         proposal['companyName']!,
                         proposal['location']!,
                         proposal['status']!,
+                        context
                       );
                     },
                   ),
@@ -223,7 +292,7 @@ class _ListSubmissionState extends State<list_submission> with SingleTickerProvi
     // );
   }
 
-  Widget buildProposalCard(String companyName, String location, String status) {
+  Widget buildProposalCard(String companyName, String location, String status, BuildContext context) {
     Color statusColor;
     // Menentukan warna berdasarkan nilai status
     if (status == 'ACCEPTED') {
@@ -288,6 +357,15 @@ class _ListSubmissionState extends State<list_submission> with SingleTickerProvi
             ),
           ),
         ),
+        onTap: () {
+          if (status == 'ACCEPTED') {
+            showDetailModal(context, status);
+          } else if (status == 'PENDING') {
+            showInfoDialog(context, "Proposal anda sudah terkirim dan sedang dalam proses.", status);
+          } else if (status == 'DECLINED') {
+            showInfoDialog(context, "Proposal anda sudah ditolak oleh perusahaan.", status);
+          }
+        },
       ),
     );
   }

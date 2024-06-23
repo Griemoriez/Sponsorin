@@ -10,7 +10,7 @@ class discover_sponsor_home extends StatefulWidget {
 
 class _discover_sponsor_homeState extends State<discover_sponsor_home> {
   bool isFavorite = false;
-  
+
   final List<Map<String, String>> cardData = [
     {
       'title': 'PT Bank Central Asia',
@@ -58,110 +58,140 @@ class _discover_sponsor_homeState extends State<discover_sponsor_home> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                  top: 15.0, left: 15.0, right: 15.0, bottom: 18.0),
-              child: SizedBox(
-                height: 45.0,
-                width: double.infinity,
-                child: TextField(
-                  onChanged: (value) {
-                    _filterCards(value);
-                  },
-                  decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.search),
-                    hintText: 'Search here...',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    fillColor: Colors.white,
-                    filled: true,
-                  ),
-                ),
+    return Scaffold(
+      body: Stack(
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("lib/assets/BG.jpg"),
+                fit: BoxFit.cover,
               ),
             ),
-            ListView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: filteredCardData.length,
-              itemBuilder: (context, index) {
-                final item = filteredCardData[index];
-                return Padding(
-                  padding: const EdgeInsets.only(right: 15.0, left: 15.0, bottom: 15.0),
-                  child: Card(
-                    elevation: 4,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      side: const BorderSide(
-                          color: Colors.grey, width: 1), // Menambahkan border
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          top: 15.0, left: 20.0, right: 20.0, bottom: 18.0),
-                      child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Row(
-                              children: <Widget>[
-                                CircleAvatar(
-                                  backgroundImage: AssetImage(
-                                      item['imagePath']!), // Ganti dengan path gambar Anda
-                                  radius: 20,
-                                ),
-                                SizedBox(width: 10),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Text(
-                                      item['title'] ?? 'No Title',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    Text(
-                                      item['time'] ?? 'No Time',
-                                      style: TextStyle(
-                                        color: Colors.grey,
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Spacer(),
-                                Icon(Icons.more_vert),
-                              ],
-                            ),
-                            SizedBox(height: 5),
-                            Text(
-                              item['description'] ?? 'No Description',
-                            ),
-                            SizedBox(height: 10),
-                            Row(children: <Widget>[
-                              Icon(
-                                Icons.favorite_border,
-                                color: Colors.grey,
-                              ),
-                              SizedBox(width: 5),
-                              Text(
-                                'Like',
-                                style: TextStyle(
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ])
-                        ]),
+          ),
+          SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: SizedBox(
+                    height: 45.0,
+                    width: double.infinity,
+                    child: TextField(
+                      onChanged: (value) {
+                        _filterCards(value);
+                      },
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(Icons.search),
+                        hintText: 'Search here...',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        contentPadding:
+                            const EdgeInsets.symmetric(horizontal: 10.0),
+                        fillColor: Colors.white,
+                        filled: true,
+                      ),
                     ),
                   ),
-                );
-              },
+                ),
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: filteredCardData.length,
+                  itemBuilder: (context, index) {
+                    final item = filteredCardData[index];
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 15.0, vertical: 7.5),
+                      child: Card(
+                        elevation: 4,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          side: const BorderSide(
+                              color: Colors.grey,
+                              width: 1), // Menambahkan border
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Row(
+                                children: <Widget>[
+                                  CircleAvatar(
+                                    backgroundImage: AssetImage(item[
+                                        'imagePath']!), // Ganti dengan path gambar Anda
+                                    radius: 20,
+                                  ),
+                                  SizedBox(width: 10),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        item['title'] ?? 'No Title',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Text(
+                                        item['time'] ?? 'No Time',
+                                        style: TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Spacer(),
+                                  Icon(Icons.more_vert),
+                                ],
+                              ),
+                              SizedBox(height: 5),
+                              Text(
+                                item['description'] ?? 'No Description',
+                              ),
+                              SizedBox(height: 10),
+                              Row(
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.favorite_border,
+                                    color: Colors.grey,
+                                  ),
+                                  SizedBox(width: 5),
+                                  Text(
+                                    'Like',
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ],
             ),
-          ],
-        ),
-      );
-  }}
+          ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(builder: (context) => upload_status()),
+          // );
+        },
+        backgroundColor: Colors.green,
+        child: Icon(Icons.add),
+      ),
+    );
+  }
+}

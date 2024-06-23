@@ -1,4 +1,5 @@
 import 'package:flut_sponsorin/sponsor_seeker_view/submit_proposal.dart';
+import 'package:flut_sponsorin/sponsor_seeker_view/submit_proposal_to_comp.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -297,7 +298,7 @@ class _DetailCompanyState extends State<detail_company>
             floatingActionButton: FloatingActionButton(
               onPressed: () {Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => submit_proposal()),
+                      MaterialPageRoute(builder: (context) => submit_proposal_to_comp()),
                     );},
               backgroundColor: Colors.green,
               child: Icon(Icons.add),
