@@ -10,17 +10,17 @@ class discover_event extends StatefulWidget {
   const discover_event({super.key});
 
   @override
-  State<discover_event> createState() => _discover_spponsor_state();
+  State<discover_event> createState() => _discover_sponsor_state();
 }
 
-class _discover_spponsor_state extends State<discover_event> {
+class _discover_sponsor_state extends State<discover_event> {
   int _page = 0;
   final List<Widget> _pages = [
-    const discover_sponsor_home(),
-    const list_company(),
-    const submit_proposal(),
-    const list_submission(),
-    const profile_sponsor(),
+    discover_sponsor_home(),
+    list_company(),
+    submit_proposal(),
+    list_submission(),
+    ProfileSponsor(),
   ];
 
   @override
@@ -43,17 +43,29 @@ class _discover_spponsor_state extends State<discover_event> {
             title: const Padding(
               padding: EdgeInsets.only(top: 20),
               child: Center(
-                child: Text(
-                  "Sponsorin",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ),
+                  child: Text.rich(
+                TextSpan(
+                    style: TextStyle(
+                        color: Color(0xff008037),
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold),
+                    text: 'Sponsor',
+                    children: [
+                      TextSpan(
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                              fontSize: 25),
+                          text: 'in')
+                    ]),
+              )),
             ),
           ),
           body: IndexedStack(
             index: _page,
             children: _pages,
           ),
+          
           bottomNavigationBar: CurvedNavigationBar(
             items: const [
               Icon(

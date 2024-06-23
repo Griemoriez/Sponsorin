@@ -1,31 +1,27 @@
 import 'package:flutter/material.dart';
 
-class upcoming_events_card extends StatelessWidget {
-  upcoming_events_card({super.key});
+class EventData{
+  final String title;
+  final String type;
+  final String time;
+  final String poster;
+   final String description;
 
-    final List<Map<String, String>> cardData = [
+  const EventData(
     {
-      'title': 'IRGL 2023',
-      'type': 'competition',
-      'time': 'Oktober 2023',
-      'description': 'Onsite: Universitas Kristen Petra, Surabaya',
-      'imagePath': 'lib/assets/irgl.png'
-    },
-    {
-      'title': 'Bharatika 2023',
-      'type': 'exhibition',
-      'time': 'November 2024',
-      'description': 'Tunjungan Plaza, Surabaya',
-      'imagePath': 'lib/assets/irgl.png'
-    },
-    {
-     'title': 'Adiwarna 2023',
-      'type': 'exhibition',
-      'time': 'Maret 2023',
-      'description': 'Onsite: Universitas Kristen Petra, Surabaya',
-      'imagePath': 'lib/assets/irgl.png'
+    required this.title,
+    required this.type,
+    required this.time,
+    required this.poster,
+    required this.description,
+
     }
-  ];
+  );
+}
+class upcoming_events_card extends StatelessWidget {
+   final EventData cardData;
+
+  upcoming_events_card({super.key, required this.cardData});
 
   @override
   Widget build(BuildContext context) {
@@ -47,13 +43,13 @@ class upcoming_events_card extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Align(
+                    Align(
                       alignment: Alignment.topRight,
                       child: Padding(
                         padding: EdgeInsets.only(right: 8.0, bottom: 8.0),
                         child: Text(
-                          "COMPETITION",
-                          style: TextStyle(
+                          cardData.type.toUpperCase(), // Example usage
+                          style: const TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
                             color: Colors.grey,
@@ -64,31 +60,31 @@ class upcoming_events_card extends StatelessWidget {
                     const Image(
                       image: AssetImage('lib/assets/irgl.png'),
                     ),
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.only(top: 8),
                       child: Text(
-                        "IRGL 2023",
-                        style: TextStyle(
+                        cardData.title,
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
                         ),
                       ),
                     ),
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.only(top: 8),
                       child: Text(
-                        "Onsite : Universitas Kristen Petra, Surabaya",
-                        style: TextStyle(
+                        cardData.description,
+                        style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
                     ),
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.only(top: 8),
                       child: Text(
-                        "Oktober 2023",
-                        style: TextStyle(
+                        cardData.time,
+                        style: const TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w400,
                         ),
@@ -107,7 +103,7 @@ class upcoming_events_card extends StatelessWidget {
                         ),
                         child: const Center(
                           child: Text(
-                            'REGISTER HERE',
+                            'OFFER',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 16,
