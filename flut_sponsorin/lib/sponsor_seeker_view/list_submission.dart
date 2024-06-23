@@ -49,7 +49,18 @@ class _ListSubmissionState extends State<list_submission> {
     });
   }
 
-  void showDetailModal(BuildContext context) {
+  void showDetailModal(BuildContext context, String status) {
+    Color backgroundColor;
+    if (status == 'ACCEPTED') {
+      backgroundColor = Colors.green;
+    } else if (status == 'PENDING') {
+      backgroundColor = Colors.yellow;
+    } else if (status == 'DECLINED') {
+      backgroundColor = Colors.red;
+    } else {
+      backgroundColor = Colors.white; // Default color if status is unknown
+    }
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -58,28 +69,22 @@ class _ListSubmissionState extends State<list_submission> {
             borderRadius: BorderRadius.circular(12),
           ),
           child: Container(
+            decoration: BoxDecoration(
+              color: backgroundColor,
+              borderRadius: BorderRadius.circular(12),
+            ),
             padding: EdgeInsets.all(16),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'PROPOSAL DITERIMA',
+                  'Detail Proposal',
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 16),
                 Text(
-                  'Dimohon untuk pihak acara dapat mengirimkan pesan pada Whatsapp yang tertera untuk melanjutkan ke proses selanjutnya',
-                  style: TextStyle(fontSize: 16),
-                ),
-                SizedBox(height: 16),
-                Text(
-                  'CP : 081-XXX-XXX-XXX',
-                  style: TextStyle(fontSize: 16),
-                ),
-                SizedBox(height: 16),
-                Text(
-                  '(Kevin Sadino)',
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor.',
                   style: TextStyle(fontSize: 16),
                 ),
                 SizedBox(height: 16),
@@ -97,11 +102,24 @@ class _ListSubmissionState extends State<list_submission> {
     );
   }
 
-  void showInfoDialog(BuildContext context, String message) {
+  void showInfoDialog(BuildContext context, String message, String status) {
+    Color backgroundColor;
+    if (status == 'PENDING') {
+      backgroundColor = Colors.yellow;
+    } else if (status == 'DECLINED') {
+      backgroundColor = Colors.red;
+    } else {
+      backgroundColor = Colors.white; // Default color if status is unknown
+    }
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          backgroundColor: backgroundColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
           content: Text(message),
           actions: [
             ElevatedButton(
@@ -227,11 +245,11 @@ class _ListSubmissionState extends State<list_submission> {
         ),
         onTap: () {
           if (status == 'ACCEPTED') {
-            showDetailModal(context);
+            showDetailModal(context, status);
           } else if (status == 'PENDING') {
-            showInfoDialog(context, "Proposal anda sudah terkirim dan sedang dalam proses.");
+            showInfoDialog(context, "Proposal anda sudah terkirim dan sedang dalam proses.", status);
           } else if (status == 'DECLINED') {
-            showInfoDialog(context, "Proposal anda sudah ditolak oleh perusahaan.");
+            showInfoDialog(context, "Proposal anda sudah ditolak oleh perusahaan.", status);
           }
         },
       ),
