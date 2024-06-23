@@ -15,6 +15,20 @@ class _upload_statusState extends State<upload_status> {
   ];
 
   Map<String, dynamic>? selected_event;
+class upload_status extends StatefulWidget {
+  upload_status({super.key});
+
+  @override
+  State<upload_status> createState() => _upload_statusState();
+}
+
+class _upload_statusState extends State<upload_status> {
+  final List<Map<String, dynamic>> list_event = [
+    {'id': 1, 'nama': 'IRGL 2023'},
+    {'id': 1, 'nama': "Bharatika 2023"}
+  ];
+
+  Map<String, dynamic>? selected_event;
 
   @override
   Widget build(BuildContext context) {

@@ -1,8 +1,12 @@
 import 'package:flut_sponsorin/company_view/discover_company.dart';
 import 'package:flut_sponsorin/company_view/upload_status.dart';
 import 'package:flut_sponsorin/home.dart';
+import 'package:flut_sponsorin/signup.dart';
+import 'package:flut_sponsorin/splashscreen.dart';
+import 'package:flut_sponsorin/sponsor_seeker_view/detail_company.dart';
 import 'package:flutter/material.dart';
 import 'package:flut_sponsorin/login.dart';
+import 'package:flut_sponsorin/sponsor_seeker_view/discover_sponsor.dart';
 
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';

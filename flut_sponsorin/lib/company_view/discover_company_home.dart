@@ -11,6 +11,7 @@ class discover_company_home extends StatefulWidget {
 class _discover_company_homeState extends State<discover_company_home> {
   bool isFavorite = false;
 
+
   final List<Map<String, String>> cardData = [
     {
       'title': 'IRGL 2023',
@@ -18,7 +19,7 @@ class _discover_company_homeState extends State<discover_company_home> {
       'event': 'INFORMATICS RALLY GAMES AND LOGIC',
       'description':
           'Berkembangnya teknologi membuka banyak peluang karir. Jadinya, semakin banyak lowongan baru di bidang teknologi yang bisa dijalani deh! Buat kamu yang tertarik jadi hashtag',
-      'imagePath': 'assets/logo.png'
+      'imagePath': 'lib/assets/logo.png'
     },
     {
       'title': 'Tech Expo 2024',
@@ -26,7 +27,7 @@ class _discover_company_homeState extends State<discover_company_home> {
       'event': 'TECHNOLOGY EXHIBITION AND SEMINAR',
       'description':
           'Acara ini akan menghadirkan pembicara dari berbagai perusahaan teknologi terkemuka. Ayo datang dan tambahkan wawasanmu tentang teknologi terbaru!',
-      'imagePath': 'assets/logo.png'
+      'imagePath': 'lib/assets/logo.png'
     },
     {
       'title': 'AI Summit 2024',
@@ -34,7 +35,7 @@ class _discover_company_homeState extends State<discover_company_home> {
       'event': 'ARTIFICIAL INTELLIGENCE SUMMIT',
       'description':
           'Diskusikan perkembangan terbaru dalam bidang kecerdasan buatan bersama para ahli dan praktisi di AI Summit 2024.',
-      'imagePath': 'assets/logo.png'
+      'imagePath': 'lib/assets/logo.png'
     }
   ];
 

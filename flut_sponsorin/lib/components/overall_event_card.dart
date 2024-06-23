@@ -171,4 +171,15 @@ class overall_event_card extends StatelessWidget {
       ),
     );
   }
+  Color getColorBasedOnStatus(int status) {
+    if (status == -1) {
+      return Colors.white;
+    } else if (status == 0) {
+      return Colors.red.shade200;
+    } else if (status == 1) {
+      return Colors.green.shade200;
+    } else {
+      return Colors.grey; // Default color if status is unknown
+    }
+  }
 }
