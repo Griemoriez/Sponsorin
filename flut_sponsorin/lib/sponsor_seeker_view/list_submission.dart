@@ -187,7 +187,7 @@ class _ListSubmissionState extends State<list_submission> with SingleTickerProvi
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 15),
               child: Text(
-                "Hi, PT Mandiri!",
+                "Hi, IRGL!",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
