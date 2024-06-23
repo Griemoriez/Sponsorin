@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 class ProfileSponsorHome extends StatelessWidget {
   final List<Map<String, String>> items = [
     {
-      'image': 'https://via.placeholder.com/150',
+      'image': 'lib/assets/irgl.png',
       'title': 'IRGL 2023',
       'description': 'Journey to the heart of the archipelago',
     },
     {
-      'image': 'https://via.placeholder.com/150',
+      'image': 'lib/assets/irgl.png',
       'title': 'IRGL 2022',
       'description': 'The Sacred lalalalalala',
     },
     {
-      'image': 'https://via.placeholder.com/150',
+      'image': 'lib/assets/irgl.png',
       'title': 'IRGL 2021',
       'description': 'TEMA',
     },
@@ -21,58 +21,56 @@ class ProfileSponsorHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView.builder(
-        padding: EdgeInsets.all(10.0),
-        itemCount: items.length,
-        itemBuilder: (context, index) {
-          return Center(
-            child: Container(
-              width: MediaQuery.of(context).size.width * 0.8,
-              height: MediaQuery.of(context).size.height * 0.44,
-              margin: EdgeInsets.symmetric(vertical: 10.0),
-              child: Card(
-                elevation: 5,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                      height: MediaQuery.of(context).size.height * 0.2, // Adjust height as needed
-                      child: Image.network(
-                        items[index]['image']!,
-                        fit: BoxFit.cover,
+    return ListView.builder(
+      padding: EdgeInsets.all(10.0),
+      itemCount: items.length,
+      itemBuilder: (context, index) {
+        return Center(
+          child: Container(
+            width: MediaQuery.of(context).size.width * 0.7,
+            height: MediaQuery.of(context).size.height * 0.5, // Adjust height of the card
+            margin: EdgeInsets.symmetric(vertical: 10.0),
+            child: Card(
+              elevation: 5,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    height: MediaQuery.of(context).size.height * 0.3, // Increase the height of the image container
+                    child: Image.asset(
+                      items[index]['image']!,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Text(
+                      items[index]['title']!,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Text(
-                        items[index]['title']!,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Text(
+                      items[index]['description']!,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey[600],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: Text(
-                        items[index]['description']!,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.grey[600],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

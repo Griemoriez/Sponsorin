@@ -9,72 +9,68 @@ class ProfileSponsor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 3,
       child: Column(
-          children: [
-            Container(
-              padding: EdgeInsets.all(16.0),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Colors.greenAccent, Colors.green[100]!],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
+        children: [
+          Container(
+            padding: EdgeInsets.all(16.0),
+            // decoration: BoxDecoration(
+            //   color: Colors.white.withOpacity(1), // Making the container transparent
+            // ),
+            child: Column(
+              children: [
+                CircleAvatar(
+                  radius: 50,
+                  backgroundImage: AssetImage('lib/assets/irgl.png'), // Replace with your image URL
                 ),
-              ),
-              child: Column(
-                children: [
-                  CircleAvatar(
-                    radius: 50,
-                    backgroundImage: NetworkImage('https://via.placeholder.com/150'), // Replace with your image URL
+                SizedBox(height: 10),
+                Text(
+                  'IRGL',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
                   ),
-                  SizedBox(height: 10),
-                  Text(
-                    'IRGL',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
+                ),
+                SizedBox(height: 5),
+                Text(
+                  'Informatics Rally Games and Logic',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.grey[600],
                   ),
-                  SizedBox(height: 5),
-                  Text(
-                    'Informatics Rally Games and Logic',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey[600],
-                    ),
+                ),
+                SizedBox(height: 5),
+                Text(
+                  'Surabaya, East Java, Indonesia',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.grey[600],
                   ),
-                  SizedBox(height: 5),
-                  Text(
-                    'Surabaya, East Java, Indonesia',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey[600],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            TabBar(
-              labelColor: Colors.green,
-              unselectedLabelColor: Colors.grey,
-              indicatorColor: Colors.green,
-              tabs: [
-                Tab(text: 'Home'),
-                Tab(text: 'About'),
-                Tab(text: 'Past Sponsorship'),
+                ),
               ],
             ),
-            Expanded(
-              child: TabBarView(
-                children: [
-                  ProfileSponsorHome(),
-                  ProfileSponsorAbout(),
-                  ProfileSponsorPast(),
-                ],
-              ),
+          ),
+          TabBar(
+            labelColor: Colors.green,
+            unselectedLabelColor: Colors.grey,
+            indicatorColor: Colors.green,
+            tabs: [
+              Tab(text: 'Home'),
+              Tab(text: 'About'),
+              Tab(text: 'Past Sponsorship'),
+            ],
+          ),
+          Expanded(
+            child: TabBarView(
+              children: [
+                ProfileSponsorHome(),
+                ProfileSponsorAbout(),
+                ProfileSponsorPast(),
+              ],
             ),
-          ],
-        ),
-      );
+          ),
+        ],
+      ),
+    );
   }
 }

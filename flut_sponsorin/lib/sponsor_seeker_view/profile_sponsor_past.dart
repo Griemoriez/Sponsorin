@@ -4,16 +4,17 @@ import 'package:url_launcher/url_launcher.dart';
 class ProfileSponsorPast extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Past Sponsors'),
-      ),
-      body: ListView.builder(
-        itemCount: sponsors.length,
-        itemBuilder: (context, index) {
-          final sponsor = sponsors[index];
-          return SponsorCard(sponsor: sponsor);
-        },
+    return Container(
+      // Setting the background color to transparent
+      color: Colors.transparent,
+      child: SafeArea(
+        child: ListView.builder(
+          itemCount: sponsors.length,
+          itemBuilder: (context, index) {
+            final sponsor = sponsors[index];
+            return SponsorCard(sponsor: sponsor);
+          },
+        ),
       ),
     );
   }
@@ -26,51 +27,57 @@ class SponsorCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.all(10),
-      child: Padding(
-        padding: EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              sponsor.name,
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 5),
-            Text(
-              sponsor.time,
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey,
-              ),
-            ),
-            SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Center(
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.9, // Set the width of the card here
+        margin: EdgeInsets.symmetric(vertical: 10.0),
+        child: Card(
+          elevation: 5,
+          child: Padding(
+            padding: EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ElevatedButton(
-                  onPressed: () {
-                    // Show modal with sponsor description
-                    _showDescriptionDialog(context, sponsor);
-                  },
-                  child: Text('Description'),
-                ),
-                Row(
-                  children: List.generate(
-                    5,
-                    (index) => Icon(
-                      index < (sponsor.rating ?? 0) ? Icons.star : Icons.star_border,
-                      color: Colors.amber,
-                    ),
+                Text(
+                  sponsor.name,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
                   ),
+                ),
+                SizedBox(height: 5),
+                Text(
+                  sponsor.time,
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.grey,
+                  ),
+                ),
+                SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        // Show modal with sponsor description
+                        _showDescriptionDialog(context, sponsor);
+                      },
+                      child: Text('Description'),
+                    ),
+                    Row(
+                      children: List.generate(
+                        5,
+                        (index) => Icon(
+                          index < (sponsor.rating ?? 0) ? Icons.star : Icons.star_border,
+                          color: Colors.amber,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
-          ],
+          ),
         ),
       ),
     );
@@ -139,21 +146,21 @@ List<Sponsor> sponsors = [
     time: "3h ago",
     description: "Berkembangnya teknologi membuka banyak peluang karir. Jadinya, semakin banyak lowongan baru di bidang teknologi yang bisa dijalani deh Buat kamu yang tertarik jadi #TeamITBCAslik, klik link ini untuk cari tahu lowongan yang sedang dibuka https://lnkd.in/gk35qqikt",
     url: "https://youtube.com",
-    rating: 4,
+    rating: 5,
   ),
   Sponsor(
     name: "PT ABC",
     time: "3h ago",
     description: "Berkembangnya teknologi membuka banyak peluang karir. Jadinya, semakin banyak lowongan baru di bidang teknologi yang bisa dijalani deh Buat kamu yang tertarik jadi #TeamITBCAslik, klik link ini untuk cari tahu lowongan yang sedang dibuka https://lnkd.in/gk35qqikt",
     url: "https://lnkd.in/gk35qqikt",
-    rating: 3,
+    rating: 5,
   ),
   Sponsor(
     name: "PT Bango",
     time: "3h ago",
     description: "Berkembangnya teknologi membuka banyak peluang karir. Jadinya, semakin banyak lowongan baru di bidang teknologi yang bisa dijalani deh Buat kamu yang tertarik jadi #TeamITBCAslik, klik link ini untuk cari tahu lowongan yang sedang dibuka https://lnkd.in/gk35qqikt",
     url: "https://lnkd.in/gk35qqikt",
-    rating: 1,
+    rating: 2,
   ),
   // Add more sponsors with ratings here
 ];
