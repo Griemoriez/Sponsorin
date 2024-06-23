@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
 
 class detail_company extends StatefulWidget {
   const detail_company({super.key});
@@ -7,7 +9,8 @@ class detail_company extends StatefulWidget {
   _DetailCompanyState createState() => _DetailCompanyState();
 }
 
-class _DetailCompanyState extends State<detail_company> with SingleTickerProviderStateMixin {
+class _DetailCompanyState extends State<detail_company>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -24,7 +27,8 @@ class _DetailCompanyState extends State<detail_company> with SingleTickerProvide
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Scaffold(
+      body: Stack(
         children: [
           Container(
             decoration: const BoxDecoration(
@@ -43,7 +47,7 @@ class _DetailCompanyState extends State<detail_company> with SingleTickerProvide
               title: Container(
                 width: double.infinity,
                 alignment: Alignment.center,
-                child: const Text.rich(
+                child: Text.rich(
                   TextSpan(
                     style: TextStyle(
                       color: Color(0xff008037),
@@ -73,7 +77,7 @@ class _DetailCompanyState extends State<detail_company> with SingleTickerProvide
                   // Company Header
                   Container(
                     padding: const EdgeInsets.all(16.0),
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.vertical(
                         bottom: Radius.circular(16.0),
@@ -88,12 +92,13 @@ class _DetailCompanyState extends State<detail_company> with SingleTickerProvide
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const CircleAvatar(
+                        CircleAvatar(
                           radius: 40.0,
-                          backgroundImage: AssetImage('lib/assets/company_logo.jpg'),
+                          backgroundImage:
+                              AssetImage('lib/assets/company_logo.jpg'),
                         ),
                         const SizedBox(height: 8.0),
-                        const Text(
+                        Text(
                           'PT Mandira',
                           style: TextStyle(
                             fontSize: 24.0,
@@ -114,7 +119,7 @@ class _DetailCompanyState extends State<detail_company> with SingleTickerProvide
                           labelColor: Colors.green,
                           unselectedLabelColor: Colors.grey,
                           indicatorColor: Colors.green,
-                          tabs: const [
+                          tabs: [
                             Tab(text: 'Home'),
                             Tab(text: 'About'),
                             Tab(text: 'Past Sponsorship'),
@@ -143,12 +148,14 @@ class _DetailCompanyState extends State<detail_company> with SingleTickerProvide
                                 child: const Padding(
                                   padding: EdgeInsets.all(16.0),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Row(
                                         children: [
                                           CircleAvatar(
-                                            backgroundImage: AssetImage('lib/assets/profile_picture.jpg'),
+                                            backgroundImage: AssetImage(
+                                                'lib/assets/profile_picture.jpg'),
                                           ),
                                           SizedBox(width: 8.0),
                                           Text(
@@ -183,57 +190,97 @@ class _DetailCompanyState extends State<detail_company> with SingleTickerProvide
                         // About Tab
                         Padding(
                           padding: const EdgeInsets.all(16.0),
+                          child: AboutCompany(),
+                        ),
+                        // Past Sponsorship Tab
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
                           child: Column(
                             children: [
-                              Card(
-                                elevation: 2.0,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(16.0),
-                                ),
-                                child: const Padding(
-                                  padding: EdgeInsets.all(16.0),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          CircleAvatar(
-                                            backgroundImage: AssetImage('lib/assets/profile_picture.jpg'),
-                                          ),
-                                          SizedBox(width: 8.0),
-                                          Text(
-                                            'PT Mandira',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          Spacer(),
-                                          Text(
-                                            '3h ago',
-                                            style: TextStyle(
-                                              color: Colors.grey,
-                                            ),
-                                          ),
-                                          SizedBox(width: 8.0),
-                                          Icon(Icons.more_vert),
-                                        ],
-                                      ),
-                                      SizedBox(height: 16.0),
-                                      Text(
-                                        'Jadi pemimpin dengan anggota yang banyak dan tersebar merupakan sebuah keahlian yang harus dimiliki oleh seluruh mahasiswa. Salah satunya menjadi panitia sponsor merupakan salah satu keahlian yang penting\n\nYuk, simak cerita Akmal untuk tahu tips dan tricks mencari sponsor yang baik dan mudah!!!',
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                              SponsorCard(
+                                imageUrl: 'lib/assets/event_logo.jpg',
+                                title: 'IRGL 2023',
+                                subtitle:
+                                    'Universitas Kristen Petra\nSurabaya, Indonesia',
+                                rating: 5.0,
+                              ),
+                              SponsorCard(
+                                imageUrl: 'lib/assets/event_logo.jpg',
+                                title: 'Dies Natalis',
+                                subtitle:
+                                    'Universitas Ciputra\nSurabaya, Indonesia',
+                                rating: 5.0,
                               ),
                               // Additional Cards...
                             ],
                           ),
                         ),
-                        // Past Sponsorship Tab
-                        const Center(child: Text('Past Sponsorship')),
                         // Events Tab
-                        const Center(child: Text('Events')),
+                        Padding(
+  padding: const EdgeInsets.all(16.0),
+  child: Column(
+    children: [
+      SizedBox(
+        width: double.infinity, // Make the card take up the full width
+        child: Card(
+          elevation: 2.0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16.0),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundImage: AssetImage('lib/assets/profile_picture.jpg'),
+                    ),
+                    SizedBox(width: 8.0),
+                    Expanded(
+                      child: Text(
+                        'Informatics Rally Games and Logic',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 11,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      '3h ago',
+                      style: TextStyle(
+                        color: Colors.grey,
+                      ),
+                    ),
+                    SizedBox(width: 8.0),
+                    Icon(Icons.more_vert),
+                  ],
+                ),
+                SizedBox(height: 16.0),
+                // Event Image
+                Center(
+                  child: Image(
+                    image: AssetImage('lib/assets/irgl.png'),
+                    fit: BoxFit.contain,
+                    width: double.infinity,
+                  ),
+                ),
+                SizedBox(height: 16.0),
+                // Event Description
+                Text(
+                  'Jadi pemimpin dengan anggota yang banyak ',
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+      // Additional Cards...
+    ],
+  ),
+)
+
                       ],
                     ),
                   ),
@@ -247,8 +294,162 @@ class _DetailCompanyState extends State<detail_company> with SingleTickerProvide
             ),
           ),
         ],
-      );
+      ),
+    );
   }
 }
 
+class SponsorCard extends StatelessWidget {
+  final String imageUrl;
+  final String title;
+  final String subtitle;
+  final double rating;
 
+  const SponsorCard({
+    Key? key,
+    required this.imageUrl,
+    required this.title,
+    required this.subtitle,
+    required this.rating,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: const EdgeInsets.symmetric(vertical: 10.0),
+      elevation: 2.0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16.0),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          children: [
+            CircleAvatar(
+              radius: 30.0,
+              backgroundImage: AssetImage(imageUrl),
+            ),
+            const SizedBox(width: 16.0),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 4.0),
+                  Text(
+                    subtitle,
+                    style: TextStyle(
+                      fontSize: 14.0,
+                      color: Colors.grey[600],
+                    ),
+                  ),
+                  const SizedBox(height: 4.0),
+                  Row(
+                    children: [
+                      Icon(Icons.star, color: Colors.green, size: 20.0),
+                      const SizedBox(width: 4.0),
+                      Text(
+                        rating.toString(),
+                        style: TextStyle(
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(width: 16.0),
+                      ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                        ),
+                        child: Text(
+                          'See Comments',
+                          style: TextStyle(fontSize: 12.0),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 16.0),
+            Icon(Icons.more_vert),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class AboutCompany extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 2.0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16.0),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'PT Mandira',
+              style: TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 8.0),
+            Text(
+              'Berdiri sejak tahun 1968, PT Mandiri telah menjadi Bank Swasta terbesar kedua di Indonesia. Berkomitmen untuk memberikan pelayanan terbaik kepada nasabah dan menjadi bank yang dapat dipercaya oleh seluruh nasabah.',
+            ),
+            const SizedBox(height: 8.0),
+            Text(
+              'Mandira terus bertumbuh dengan puluhan ribu karyawan yang tersebar di berbagai cabang yang ada di seluruh Indonesia.',
+            ),
+            const SizedBox(height: 8.0),
+            Text(
+              'Website',
+              style: TextStyle(
+                color: Colors.blue,
+                decoration: TextDecoration.underline,
+              ),
+            ),
+            const SizedBox(height: 4.0),
+            Text('http://www.mandira.co.id'),
+            const SizedBox(height: 8.0),
+            Text(
+              'Email',
+              style: TextStyle(
+                color: Colors.blue,
+                decoration: TextDecoration.underline,
+              ),
+            ),
+            const SizedBox(height: 4.0),
+            Text('mandira@gmail.co.id'),
+            const SizedBox(height: 8.0),
+            Text(
+              'Nomor Telepon',
+              style: TextStyle(
+                color: Colors.blue,
+                decoration: TextDecoration.underline,
+              ),
+            ),
+            const SizedBox(height: 4.0),
+            Text('+6281123456789'),
+          ],
+        ),
+      ),
+    );
+  }
+}
