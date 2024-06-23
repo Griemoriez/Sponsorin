@@ -23,7 +23,8 @@ class list_submission extends StatefulWidget {
   _ListSubmissionState createState() => _ListSubmissionState();
 }
 
-class _ListSubmissionState extends State<list_submission> {
+class _ListSubmissionState extends State<list_submission> with SingleTickerProviderStateMixin{
+  late TabController _tabController;
   final TextEditingController _searchController = TextEditingController();
   List<Map<String, String>> proposals = [
     {
@@ -42,72 +43,184 @@ class _ListSubmissionState extends State<list_submission> {
       'status': 'DECLINED'
     },
   ];
+  List<Map<String, String>> incoming_proposals = [
+    {
+      'companyName': 'PT Mandira',
+      'location': 'Surabaya, Indonesia',
+      'status': 'ACCEPTED'
+    },
+    {
+      'companyName': 'PT Lamuda',
+      'location': 'Jakarta, Indonesia',
+      'status': 'PENDING'
+    }
+  ];
   List<Map<String, String>> filteredProposals = [];
+  List<Map<String, String>> filteredIncomingProposals = [];
 
   @override
   void initState() {
     super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+    _tabController.addListener(() {
+      _handleTabSelection();
+    });
     filteredProposals = proposals;
+    filteredIncomingProposals = incoming_proposals;
     _searchController.addListener(_filterProposals);
   }
 
   @override
   void dispose() {
     _searchController.dispose();
+    _tabController.dispose();
     super.dispose();
   }
 
+  void _handleTabSelection() {
+    if (!_tabController.indexIsChanging) {
+      _filterProposals();
+      print("Tab index: ${_tabController.index}");
+    }
+  }
+
   void _filterProposals() {
-    String query = _searchController.text.toLowerCase();
-    setState(() {
-      filteredProposals = proposals
-          .where((proposal) =>
-              proposal['companyName']!.toLowerCase().contains(query))
+    List<Map<String, String>> results = [];
+    List<Map<String, String>> sourceList =
+        _tabController.index == 0 ? proposals : incoming_proposals;
+
+    if (_searchController.text.isEmpty) {
+      results = sourceList;
+    } else {
+      results = sourceList
+          .where((event) =>
+              event['companyName']!.toLowerCase().contains(_searchController.text.toLowerCase()))
           .toList();
+      print("Filtered results: $results");
+    }
+
+    setState(() {
+      if (_tabController.index == 0) {
+        filteredProposals = results;
+      } else {
+        filteredIncomingProposals = results;
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          TextField(
-            controller: _searchController,
-            decoration: InputDecoration(
-              prefixIcon: const Icon(Icons.search),
-              hintText: 'Search here...',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(15.0),
+    return DefaultTabController(
+      length: 2,
+      child: Padding(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 15),
+              child: Text(
+                "Hi, PT Mandiri!",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 10.0),
-              fillColor: Colors.white,
-              filled: true,
             ),
-          ),
-          SizedBox(height: 16),
-          Text(
-            'Proposal Submissions',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: filteredProposals.length,
-              itemBuilder: (context, index) {
-                var proposal = filteredProposals[index];
-                return buildProposalCard(
-                  proposal['companyName']!,
-                  proposal['location']!,
-                  proposal['status']!,
-                );
-              },
+            Padding(
+              padding: EdgeInsets.only(bottom: 15),
+              child: TextField(
+                controller: _searchController,
+                decoration: InputDecoration(
+                  focusColor: Colors.green.shade100,
+                  labelText: 'Search',
+                  hintText: 'irgl, ...',
+                  prefixIcon: Icon(Icons.search),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                    borderSide: BorderSide(color: Colors.green.shade100),
+                  ),
+                ),
+              ),
             ),
-          ),
-        ],
+            TabBar(
+              controller: _tabController,
+              tabs: [
+                Tab(text: "Submitted Proposals"),
+                Tab(text: "Offered Proposals"),
+              ],
+              labelColor: Colors.black,
+              indicatorColor: Colors.green,
+            ),
+            Expanded(
+              child: TabBarView(
+                controller: _tabController,
+                children: [
+                  ListView.builder(
+                    itemCount: filteredProposals.length,
+                    itemBuilder: (context, index) {
+                      var proposal = filteredProposals[index];
+                      return buildProposalCard(
+                        proposal['companyName']!,
+                        proposal['location']!,
+                        proposal['status']!,
+                      );
+                    },
+                  ),
+                  ListView.builder(
+                    itemCount: filteredIncomingProposals.length,
+                    itemBuilder: (context, index) {
+                      var proposal = filteredIncomingProposals[index];
+                      return buildProposalCard(
+                        proposal['companyName']!,
+                        proposal['location']!,
+                        proposal['status']!,
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
+    // return Padding(
+    //   padding: const EdgeInsets.all(16.0),
+    //   child: Column(
+    //     crossAxisAlignment: CrossAxisAlignment.start,
+    //     children: [
+    //       TextField(
+    //         controller: _searchController,
+    //         decoration: InputDecoration(
+    //           prefixIcon: const Icon(Icons.search),
+    //           hintText: 'Search here...',
+    //           border: OutlineInputBorder(
+    //             borderRadius: BorderRadius.circular(15.0),
+    //           ),
+    //           contentPadding: const EdgeInsets.symmetric(horizontal: 10.0),
+    //           fillColor: Colors.white,
+    //           filled: true,
+    //         ),
+    //       ),
+    //       SizedBox(height: 16),
+    //       Text(
+    //         'Proposal Submissions',
+    //         style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+    //       ),
+    //       Expanded(
+    //         child: ListView.builder(
+    //           itemCount: filteredProposals.length,
+    //           itemBuilder: (context, index) {
+    //             var proposal = filteredProposals[index];
+    //             return buildProposalCard(
+    //               proposal['companyName']!,
+    //               proposal['location']!,
+    //               proposal['status']!,
+    //             );
+    //           },
+    //         ),
+    //       ),
+    //     ],
+    //   ),
+    // );
   }
 
   Widget buildProposalCard(String companyName, String location, String status) {
