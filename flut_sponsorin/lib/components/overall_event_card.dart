@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 
 class overall_event_card extends StatelessWidget {
-  const overall_event_card({super.key});
+  final String event_name;
+  final String event_type;
+  final String event_location;
+  final String event_date;
+  final int event_status;
+  overall_event_card({Key? key, required this.event_name, required this.event_type, required this.event_location, required this.event_date, required this.event_status}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: Card(
+        color: getColorBasedOnStatus(event_status),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
@@ -22,14 +28,14 @@ class overall_event_card extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "IRGL 2023",
+                    event_name,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
-                    'COMPETITION',
+                    event_type,
                     style: TextStyle(
                       fontSize: 12,
                       color: Colors.grey[600],
@@ -40,7 +46,7 @@ class overall_event_card extends StatelessWidget {
               SizedBox(height: 8),
               SizedBox(height: 4),
               Text(
-                'Onsite : Universitas Kristen Petra - Surabaya',
+                'Onsite : $event_location',
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.grey[800],
@@ -48,7 +54,7 @@ class overall_event_card extends StatelessWidget {
               ),
               SizedBox(height: 4),
               Text(
-                'Oktober 2023',
+                event_date,
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.grey[800],
@@ -78,5 +84,16 @@ class overall_event_card extends StatelessWidget {
         ),
       ),
     );
+  }
+  Color getColorBasedOnStatus(int status) {
+    if (status == -1) {
+      return Colors.white;
+    } else if (status == 0) {
+      return Colors.red.shade200;
+    } else if (status == 1) {
+      return Colors.green.shade200;
+    } else {
+      return Colors.grey; // Default color if status is unknown
+    }
   }
 }

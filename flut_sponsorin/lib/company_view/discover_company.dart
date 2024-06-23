@@ -38,27 +38,25 @@ class _homePageState extends State<discover_company> {
           backgroundColor: Colors.transparent,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
-            elevation: 0,
             title: Padding(
               padding: const EdgeInsets.only(top: 20),
               child: Center(
-                child: Text.rich(
-                  TextSpan(
-                      style: TextStyle(
-                          color: Color(0xff008037),
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold),
-                      text: 'Sponsor',
-                      children: [
-                        TextSpan(
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                                fontSize: 25),
-                            text: 'in')
-                      ]),
-                )
-              ),
+                  child: Text.rich(
+                TextSpan(
+                    style: TextStyle(
+                        color: Color(0xff008037),
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold),
+                    text: 'Sponsor',
+                    children: [
+                      TextSpan(
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                              fontSize: 25),
+                          text: 'in')
+                    ]),
+              )),
             ),
           ),
           body: IndexedStack(

@@ -3,13 +3,13 @@ import 'package:flut_sponsorin/components/overall_event_card.dart';
 import 'package:flut_sponsorin/components/upcoming_event_card.dart';
 
 class upcoming_events extends StatelessWidget {
-   upcoming_events({super.key});
+  upcoming_events({super.key});
 
-    final List<EventData> cardData = const [
-     EventData(title: 'IRGL 2023', type: 'competition', time: 'Oktober 2023', imagePath: 'lib/assets/irgl.png', description: 'Onsite: Universitas Kristen Petra, Surabaya'),
-     EventData(title: 'Bharatika 2023', type: 'competition', time: 'Oktober 2023', imagePath: 'lib/assets/irgl.png', description: 'Onsite: Universitas Kristen Petra, Surabaya'),
-     EventData(title: 'IRGL 2023', type: 'competition', time: 'Oktober 2023', imagePath: 'lib/assets/irgl.png', description: 'Onsite: Universitas Kristen Petra, Surabaya')
-  ];
+  //   final List<EventData> cardData = const [
+  //    EventData(title: 'IRGL 2023', type: 'competition', time: 'Oktober 2023', imagePath: 'lib/assets/irgl.png', description: 'Onsite: Universitas Kristen Petra, Surabaya'),
+  //    EventData(title: 'Bharatika 2023', type: 'competition', time: 'Oktober 2023', imagePath: 'lib/assets/irgl.png', description: 'Onsite: Universitas Kristen Petra, Surabaya'),
+  //    EventData(title: 'IRGL 2023', type: 'competition', time: 'Oktober 2023', imagePath: 'lib/assets/irgl.png', description: 'Onsite: Universitas Kristen Petra, Surabaya')
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -58,14 +58,15 @@ class upcoming_events extends StatelessWidget {
                         )),
                   ],
                 ),
-                SizedBox(
-                  height: 520, // Sesuaikan tinggi sesuai kebutuhan
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: cardData.length,
-                    itemBuilder: (context, index) => upcoming_events_card(cardData : cardData[index]),
-                  ),
-                ),
+                // SizedBox(
+                //   height: 520, // Sesuaikan tinggi sesuai kebutuhan
+                //   child: ListView.builder(
+                //     scrollDirection: Axis.horizontal,
+                //     itemCount: cardData.length,
+                //     itemBuilder: (context, index) =>
+                //         upcoming_events_card(cardData: cardData[index]),
+                //   ),
+                // ),
               ],
             ),
           )),
