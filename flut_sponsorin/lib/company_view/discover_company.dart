@@ -1,6 +1,5 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flut_sponsorin/company_view/discover_company_home.dart';
-import 'package:flut_sponsorin/company_view/profile_company2.dart';
 import 'package:flut_sponsorin/company_view/proposal_page.dart';
 import 'package:flut_sponsorin/company_view/profile_company.dart';
 import 'package:flut_sponsorin/company_view/upcoming_events.dart';

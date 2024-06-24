@@ -3,60 +3,80 @@ import 'package:flutter/material.dart';
 class ProfileCompanyHome extends StatelessWidget {
   const ProfileCompanyHome({Key? key}) : super(key: key);
 
+  final List<Map<String, String>> posts = const [
+    {
+      'avatar': 'lib/assets/profile_picture.jpg',
+      'name': 'PT Mandira',
+      'time': '1h ago',
+      'description': 'Jadi pemimpin dengan anggota yang banyak dan tersebar merupakan sebuah keahlian yang harus dimiliki oleh seluruh mahasiswa. Yuk, simak cerita Akmal untuk tahu tips dan tricks mencari sponsor yang baik dan mudah!!!',
+    },
+    {
+      'avatar': 'lib/assets/profile_picture.jpg',
+      'name': 'PT Mandira',
+      'time': '2h ago',
+      'description': 'Menjadi panitia sponsor merupakan salah satu keahlian yang penting. Simak cerita Akmal untuk tahu tips dan tricks mencari sponsor yang baik dan mudah!!!',
+    },
+    {
+      'avatar': 'lib/assets/profile_picture.jpg',
+      'name': 'PT Mandira',
+      'time': '5h ago',
+      'description': 'Pemimpin yang baik harus bisa mengelola anggota yang banyak. Pelajari lebih lanjut dari pengalaman Akmal mencari sponsor!',
+    },
+    {
+      'avatar': 'lib/assets/profile_picture.jpg',
+      'name': 'PT Mandira',
+      'time': '1d ago',
+      'description': 'Simak tips dan tricks dari Akmal tentang cara mencari sponsor yang baik dan mudah. Informasi penting bagi seluruh mahasiswa!',
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.vertical,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            for (int i = 0; i < 4; i++)
-              Card(
-                elevation: 2.0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16.0),
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          CircleAvatar(
-                            backgroundImage:
-                                AssetImage('lib/assets/profile_picture.jpg'),
-                          ),
-                          SizedBox(width: 8.0),
-                          Text(
-                            'PT Mandira',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Spacer(),
-                          Text(
-                            '3h ago',
-                            style: TextStyle(
-                              color: Colors.grey,
-                            ),
-                          ),
-                          SizedBox(width: 8.0),
-                          Icon(Icons.more_vert),
-                        ],
+    return ListView.builder(
+      padding: const EdgeInsets.all(16.0),
+      itemCount: posts.length,
+      itemBuilder: (context, index) {
+        var post = posts[index];
+        return Card(
+          elevation: 2.0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16.0),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundImage: AssetImage(post['avatar']!),
+                    ),
+                    const SizedBox(width: 8.0),
+                    Text(
+                      post['name']!,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
                       ),
-                      SizedBox(height: 16.0),
-                      Text(
-                        'Jadi pemimpin dengan anggota yang banyak dan tersebar merupakan sebuah keahlian yang harus dimiliki oleh seluruh mahasiswa. Salah satunya menjadi panitia sponsor merupakan salah satu keahlian yang penting\n\nYuk, simak cerita Akmal untuk tahu tips dan tricks mencari sponsor yang baik dan mudah!!!',
+                    ),
+                    const Spacer(),
+                    Text(
+                      post['time']!,
+                      style: const TextStyle(
+                        color: Colors.grey,
                       ),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(width: 8.0),
+                    const Icon(Icons.more_vert),
+                  ],
                 ),
-              ),
-          ],
-        ),
-      ),
+                const SizedBox(height: 16.0),
+                Text(post['description']!),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

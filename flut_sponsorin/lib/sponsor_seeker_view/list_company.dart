@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flut_sponsorin/company_view/profile_company.dart';
 import 'package:flut_sponsorin/sponsor_seeker_view/detail_company.dart';
+import 'package:flutter/material.dart';
 
 class list_company extends StatefulWidget {
   const list_company({super.key});
@@ -45,7 +46,7 @@ class _ListCompanyState extends State<list_company> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.only(top: 16.0, right: 16.0, left: 16.0),
       child: Column(
         children: [
           TextField(

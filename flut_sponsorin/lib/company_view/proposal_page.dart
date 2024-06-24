@@ -125,7 +125,7 @@ class _ProposalPageState extends State<ProposalPage>
     return DefaultTabController(
       length: 4,
       child: Padding(
-        padding: EdgeInsets.all(20),
+        padding: EdgeInsets.only(top: 20, right: 20, left: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -224,7 +224,7 @@ class ProposalListView extends StatelessWidget {
         final event = events[index];
 
         return Padding(
-            padding: const EdgeInsets.only(top: 10.0),
+            padding: const EdgeInsets.only(top: 10.0, bottom: 15.0),
             child: GestureDetector(
               onTap: () {
                 Navigator.push(

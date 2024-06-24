@@ -90,12 +90,12 @@ class _upcoming_eventsState extends State<upcoming_events> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         child: SingleChildScrollView(
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 5.0, bottom: 15),
+                padding: const EdgeInsets.only(top: 5.0),
                 child: TextField(
                   onChanged: (value) {
                     _filterCards(value);
@@ -110,6 +110,7 @@ class _upcoming_eventsState extends State<upcoming_events> {
                   ),
                 ),
               ),
+              SizedBox(height: 15.0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

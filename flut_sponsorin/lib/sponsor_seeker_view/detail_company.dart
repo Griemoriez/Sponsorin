@@ -48,8 +48,6 @@ class _DetailCompanyState extends State<detail_company>
               elevation: 0,
               centerTitle: true,
               title: Container(
-                width: double.infinity,
-                alignment: Alignment.center,
                 child: const Text.rich(
                   TextSpan(
                     style: TextStyle(
@@ -69,7 +67,6 @@ class _DetailCompanyState extends State<detail_company>
                       ),
                     ],
                   ),
-                  textAlign: TextAlign.center,
                 ),
               ),
             ),
@@ -249,8 +246,8 @@ class _DetailCompanyState extends State<detail_company>
                                                 child: Text(
                                                   'Informatics Rally Games and Logic',
                                                   style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 11,
+                                                    fontWeight: FontWeight.w700,
+                                                    fontSize: 15,
                                                   ),
                                                 ),
                                               ),
