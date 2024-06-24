@@ -1,9 +1,11 @@
 import 'package:flut_sponsorin/company_view/discover_company.dart';
+import 'package:flut_sponsorin/company_view/profile_company2.dart';
 import 'package:flut_sponsorin/company_view/upload_status.dart';
 import 'package:flut_sponsorin/home.dart';
 import 'package:flut_sponsorin/signup.dart';
 import 'package:flut_sponsorin/splashscreen.dart';
 import 'package:flut_sponsorin/sponsor_seeker_view/detail_company.dart';
+import 'package:flut_sponsorin/sponsor_seeker_view/discovery_sponsor_home.dart';
 import 'package:flutter/material.dart';
 import 'package:flut_sponsorin/login.dart';
 import 'package:flut_sponsorin/sponsor_seeker_view/discover_sponsor.dart';
@@ -45,7 +47,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'SponsorIn',
-      home: LoginScreen(),
+      home: discover_company(),
     );
   }
 }
