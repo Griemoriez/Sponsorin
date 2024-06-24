@@ -3,10 +3,11 @@ import 'package:flut_sponsorin/signup.dart';
 import 'package:flut_sponsorin/sponsor_seeker_view/discover_sponsor.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+
 import 'models/user.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({super.key});
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -17,47 +18,48 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _tfPassword = TextEditingController();
   late Box<User> userBox;
 
-  void handle_login() async {
-    String emailOrPhone = _tfPhoneOrEmail.text;
+  void handleLogin() async {
+    String phoneOrEmail = _tfPhoneOrEmail.text;
     String password = _tfPassword.text;
 
     userBox = Hive.box<User>('userBox');
-    bool loginSuccess = false;
+    bool loginSuccessful = false;
+    String? role;
 
     for (var key in userBox.keys) {
       var user = userBox.get(key) as User;
 
-      if ((user.email == emailOrPhone || user.phone == emailOrPhone) && user.password == password) {
-        loginSuccess = true;
-
-        if (user.role == 'sponsor') {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => discover_event()),
-          );
-        } else if (user.role == 'seeker') {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => discover_company()),
-          );
-        }
-
+      if ((user.email == phoneOrEmail || user.phone == phoneOrEmail) && user.password == password) {
+        loginSuccessful = true;
+        role = user.role;
         break;
       }
     }
 
-    if (!loginSuccess) {
+    if (loginSuccessful) {
+      if (role == 'sponsor') {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => discover_event()),
+        );
+      } else if (role == 'seeker') {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => discover_company()),
+        );
+      }
+    } else {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text('Login Failed'),
-          content: Text('Invalid Credentials or Password'),
+          title: const Text('Login Failed'),
+          content: const Text('Invalid Credentials or Password'),
           actions: <Widget>[
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         ),
@@ -67,66 +69,116 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              TextField(
-                controller: _tfPhoneOrEmail,
-                decoration: InputDecoration(
-                  labelText: 'Email / Phone Number',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                ),
-              ),
-              SizedBox(height: 20),
-              TextField(
-                controller: _tfPassword,
-                obscureText: true,
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                ),
-              ),
-              SizedBox(height: 20),
-              Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => signup()));
-                  },
-                  child: Text(
-                    "Don't Have an Account? Sign Up Here",
-                    style: TextStyle(color: Colors.blue),
-                  ),
-                ),
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  handle_login();
-                },
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                ),
-                child: Text('Next'),
-              ),
-            ],
+    return Stack(
+      children: [
+        Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("lib/assets/startupandroid.png"),
+              fit: BoxFit.cover,
+            ),
           ),
         ),
-      ),
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          body: Center(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const Image(image: AssetImage('lib/assets/logo.png')),
+                    const Padding(
+                      padding: EdgeInsets.only(bottom: 30),
+                      child: Text(
+                        "Login",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                      child: TextField(
+                        controller: _tfPhoneOrEmail,
+                        decoration: InputDecoration(
+                          labelText: 'Email / Phone',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                      child: TextField(
+                        controller: _tfPassword,
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          labelText: 'Password',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 30.0),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text("Don't Have an Account?"),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (context) => signup()),
+                            );
+                          },
+                          child: const Text(
+                            "Sign Up",
+                            style: TextStyle(color: Colors.blue),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 30.0),
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: ElevatedButton(
+                          onPressed: handleLogin,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xff008037),
+                            padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30.0),
+                            ),
+                          ),
+                          child: const Text(
+                            'Next',
+                            style: TextStyle(color: Colors.white, fontSize: 15),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

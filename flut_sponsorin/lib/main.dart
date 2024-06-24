@@ -33,7 +33,8 @@ void main() async {
   }
   await Hive.openBox('eventBox');
   await Hive.openBox('proposalBox');
-  // await Hive.openBox('postBox');
+
+
   runApp(const MainApp());
 }
 
