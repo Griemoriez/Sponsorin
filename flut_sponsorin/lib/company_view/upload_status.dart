@@ -1,5 +1,6 @@
 import 'package:flut_sponsorin/company_view/discover_company.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 class upload_status extends StatefulWidget {
   upload_status({super.key});
@@ -9,6 +10,14 @@ class upload_status extends StatefulWidget {
 }
 
 class _upload_statusState extends State<upload_status> {
+// final postBox = Hive.box('postBox');
+//   final title = TextEditingController();
+//   final description = TextEditingController();
+
+  // void writeData(){
+  //   postBox.put(title, value)
+  // }
+
   final List<Map<String, dynamic>> list_event = [
     {'id': 1, 'nama': 'IRGL 2023'},
     {'id': 1, 'nama': "Bharatika 2023"}
@@ -16,6 +25,12 @@ class _upload_statusState extends State<upload_status> {
 
   Map<String, dynamic>? selected_event;
 
+  // void writePost(){
+  //   postBox.put('title',{'selected_event': selected_event,'desc': description});
+  //   print('Berhasil'); 
+  // }
+
+  // void readPost(){}
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -87,6 +102,7 @@ class _upload_statusState extends State<upload_status> {
                         return DropdownMenuItem<Map<String, dynamic>>(
                             value: item, child: Text(item['nama']));
                       }).toList(),
+                      
                       onChanged: (newValue) {
                         setState(() {
                           selected_event = newValue;
@@ -113,6 +129,7 @@ class _upload_statusState extends State<upload_status> {
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       ),
+                  
                     ),
                     const SizedBox(height: 8),
                     TextField(
@@ -126,6 +143,7 @@ class _upload_statusState extends State<upload_status> {
                         contentPadding: const EdgeInsets.symmetric(
                             horizontal: 16.0, vertical: 12.0),
                       ),
+                      // controller: title,
                     ),
                     const SizedBox(
                       height: 20,
@@ -150,6 +168,7 @@ class _upload_statusState extends State<upload_status> {
                         contentPadding: const EdgeInsets.symmetric(
                             horizontal: 16.0, vertical: 12.0),
                       ),
+                      // controller: description,
                     ),
                     const SizedBox(height: 20.0),
                     Center(
@@ -157,11 +176,12 @@ class _upload_statusState extends State<upload_status> {
                         height: 50,
                         child: ElevatedButton(
                           onPressed: () {
+                            // writePost();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      const discover_company()),
+                                      const discover_company()) ,
                             );
                           },
                           style: ElevatedButton.styleFrom(
@@ -169,6 +189,7 @@ class _upload_statusState extends State<upload_status> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15.0),
                             ),
+                            
                           ),
                           child: const Text(
                             'UPLOAD',

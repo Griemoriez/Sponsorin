@@ -6,13 +6,19 @@ class EventData {
   final String description;
   final String contactPerson;
   final String venue;
+  int status;
 
-  const EventData(
+  EventData(
       {required this.title,
       required this.type,
       required this.time,
       required this.poster,
       required this.description,
       required this.contactPerson,
-      required this.venue});
+      required this.venue,
+      required this.status
+      }
+  );
+
+  
 }

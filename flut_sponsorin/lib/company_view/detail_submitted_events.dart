@@ -1,16 +1,17 @@
 import 'package:flut_sponsorin/company_view/discover_company.dart';
+import 'package:flut_sponsorin/components/EventData.dart';
 import 'package:flutter/material.dart';
 
 class detail_submitted_events extends StatelessWidget {
-  final Map<String, dynamic> data;
-  detail_submitted_events({Key? key, required this.data}) : super(key: key);
+  final EventData detailSubmitted;
+  const detail_submitted_events({super.key, required this.detailSubmitted});
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage("lib/assets/BG.jpg"),
               fit: BoxFit.cover,
@@ -55,7 +56,7 @@ class detail_submitted_events extends StatelessWidget {
                 buildSectionTitle('EVENT NAME'),
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
-                  child: buildSectionContent(data['nama']),
+                  child: buildSectionContent(detailSubmitted.title),
                 ),
                 SizedBox(height: 16),
                 buildSectionTitle('EVENT DATE AND TIME :'),
@@ -72,7 +73,7 @@ class detail_submitted_events extends StatelessWidget {
                 buildSectionTitle('EVENT LOCATION'),
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
-                  child: buildSectionContent(data['location']),
+                  child: buildSectionContent(detailSubmitted.venue),
                 ),
                 SizedBox(height: 16),
                 buildSectionTitle('TARGET'),

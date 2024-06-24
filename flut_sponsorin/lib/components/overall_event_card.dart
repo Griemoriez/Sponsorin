@@ -171,6 +171,7 @@ class overall_event_card extends StatelessWidget {
       ),
     );
   }
+  
   Color getColorBasedOnStatus(int status) {
     if (status == -1) {
       return Colors.white;

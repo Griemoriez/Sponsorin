@@ -1,6 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flut_sponsorin/company_view/discover_company_home.dart';
-import 'package:flut_sponsorin/company_view/list_submitted_events.dart';
+import 'package:flut_sponsorin/company_view/proposal_page.dart';
 import 'package:flut_sponsorin/company_view/profile_company.dart';
 import 'package:flut_sponsorin/company_view/upcoming_events.dart';
 import 'package:flut_sponsorin/company_view/upload_status.dart';
@@ -20,8 +20,8 @@ class _homePageState extends State<discover_company> {
   final List<Widget> _pages = [
     const discover_company_home(),
     const upcoming_events(),
-     upload_status(),
-    const list_submitted_events(),
+    // upload_status(),
+    const ProposalPage(),
     const profile_company(),
   ];
   @override
@@ -40,8 +40,8 @@ class _homePageState extends State<discover_company> {
           backgroundColor: Colors.transparent,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
-            title: Padding(
-              padding: const EdgeInsets.only(top: 20),
+            title: const Padding(
+              padding:  EdgeInsets.only(top: 20),
               child: Center(
                   child: Text.rich(
                 TextSpan(
@@ -75,10 +75,10 @@ class _homePageState extends State<discover_company> {
                 Icons.business,
                 color: Colors.white,
               ),
-              Icon(
-                Icons.add_box,
-                color: Colors.white,
-              ),
+              // Icon(
+              //   Icons.add_box,
+              //   color: Colors.white,
+              // ),
               Icon(
                 Icons.insert_drive_file,
                 color: Colors.white,

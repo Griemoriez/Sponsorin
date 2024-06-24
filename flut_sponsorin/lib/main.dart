@@ -33,7 +33,7 @@ void main() async {
   }
   await Hive.openBox('eventBox');
   await Hive.openBox('proposalBox');
-
+  // await Hive.openBox('postBox');
   runApp(const MainApp());
 }
 
@@ -53,6 +53,7 @@ class MainApp extends StatelessWidget {
 Future<void> populateUserBox() async {
   var userBox = await Hive.openBox<User>('userBox');
   var startIndex = Hive.box<User>('userBox').length;
+  
 
   final users = [
     User(

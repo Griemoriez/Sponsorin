@@ -1,5 +1,7 @@
 import 'package:flut_sponsorin/company_view/upload_status.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+
 
 class discover_company_home extends StatefulWidget {
   const discover_company_home({super.key});
@@ -10,8 +12,6 @@ class discover_company_home extends StatefulWidget {
 
 class _discover_company_homeState extends State<discover_company_home> {
   bool isFavorite = false;
-
-
   final List<Map<String, String>> cardData = [
     {
       'title': 'IRGL 2023',
