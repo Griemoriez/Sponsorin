@@ -1,50 +1,54 @@
-import 'package:flut_sponsorin/company_view/upload_status.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:intl/intl.dart';
+import 'package:flut_sponsorin/company_view/upload_status.dart';
+import '../models/user.dart';
+import '../models/post.dart';
 
-
-class discover_company_home extends StatefulWidget {
-  const discover_company_home({super.key});
+class DiscoverCompanyHome extends StatefulWidget {
+  const DiscoverCompanyHome({super.key});
 
   @override
-  State<discover_company_home> createState() => _discover_company_homeState();
+  State<DiscoverCompanyHome> createState() => _DiscoverCompanyHomeState();
 }
 
-class _discover_company_homeState extends State<discover_company_home> {
+class _DiscoverCompanyHomeState extends State<DiscoverCompanyHome> {
   bool isFavorite = false;
-  final List<Map<String, String>> cardData = [
-    {
-      'title': 'IRGL 2023',
-      'time': '3h ago',
-      'event': 'INFORMATICS RALLY GAMES AND LOGIC',
-      'description':
-          'Berkembangnya teknologi membuka banyak peluang karir. Jadinya, semakin banyak lowongan baru di bidang teknologi yang bisa dijalani deh! Buat kamu yang tertarik jadi hashtag',
-      'imagePath': 'lib/assets/logo.png'
-    },
-    {
-      'title': 'Tech Expo 2024',
-      'time': '5h ago',
-      'event': 'TECHNOLOGY EXHIBITION AND SEMINAR',
-      'description':
-          'Acara ini akan menghadirkan pembicara dari berbagai perusahaan teknologi terkemuka. Ayo datang dan tambahkan wawasanmu tentang teknologi terbaru!',
-      'imagePath': 'lib/assets/logo.png'
-    },
-    {
-      'title': 'AI Summit 2024',
-      'time': '1d ago',
-      'event': 'ARTIFICIAL INTELLIGENCE SUMMIT',
-      'description':
-          'Diskusikan perkembangan terbaru dalam bidang kecerdasan buatan bersama para ahli dan praktisi di AI Summit 2024.',
-      'imagePath': 'lib/assets/logo.png'
-    }
-  ];
-
+  bool isLoading = true;
+  List<Map<String, String>> cardData = [];
   List<Map<String, String>> filteredCardData = [];
 
   @override
   void initState() {
     super.initState();
-    filteredCardData = cardData;
+    _loadData();
+  }
+
+  void _loadData() async {
+    var postBox = await Hive.openBox<Post>('postBox');
+    var userBox = await Hive.openBox<User>('userBox');
+
+    List<Map<String, String>> tempCardData = [];
+
+    for (var postKey in postBox.keys) {
+      var post = postBox.get(postKey) as Post;
+      var user = userBox.get(post.poster) as User;
+
+      tempCardData.add({
+        'title': user.name,
+        'time': DateFormat('dd MMM yyyy, HH:mm').format(post.time_posted),
+        'event': post.title,
+        'description': post.description,
+        'imagePath': user.picture ?? 'lib/assets/logo.png', // Use placeholder if null,
+
+      });
+    }
+
+    setState(() {
+      cardData = tempCardData;
+      filteredCardData = cardData;
+      isLoading = false;
+    });
   }
 
   void _filterCards(String query) {
@@ -75,7 +79,9 @@ class _discover_company_homeState extends State<discover_company_home> {
         ),
         Scaffold(
           backgroundColor: Colors.transparent,
-          body: SingleChildScrollView(
+          body: isLoading
+              ? Center(child: CircularProgressIndicator())
+              : SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Column(
               children: [
@@ -91,7 +97,8 @@ class _discover_company_homeState extends State<discover_company_home> {
                       labelText: 'Search',
                       prefixIcon: Icon(Icons.search),
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          borderRadius:
+                          BorderRadius.all(Radius.circular(20.0)),
                           borderSide: BorderSide(color: Colors.orange)),
                     ),
                   ),
@@ -110,27 +117,30 @@ class _discover_company_homeState extends State<discover_company_home> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                           side: const BorderSide(
-                              color: Colors.grey,
-                              width: 1), // Menambahkan border
+                              color: Colors.grey, width: 1),
                         ),
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              top: 15.0, left: 20.0, right: 20.0, bottom: 18.0),
+                              top: 15.0,
+                              left: 20.0,
+                              right: 20.0,
+                              bottom: 18.0),
                           child: Column(
                               mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                              crossAxisAlignment:
+                              CrossAxisAlignment.start,
                               children: <Widget>[
                                 Row(
                                   children: <Widget>[
                                     CircleAvatar(
-                                      backgroundImage: AssetImage(item[
-                                          'imagePath']!), // Ganti dengan path gambar Anda
+                                      backgroundImage: AssetImage(
+                                          item['imagePath']!),
                                       radius: 20,
                                     ),
                                     SizedBox(width: 10),
                                     Column(
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      CrossAxisAlignment.start,
                                       children: <Widget>[
                                         Text(
                                           item['title']!,
@@ -189,8 +199,7 @@ class _discover_company_homeState extends State<discover_company_home> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) => upload_status()),
+                MaterialPageRoute(builder: (context) => upload_status()),
               );
             },
             child: Icon(Icons.add),

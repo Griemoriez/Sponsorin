@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
 import 'models/user.dart';
+import 'globals.dart' as globals;
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -32,6 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
       if ((user.email == phoneOrEmail || user.phone == phoneOrEmail) && user.password == password) {
         loginSuccessful = true;
         role = user.role;
+        globals.loggedInUser = user;
         break;
       }
     }

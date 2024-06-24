@@ -1,9 +1,9 @@
 import 'package:hive/hive.dart';
 
-part 'proposal.g.dart';
+part 'penawaran.g.dart';
 
 @HiveType(typeId: 2)
-class Proposal extends HiveObject {
+class Penawaran extends HiveObject {
   @HiveField(0)
   int id;
 
@@ -25,7 +25,7 @@ class Proposal extends HiveObject {
   @HiveField(6)
   DateTime lastAction;
 
-  Proposal({
+  Penawaran({
     required this.id,
     required this.event,
     this.seeker,
