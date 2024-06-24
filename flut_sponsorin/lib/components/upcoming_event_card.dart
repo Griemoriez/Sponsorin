@@ -1,13 +1,13 @@
-import 'package:flut_sponsorin/components/EventData.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
+import 'package:flut_sponsorin/models/event.dart';
+import 'package:intl/intl.dart'; // Import intl package for date formatting
 
 class upcoming_events_card extends StatelessWidget {
-  final EventData cardData;
+  final Event cardData;
 
-  const upcoming_events_card({super.key, required this.cardData});
+  const upcoming_events_card({Key? key, required this.cardData}) : super(key: key);
 
-  void _showDescriptionDialog(BuildContext context, EventData event) {
+  void _showDescriptionDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -20,19 +20,21 @@ class upcoming_events_card extends StatelessWidget {
             children: [
               Container(
                 padding: const EdgeInsets.only(
-                    top: 12.0, right: 12.0, left: 12.0, bottom: 1.0),
+                  top: 12.0,
+                  right: 12.0,
+                  left: 12.0,
+                  bottom: 1.0,
+                ),
                 decoration: const BoxDecoration(
                   color: Colors.white,
-                  borderRadius:
-                      BorderRadius.vertical(top: Radius.circular(15.0)),
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(15.0)),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      event.title,
-                      style: const TextStyle(
-                          fontSize: 30, fontWeight: FontWeight.bold),
+                      cardData.name,
+                      style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 8.0),
@@ -40,22 +42,20 @@ class upcoming_events_card extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         decoration: BoxDecoration(
                           color: Colors.grey.shade200,
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(10)),
+                          borderRadius: const BorderRadius.all(Radius.circular(10)),
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              event.description,
+                              cardData.description,
                               style: const TextStyle(fontSize: 17),
                             ),
                             Padding(
                               padding: const EdgeInsets.only(top: 10.0),
                               child: Text(
-                                'CP: ' + event.contactPerson,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 17),
+                                'CP: ' + (cardData.contact ?? ''),
+                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                               ),
                             )
                           ],
@@ -85,11 +85,14 @@ class upcoming_events_card extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Format date to "DD Month, YYYY" format
+    String formattedDate = DateFormat('dd MMMM, yyyy').format(cardData.startDate);
+
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: GestureDetector(
         onTap: () {
-          _showDescriptionDialog(context, cardData);
+          _showDescriptionDialog(context);
         },
         child: SizedBox(
           width: 350,
@@ -100,11 +103,12 @@ class upcoming_events_card extends StatelessWidget {
                 elevation: 4.0,
                 color: Colors.white,
                 shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    side: BorderSide(
-                      color: Colors.grey, // Warna border
-                      width: 2.0, // Lebar border
-                    )),
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  side: BorderSide(
+                    color: Colors.grey, // Border color
+                    width: 2.0, // Border width
+                  ),
+                ),
                 child: Padding(
                   padding: const EdgeInsets.all(18.0),
                   child: Column(
@@ -113,8 +117,7 @@ class upcoming_events_card extends StatelessWidget {
                       Align(
                         alignment: Alignment.topRight,
                         child: Padding(
-                          padding:
-                              const EdgeInsets.only(right: 8.0, bottom: 8.0),
+                          padding: const EdgeInsets.only(right: 8.0, bottom: 8.0),
                           child: Text(
                             cardData.type.toUpperCase(), // Example usage
                             style: const TextStyle(
@@ -126,12 +129,12 @@ class upcoming_events_card extends StatelessWidget {
                         ),
                       ),
                       Image(
-                        image: AssetImage(cardData.poster),
+                        image: AssetImage(cardData.poster ?? ''), // Handle null poster
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 8),
                         child: Text(
-                          cardData.title,
+                          cardData.name,
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
@@ -141,7 +144,7 @@ class upcoming_events_card extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(top: 8),
                         child: Text(
-                          'Venue: ' + cardData.venue,
+                          'Venue: ' + (cardData.venue ?? 'Unknown Venue'), // Handle null venue
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w400,
@@ -151,7 +154,7 @@ class upcoming_events_card extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(top: 8),
                         child: Text(
-                          cardData.time,
+                          formattedDate, // Display formatted date
                           style: const TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w400,

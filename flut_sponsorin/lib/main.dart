@@ -27,14 +27,20 @@ void main() async {
   Hive.registerAdapter(PenawaranAdapter());
   Hive.registerAdapter(PostAdapter());
 
-  // Populate userBox if empty
   var userBox = await Hive.openBox<User>('userBox');
   // userBox.clear();
   if (userBox.isEmpty) {
     await populateUserBox();
   }
-  await Hive.openBox('eventBox');
+
+  var eventBox = await Hive.openBox<Event>('eventBox');
+  // eventBox.clear();
+  if (eventBox.isEmpty) {
+    await populateEvents();
+  }
+
   await Hive.openBox('penawaranBox');
+
   var postBox = await Hive.openBox<Post>('postBox');
   // postBox.clear();
   if (postBox.isEmpty) {
@@ -145,5 +151,77 @@ Future<void> populatePosts() async {
 
   for (var post in posts) {
     await postBox.put(post.id, post);
+  }
+}
+
+Future<void> populateEvents() async {
+  var eventBox = await Hive.openBox<Event>('eventBox');
+  var startIndex = Hive.box<Event>('eventBox').length;
+
+  final events = [
+    Event(
+        id: startIndex + 1,
+        name: "IRGL 2023",
+        contact: "081234567890",
+        venue: "Universitas Kristen Petra",
+        type: 'Competition',
+        seeker: 4,
+        startDate: DateTime(2023, 10, 1), // October 1, 2023
+        endDate: DateTime(2023, 10, 2),   // October 2, 2023
+        poster: "lib/assets/irgl.png",
+        description: "IRGL 2023 adalah kompetisi tahunan yang menguji kemampuan logika dan pemrograman. Acara ini diselenggarakan di Universitas Kristen Petra dan diikuti oleh peserta dari seluruh Indonesia.",
+        amount: 25000000,
+        terms: null,
+        status: -1
+    ),
+    Event(
+        id: startIndex + 2,
+        name: "Bharatika 2023",
+        contact: "082345678901",
+        venue: "Tunjungan Plaza",
+        type: 'Exhibition',
+        seeker: 4,
+        startDate: DateTime(2023, 11, 15), // November 15, 2023
+        endDate: DateTime(2023, 11, 20),   // November 20, 2023
+        poster: "lib/assets/bharatika.jpg",
+        description: "Bharatika 2023 adalah pameran seni dan budaya yang menampilkan karya seni dari berbagai seniman lokal. Acara ini bertujuan untuk mempromosikan seni dan budaya lokal kepada masyarakat luas.",
+        amount: 30000000,
+        terms: null,
+        status: -1
+    ),
+    Event(
+        id: startIndex + 3,
+        name: "Adiwarna 2023",
+        contact: "083456789012",
+        venue: "Universitas Kristen Petra",
+        type: 'Exhibition',
+        seeker: 4,
+        startDate: DateTime(2023, 3, 10), // March 10, 2023
+        endDate: DateTime(2023, 3, 12),  // March 12, 2023
+        poster: "lib/assets/adiwarna.jpg",
+        description: "Adiwarna 2023 adalah pameran teknologi yang menampilkan inovasi terbaru di bidang teknologi informasi dan komunikasi. Acara ini menghadirkan berbagai perusahaan teknologi terkemuka.",
+        amount: 15000000,
+        terms: null,
+        status: -1
+    ),
+    Event(
+        id: startIndex + 4,
+        name: "Tutorial Programming 2023",
+        contact: "084567890123",
+        venue: "Universitas Kristen Petra",
+        type: 'Tutorial',
+        seeker: 4,
+        startDate: DateTime(2023, 7, 1), // July 1, 2023
+        endDate: DateTime(2023, 7, 5),  // July 5, 2023
+        poster: null,
+        description: "Tutorial Programming 2023 adalah serangkaian workshop yang bertujuan untuk meningkatkan keterampilan pemrograman para peserta. Acara ini akan diisi oleh pembicara-pembicara yang ahli di bidangnya.",
+        amount: 8000000,
+        terms: null,
+        status: -1
+    ),
+  ];
+
+  for (var event in events) {
+    await eventBox.put(event.id, event);
   }
 }
