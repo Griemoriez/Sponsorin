@@ -128,8 +128,22 @@ class upcoming_events_card extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Image(
-                        image: AssetImage(cardData.poster ?? ''), // Handle null poster
+                      // Display poster image or placeholder if not available
+                      Container(
+                        height: 250, // Increase height for bigger poster
+                        width: 300, // Maintain width for consistent layout
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: cardData.poster != null ? null : Colors.grey,
+                        ),
+                        child: cardData.poster != null
+                            ? Image(image: AssetImage(cardData.poster!))
+                            : Center(
+                          child: Text(
+                            'No Poster',
+                            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 8),

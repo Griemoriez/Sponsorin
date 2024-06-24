@@ -114,7 +114,7 @@ class _upcoming_eventsState extends State<upcoming_events> {
             SizedBox(
               height: 550, // Adjust height as needed
               child: ListView.builder(
-                scrollDirection: Axis.horizontal,
+                scrollDirection: Axis.vertical,
                 itemCount: filteredCardData.length,
                 itemBuilder: (context, index) => GestureDetector(
                   onTap: () {
