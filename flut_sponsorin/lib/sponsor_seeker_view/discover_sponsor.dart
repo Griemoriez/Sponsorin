@@ -18,7 +18,6 @@ class _discover_sponsor_state extends State<discover_event> {
   final List<Widget> _pages = [
     discover_sponsor_home(),
     list_company(),
-    submit_proposal(),
     list_submission(),
     ProfileSponsor(),
   ];
@@ -74,10 +73,6 @@ class _discover_sponsor_state extends State<discover_event> {
               ),
               Icon(
                 Icons.business,
-                color: Colors.white,
-              ),
-              Icon(
-                Icons.add_box,
                 color: Colors.white,
               ),
               Icon(

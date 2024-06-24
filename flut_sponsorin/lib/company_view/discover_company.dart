@@ -19,7 +19,7 @@ class discover_company extends StatefulWidget {
 class _homePageState extends State<discover_company> {
   int _page = 0;
   final List<Widget> _pages = [
-    const discover_company_home(),
+    const DiscoverCompanyHome(),
     const upcoming_events(),
     // upload_status(),
     const ProposalPage(),
