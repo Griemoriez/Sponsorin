@@ -1,11 +1,12 @@
-import 'package:flut_sponsorin/company_view/event_details.dart';
-import 'package:flut_sponsorin/components/EventData.dart';
 import 'package:flutter/material.dart';
+import 'package:flut_sponsorin/company_view/event_details.dart';
+import 'package:flut_sponsorin/models/event.dart';
+import 'package:intl/intl.dart';
 
 class overall_event_card extends StatelessWidget {
-  final EventData cardData;
+  final Event cardData;
 
-  void _showDescriptionDialog(BuildContext context, EventData event) {
+  void _showDescriptionDialog(BuildContext context, Event event) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -18,19 +19,21 @@ class overall_event_card extends StatelessWidget {
             children: [
               Container(
                 padding: const EdgeInsets.only(
-                    top: 12.0, right: 12.0, left: 12.0, bottom: 1.0),
+                  top: 12.0,
+                  right: 12.0,
+                  left: 12.0,
+                  bottom: 1.0,
+                ),
                 decoration: const BoxDecoration(
                   color: Colors.white,
-                  borderRadius:
-                      BorderRadius.vertical(top: Radius.circular(15.0)),
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(15.0)),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      event.title,
-                      style: const TextStyle(
-                          fontSize: 30, fontWeight: FontWeight.bold),
+                      event.name,
+                      style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 8.0),
@@ -38,8 +41,7 @@ class overall_event_card extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         decoration: BoxDecoration(
                           color: Colors.grey.shade200,
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(10)),
+                          borderRadius: const BorderRadius.all(Radius.circular(10)),
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,9 +53,8 @@ class overall_event_card extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.only(top: 10.0),
                               child: Text(
-                                'CP: ' + event.contactPerson,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 17),
+                                'CP: ${event.contact}',
+                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                               ),
                             )
                           ],
@@ -89,11 +90,12 @@ class overall_event_card extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: Card(
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15.0),
-            side: const BorderSide(
-              color: Colors.grey, // Warna border
-              width: 2.0, // Lebar border
-            )),
+          borderRadius: BorderRadius.circular(15.0),
+          side: const BorderSide(
+            color: Colors.grey, // Border color
+            width: 2.0, // Border width
+          ),
+        ),
         elevation: 4,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
@@ -106,7 +108,7 @@ class overall_event_card extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      cardData.title.toUpperCase(),
+                      cardData.name.toUpperCase(),
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -117,28 +119,30 @@ class overall_event_card extends StatelessWidget {
                   ),
                   Text(
                     cardData.type.toUpperCase(),
-                    style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey[600],
-                        fontWeight: FontWeight.w500),
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ],
               ),
               const SizedBox(height: 4),
               Text(
                 cardData.description,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 17,
-                  color: Colors.grey[800],
+                  color: Colors.black,
                 ),
               ),
               const SizedBox(height: 8),
-              Text('Event Date: ' + 
-                cardData.time,
-                style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.grey[800],
-                    fontWeight: FontWeight.w600),
+              Text(
+                'Event Date: ${DateFormat('dd MMMM, yyyy').format(cardData.startDate)}',
+                style: const TextStyle(
+                  fontSize: 16,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
               const SizedBox(height: 16),
               SizedBox(
@@ -148,7 +152,8 @@ class overall_event_card extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => EventDetail(events: cardData)),
+                        builder: (context) => EventDetail(event: cardData),
+                      ),
                     );
                   },
                   style: ElevatedButton.styleFrom(
@@ -170,17 +175,5 @@ class overall_event_card extends StatelessWidget {
         ),
       ),
     );
-  }
-  
-  Color getColorBasedOnStatus(int status) {
-    if (status == -1) {
-      return Colors.white;
-    } else if (status == 0) {
-      return Colors.red.shade200;
-    } else if (status == 1) {
-      return Colors.green.shade200;
-    } else {
-      return Colors.grey; // Default color if status is unknown
-    }
   }
 }

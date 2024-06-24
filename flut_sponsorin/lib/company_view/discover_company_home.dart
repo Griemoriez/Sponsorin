@@ -40,7 +40,6 @@ class _DiscoverCompanyHomeState extends State<DiscoverCompanyHome> {
         'event': post.title,
         'description': post.description,
         'imagePath': user.picture ?? 'lib/assets/logo.png', // Use placeholder if null,
-
       });
     }
 

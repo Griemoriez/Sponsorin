@@ -31,6 +31,18 @@ class Event extends HiveObject {
   @HiveField(8)
   String? terms;
 
+  @HiveField(9)
+  String name;
+
+  @HiveField(10)
+  String? venue;
+
+  @HiveField(11)
+  int status;
+
+  @HiveField(12)
+  String contact;
+
   Event({
     required this.id,
     required this.type,
@@ -41,5 +53,9 @@ class Event extends HiveObject {
     this.poster,
     required this.amount,
     this.terms,
+    required this.name,
+    this.venue,
+    required this.status,
+    required this.contact,
   });
 }
