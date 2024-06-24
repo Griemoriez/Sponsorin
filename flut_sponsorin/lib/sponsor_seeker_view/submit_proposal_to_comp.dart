@@ -1,20 +1,3 @@
-// import 'package:flutter/material.dart';
-
-// class submit_proposal extends StatelessWidget {
-//   const submit_proposal({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       child: Center(
-//             child: Text(
-//               'submit proposal',
-//               style: TextStyle(fontSize: 24, color: Colors.black),
-//             ),
-//           ),
-//     );
-//   }
-// }
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flut_sponsorin/sponsor_seeker_view/discovery_sponsor_home.dart';
 import 'package:flut_sponsorin/sponsor_seeker_view/list_company.dart';
@@ -29,16 +12,13 @@ class submit_proposal_to_comp extends StatefulWidget {
   _SubmitProposalState createState() => _SubmitProposalState();
 }
 
-
 class _SubmitProposalState extends State<submit_proposal_to_comp> {
   final _formKey = GlobalKey<FormState>();
-  TextEditingController _eventNameController = TextEditingController();
-  TextEditingController _eventDescriptionController = TextEditingController();
-  TextEditingController _eventDateController = TextEditingController();
-  TextEditingController _idCardController = TextEditingController();
-  TextEditingController _uploadProposalController = TextEditingController();
 
-  
+  String? _selectedEvent;
+  String? _selectedSponsorType;
+  TextEditingController _nominalController = TextEditingController();
+
   int _page = 0;
   final List<Widget> _pages = [
     discover_sponsor_home(),
@@ -50,26 +30,8 @@ class _SubmitProposalState extends State<submit_proposal_to_comp> {
 
   @override
   void dispose() {
-    _eventNameController.dispose();
-    _eventDescriptionController.dispose();
-    _eventDateController.dispose();
-    _idCardController.dispose();
-    _uploadProposalController.dispose();
+    _nominalController.dispose();
     super.dispose();
-  }
-
-  _selectDate(BuildContext context) async {
-    DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2101),
-    );
-    if (picked != null) {
-      setState(() {
-        _eventDateController.text = DateFormat('yyyy-MM-dd').format(picked);
-      });
-    }
   }
 
   void _showSubmissionMessage() {
@@ -115,7 +77,6 @@ class _SubmitProposalState extends State<submit_proposal_to_comp> {
               backgroundColor: Colors.transparent,
               elevation: 0,
               centerTitle: true,
-              // automaticallyImplyLeading: false,
               title: Container(
                 width: double.infinity,
                 alignment: Alignment.center,
@@ -147,74 +108,88 @@ class _SubmitProposalState extends State<submit_proposal_to_comp> {
               child: Form(
                 key: _formKey,
                 child: Column(
-                  // crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       'Pilih Proposal',
-                      style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize: 24, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 16),
-                    TextFormField(
-                      controller: _eventNameController,
+                    DropdownButtonFormField<String>(
+                      value: _selectedEvent,
+                      items: ['IRGL 2021', 'IRGL 2022', 'IRGL 2023']
+                          .map((event) {
+                        return DropdownMenuItem(
+                          value: event,
+                          child: Text(event),
+                        );
+                      }).toList(),
                       decoration: InputDecoration(
-                        labelText: 'Event Name',
+                        labelText: 'Event',
                         filled: true,
                         fillColor: Colors.green[50],
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedEvent = value;
+                        });
+                      },
+                      validator: (value) =>
+                          value == null ? 'Please select an event' : null,
                     ),
                     SizedBox(height: 16),
-                    TextFormField(
-                      controller: _eventDescriptionController,
+                    DropdownButtonFormField<String>(
+                      value: _selectedSponsorType,
+                      items: ['Bebas', 'Produk', 'Tunai']
+                          .map((sponsorType) {
+                        return DropdownMenuItem(
+                          value: sponsorType,
+                          child: Text(sponsorType),
+                        );
+                      }).toList(),
                       decoration: InputDecoration(
-                        labelText: 'Event Description',
+                        labelText: 'Bentuk Sponsor',
                         filled: true,
                         fillColor: Colors.green[50],
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedSponsorType = value;
+                        });
+                      },
+                      validator: (value) =>
+                          value == null ? 'Please select a sponsor type' : null,
                     ),
                     SizedBox(height: 16),
                     TextFormField(
-                      controller: _eventDateController,
+                      controller: _nominalController,
                       decoration: InputDecoration(
-                        labelText: 'Event Date',
-                        filled: true,
-                        fillColor: Colors.green[50],
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        suffixIcon: IconButton(
-                          icon: Icon(Icons.calendar_today),
-                          onPressed: () {
-                            _selectDate(context);
-                          },
-                        ),
-                      ),
-                      readOnly: true,
-                    ),
-                    SizedBox(height: 16),
-                    TextFormField(
-                      controller: _uploadProposalController,
-                      decoration: InputDecoration(
-                        labelText: 'Upload Proposal',
+                        labelText: 'Nominal (Rp)',
                         filled: true,
                         fillColor: Colors.green[50],
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
+                      keyboardType: TextInputType.number,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a nominal value';
+                        }
+                        return null;
+                      },
                     ),
                     SizedBox(height: 32),
                     Center(
                       child: ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            // Handle form submission
                             _showSubmissionMessage();
                           }
                         },
@@ -233,7 +208,6 @@ class _SubmitProposalState extends State<submit_proposal_to_comp> {
                 ),
               ),
             ),
-            
           ),
         ],
       ),

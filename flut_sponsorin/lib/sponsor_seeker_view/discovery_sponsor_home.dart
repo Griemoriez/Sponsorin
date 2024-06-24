@@ -11,31 +11,34 @@ class discover_sponsor_home extends StatefulWidget {
 class _discover_sponsor_homeState extends State<discover_sponsor_home> {
   bool isFavorite = false;
 
-  final List<Map<String, String>> cardData = [
+  final List<Map<String, dynamic>> cardData = [
     {
       'title': 'PT Bank Central Asia',
       'time': '3h ago',
       'description':
           'Berkembangnya teknologi membuka banyak peluang karir. Jadinya, semakin banyak lowongan baru di bidang teknologi yang bisa dijalani deh! Buat kamu yang tertarik jadi hashtag',
-      'imagePath': 'assets/logo.png'
+      'imagePath': 'assets/logo.png',
+      'isFavorite': false
     },
     {
       'title': 'PT Asia',
       'time': '5h ago',
       'description':
           'Acara ini akan menghadirkan pembicara dari berbagai perusahaan teknologi terkemuka. Ayo datang dan tambahkan wawasanmu tentang teknologi terbaru!',
-      'imagePath': 'assets/logo.png'
+      'imagePath': 'assets/logo.png',
+      'isFavorite': false
     },
     {
       'title': 'PT Mandira',
       'time': '1d ago',
       'description':
           'Diskusikan perkembangan terbaru dalam bidang kecerdasan buatan bersama para ahli dan praktisi di AI Summit 2024.',
-      'imagePath': 'assets/logo.png'
+      'imagePath': 'assets/logo.png',
+      'isFavorite': false
     }
   ];
 
-  List<Map<String, String>> filteredCardData = [];
+  List<Map<String, dynamic>> filteredCardData = [];
 
   @override
   void initState() {
@@ -53,6 +56,12 @@ class _discover_sponsor_homeState extends State<discover_sponsor_home> {
 
     setState(() {
       filteredCardData = results;
+    });
+  }
+
+  void _toggleFavorite(int index) {
+    setState(() {
+      filteredCardData[index]['isFavorite'] = !filteredCardData[index]['isFavorite'];
     });
   }
 
@@ -122,8 +131,7 @@ class _discover_sponsor_homeState extends State<discover_sponsor_home> {
                               Row(
                                 children: <Widget>[
                                   CircleAvatar(
-                                    backgroundImage: AssetImage(item[
-                                        'imagePath']!), // Ganti dengan path gambar Anda
+                                    backgroundImage: AssetImage(item['imagePath']), // Ganti dengan path gambar Anda
                                     radius: 20,
                                   ),
                                   SizedBox(width: 10),
@@ -157,9 +165,18 @@ class _discover_sponsor_homeState extends State<discover_sponsor_home> {
                               SizedBox(height: 10),
                               Row(
                                 children: <Widget>[
-                                  Icon(
-                                    Icons.favorite_border,
-                                    color: Colors.grey,
+                                  IconButton(
+                                    icon: Icon(
+                                      item['isFavorite']
+                                          ? Icons.favorite
+                                          : Icons.favorite_border,
+                                      color: item['isFavorite']
+                                          ? Colors.red
+                                          : Colors.grey,
+                                    ),
+                                    onPressed: () {
+                                      _toggleFavorite(index);
+                                    },
                                   ),
                                   SizedBox(width: 5),
                                   Text(
@@ -193,5 +210,4 @@ class _discover_sponsor_homeState extends State<discover_sponsor_home> {
         child: Icon(Icons.add),
       ),
     );
-  }
-}
+  }}
