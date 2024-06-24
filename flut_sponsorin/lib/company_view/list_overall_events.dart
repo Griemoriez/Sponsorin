@@ -1,10 +1,10 @@
-import 'package:flut_sponsorin/components/EventData.dart';
-import 'package:flut_sponsorin/components/overall_event_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flut_sponsorin/models/event.dart'; // Import Event class
+import 'package:flut_sponsorin/components/overall_event_card.dart'; // Import overall_event_card
 
 class list_overall_events extends StatelessWidget {
-  final List<EventData> events;
-  const list_overall_events({super.key, required this.events});
+  final List<Event> events; // Change EventData to Event
+  const list_overall_events({Key? key, required this.events}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -55,15 +55,16 @@ class list_overall_events extends StatelessWidget {
                   children: [
                     const Text(
                       "All Events",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xff008037),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15)),
-                          padding: const EdgeInsets.all(12)),
+                        backgroundColor: const Color(0xff008037),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        padding: const EdgeInsets.all(12),
+                      ),
                       onPressed: () {},
                       child: const Text(
                         "Sort By",
@@ -75,9 +76,9 @@ class list_overall_events extends StatelessWidget {
                 const SizedBox(height: 10.0),
                 Expanded(
                   child: ListView.builder(
-                    itemCount: 4,
+                    itemCount: events.length,
                     itemBuilder: (context, index) {
-                      return overall_event_card(cardData : events[index]);
+                      return overall_event_card(cardData: events[index]); // Pass Event object
                     },
                   ),
                 )

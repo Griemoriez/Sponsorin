@@ -10,11 +10,11 @@ class offered_proposal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Colors.transparent,
-        child: ListView.builder(
-          itemCount: listOffered.length,
-          itemBuilder: (context, index) => overall_event_card(cardData: listOffered[index],)
-          ),
+        // color: Colors.transparent,
+        // child: ListView.builder(
+        //   itemCount: listOffered.length,
+        //   itemBuilder: (context, index) => overall_event_card(cardData: listOffered[index],)
+        //   ),
         );
   }
 }

@@ -227,12 +227,12 @@ class ProposalListView extends StatelessWidget {
             padding: const EdgeInsets.only(top: 10.0),
             child: GestureDetector(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => EventDetail(events: event),
-                  ),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => EventDetail(event: event),
+                //   ),
+                // );
               },
               child: Card(
                 shape: RoundedRectangleBorder(
