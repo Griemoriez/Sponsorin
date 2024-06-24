@@ -2,7 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flut_sponsorin/company_view/discover_company_home.dart';
 import 'package:flut_sponsorin/company_view/profile_company2.dart';
 import 'package:flut_sponsorin/company_view/proposal_page.dart';
-import 'package:flut_sponsorin/company_view/profile_company.dart';
+
 import 'package:flut_sponsorin/company_view/upcoming_events.dart';
 import 'package:flut_sponsorin/company_view/upload_status.dart';
 import 'package:flut_sponsorin/company_view/list_overall_events.dart';
@@ -19,11 +19,10 @@ class discover_company extends StatefulWidget {
 class _homePageState extends State<discover_company> {
   int _page = 0;
   final List<Widget> _pages = [
-    const DiscoverCompanyHome(),
-    const upcoming_events(),
-    // upload_status(),
-    const ProposalPage(),
-    const ProfileCompany(),
+    DiscoverCompanyHome(),
+    upcoming_events(),
+    ProposalPage(),
+    profile_company2(),
   ];
   @override
   Widget build(BuildContext context) {
