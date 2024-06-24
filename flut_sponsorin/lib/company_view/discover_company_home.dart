@@ -6,17 +6,16 @@ import '../models/user.dart';
 import '../models/post.dart';
 
 class DiscoverCompanyHome extends StatefulWidget {
-  const DiscoverCompanyHome({super.key});
+  const DiscoverCompanyHome({Key? key}) : super(key: key);
 
   @override
   State<DiscoverCompanyHome> createState() => _DiscoverCompanyHomeState();
 }
 
 class _DiscoverCompanyHomeState extends State<DiscoverCompanyHome> {
-  bool isFavorite = false;
   bool isLoading = true;
-  List<Map<String, String>> cardData = [];
-  List<Map<String, String>> filteredCardData = [];
+  List<Map<String, dynamic>> cardData = [];
+  List<Map<String, dynamic>> filteredCardData = [];
 
   @override
   void initState() {
@@ -28,7 +27,7 @@ class _DiscoverCompanyHomeState extends State<DiscoverCompanyHome> {
     var postBox = await Hive.openBox<Post>('postBox');
     var userBox = await Hive.openBox<User>('userBox');
 
-    List<Map<String, String>> tempCardData = [];
+    List<Map<String, dynamic>> tempCardData = [];
 
     for (var postKey in postBox.keys) {
       var post = postBox.get(postKey) as Post;
@@ -40,6 +39,7 @@ class _DiscoverCompanyHomeState extends State<DiscoverCompanyHome> {
         'event': post.title,
         'description': post.description,
         'imagePath': user.picture ?? 'lib/assets/logo.png', // Use placeholder if null,
+        'isFavorite': "false", // Initialize isFavorite as false
       });
     }
 
@@ -61,6 +61,12 @@ class _DiscoverCompanyHomeState extends State<DiscoverCompanyHome> {
 
     setState(() {
       filteredCardData = results;
+    });
+  }
+
+  void _toggleFavorite(int index) {
+    setState(() {
+      filteredCardData[index]['isFavorite'] = (filteredCardData[index]['isFavorite'] == 'true')? "false": "true";
     });
   }
 
@@ -96,9 +102,10 @@ class _DiscoverCompanyHomeState extends State<DiscoverCompanyHome> {
                       labelText: 'Search',
                       prefixIcon: Icon(Icons.search),
                       border: OutlineInputBorder(
-                          borderRadius:
-                          BorderRadius.all(Radius.circular(20.0)),
-                          borderSide: BorderSide(color: Colors.orange)),
+                        borderRadius:
+                        BorderRadius.all(Radius.circular(20.0)),
+                        borderSide: BorderSide(color: Colors.orange),
+                      ),
                     ),
                   ),
                 ),
@@ -108,6 +115,8 @@ class _DiscoverCompanyHomeState extends State<DiscoverCompanyHome> {
                   itemCount: filteredCardData.length,
                   itemBuilder: (context, index) {
                     final item = filteredCardData[index];
+                    String isFavorite = (item['isFavorite'] == 'true')? "false": "true";
+
                     return Padding(
                       padding: const EdgeInsets.only(
                           right: 15.0, left: 15.0, bottom: 15.0),
@@ -119,25 +128,20 @@ class _DiscoverCompanyHomeState extends State<DiscoverCompanyHome> {
                               color: Colors.grey, width: 1),
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.only(
-                              top: 15.0,
-                              left: 20.0,
-                              right: 20.0,
-                              bottom: 18.0),
+                          padding: const EdgeInsets.all(15.0),
                           child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment:
-                              CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Row(
-                                  children: <Widget>[
-                                    CircleAvatar(
-                                      backgroundImage: AssetImage(
-                                          item['imagePath']!),
-                                      radius: 20,
-                                    ),
-                                    SizedBox(width: 10),
-                                    Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Row(
+                                children: <Widget>[
+                                  CircleAvatar(
+                                    backgroundImage: AssetImage(
+                                        item['imagePath']!),
+                                    radius: 20,
+                                  ),
+                                  const SizedBox(width: 10),
+                                  Expanded(
+                                    child: Column(
                                       crossAxisAlignment:
                                       CrossAxisAlignment.start,
                                       children: <Widget>[
@@ -156,36 +160,61 @@ class _DiscoverCompanyHomeState extends State<DiscoverCompanyHome> {
                                         ),
                                       ],
                                     ),
-                                    Spacer(),
-                                    Icon(Icons.more_vert),
+                                  ),
+                                  PopupMenuButton(
+                                    itemBuilder: (context) => [
+                                      PopupMenuItem(
+                                        child: Text('Option 1'),
+                                        value: 'Option 1',
+                                      ),
+                                      PopupMenuItem(
+                                        child: Text('Option 2'),
+                                        value: 'Option 2',
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 10),
+                              Text(
+                                item['event']!,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(height: 5),
+                              Text(
+                                item['description']!,
+                              ),
+                              const SizedBox(height: 10),
+                              GestureDetector(
+                                onTap: () {
+                                  _toggleFavorite(index);
+                                },
+                                child: Row(
+                                  children: <Widget>[
+                                    Icon(
+                                      item['isFavorite'] == 'true'
+                                          ? Icons.favorite
+                                          : Icons.favorite_border,
+                                      color: item['isFavorite'] == 'true'
+                                          ? Colors.red
+                                          : Colors.grey,
+                                    ),
+                                    SizedBox(width: 5),
+                                    Expanded(
+                                      child: Text(
+                                        'Like',
+                                        style: TextStyle(
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                    ),
                                   ],
                                 ),
-                                SizedBox(height: 10),
-                                Text(
-                                  item['event']!,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                SizedBox(height: 5),
-                                Text(
-                                  item['description']!,
-                                ),
-                                SizedBox(height: 10),
-                                Row(children: <Widget>[
-                                  Icon(
-                                    Icons.favorite_border,
-                                    color: Colors.grey,
-                                  ),
-                                  SizedBox(width: 5),
-                                  Text(
-                                    'Like',
-                                    style: TextStyle(
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                ])
-                              ]),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     );
@@ -201,10 +230,10 @@ class _DiscoverCompanyHomeState extends State<DiscoverCompanyHome> {
                 MaterialPageRoute(builder: (context) => upload_status()),
               );
             },
-            child: Icon(Icons.add),
+            child: const Icon(Icons.add),
             backgroundColor: Colors.green,
           ),
-        )
+        ),
       ],
     );
   }

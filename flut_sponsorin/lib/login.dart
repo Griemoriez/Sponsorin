@@ -42,12 +42,12 @@ class _LoginScreenState extends State<LoginScreen> {
       if (role == 'sponsor') {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => discover_event()),
+          MaterialPageRoute(builder: (context) => discover_company()),
         );
       } else if (role == 'seeker') {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => discover_company()),
+          MaterialPageRoute(builder: (context) => discover_event()),
         );
       }
     } else {
