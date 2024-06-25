@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flut_sponsorin/models/event.dart';
 import 'package:intl/intl.dart'; // Import intl package for date formatting
+import 'package:flut_sponsorin/sponsor_seeker_view/submit_proposal_to_comp.dart';
 
 class upcoming_events_card extends StatelessWidget {
   final Event cardData;
@@ -178,7 +179,14 @@ class upcoming_events_card extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(top: 16.0),
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => submit_proposal_to_comp(),
+                              ),
+                            );
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.green,
                             shape: RoundedRectangleBorder(
