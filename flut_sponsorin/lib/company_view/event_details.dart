@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flut_sponsorin/models/event.dart';
 import 'package:intl/intl.dart';
+import 'package:hive/hive.dart'; // Import Hive for box operations
 
 class EventDetail extends StatelessWidget {
-  final Event event;
+  final Event? event;
 
-  const EventDetail({super.key, required this.event});
+  const EventDetail({super.key, this.event});
 
   @override
   Widget build(BuildContext context) {
+    Event? _event = event;
+
+    if (_event == null) {
+      // Fetch the first event from eventBox if event is null
+      var eventBox = Hive.box<Event>('eventBox');
+      _event = eventBox.get(1) as Event?;
+    }
+
     return Stack(
       children: [
         Container(
@@ -68,18 +77,18 @@ class EventDetail extends StatelessWidget {
                       children: [
                         Center(
                           child: Text(
-                            event.name,
+                            _event?.name ?? 'Event Name', // Handle null event case
                             style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w700),
                           ),
                         ),
                         const SizedBox(height: 20.0),
                         Center(
-                          child: Image(image: AssetImage(event.poster ?? '')),
+                          child: Image(image: AssetImage(_event?.poster ?? 'lib/assets/placeholder.jpg')), // Handle null poster case
                         ),
                         const SizedBox(height: 12.0),
                         Center(
                           child: Text(
-                            event.description,
+                            _event?.description ?? 'Event Description', // Handle null description case
                             style: const TextStyle(fontSize: 16),
                             textAlign: TextAlign.center,
                           ),
@@ -90,7 +99,7 @@ class EventDetail extends StatelessWidget {
                           style: TextStyle(fontWeight: FontWeight.w700, fontSize: 19),
                         ),
                         Text(
-                          event.venue ?? 'Unknown Venue',
+                          _event?.venue ?? 'Unknown Venue', // Handle null venue case
                           style: const TextStyle(fontSize: 15),
                         ),
                         const SizedBox(height: 12.0),
@@ -99,7 +108,7 @@ class EventDetail extends StatelessWidget {
                           style: TextStyle(fontWeight: FontWeight.w700, fontSize: 19),
                         ),
                         Text(
-                          DateFormat('dd MMMM, yyyy').format(event.startDate),
+                          _event != null ? DateFormat('dd MMMM, yyyy').format(_event.startDate) : 'Unknown Date', // Handle null start date case
                           style: const TextStyle(fontSize: 15),
                         ),
                       ],

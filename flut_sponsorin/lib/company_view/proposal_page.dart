@@ -1,6 +1,7 @@
 import 'package:flut_sponsorin/components/EventData.dart';
 import 'package:flut_sponsorin/components/EventDataGlobals.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 import 'event_details.dart';
 
@@ -223,17 +224,17 @@ class ProposalListView extends StatelessWidget {
       itemCount: events.length,
       itemBuilder: (context, index) {
         final event = events[index];
-
         return Padding(
             padding: const EdgeInsets.only(top: 10.0, bottom: 15.0),
             child: GestureDetector(
+
               onTap: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => EventDetail(event: event),
-                //   ),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const EventDetail(),
+                  ),
+                );
               },
               child: Card(
                 shape: RoundedRectangleBorder(
