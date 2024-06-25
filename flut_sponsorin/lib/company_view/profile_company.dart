@@ -12,26 +12,13 @@ class ProfileCompany extends StatelessWidget {
     return DefaultTabController(
       length: 4,
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Company Profile'),
-          bottom: const TabBar(
-            labelColor: Colors.green,
-            unselectedLabelColor: Colors.grey,
-            indicatorColor: Colors.green,
-            tabs: [
-              Tab(text: 'Home'),
-              Tab(text: 'About'),
-              Tab(text: 'Past Sponsorship'),
-              Tab(text: 'Events')
-            ],
-          ),
-        ),
         body: Column(
           children: [
             Container(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
+                  const SizedBox(height: 10),
                   const CircleAvatar(
                     radius: 50,
                     backgroundImage: AssetImage(
@@ -56,6 +43,17 @@ class ProfileCompany extends StatelessWidget {
                   ),
                 ],
               ),
+            ),
+            const TabBar(
+              labelColor: Colors.green,
+              unselectedLabelColor: Colors.grey,
+              indicatorColor: Colors.green,
+              tabs: [
+                Tab(text: 'Home'),
+                Tab(text: 'About'),
+                Tab(text: 'Past Sponsorship'),
+                Tab(text: 'Events')
+              ],
             ),
             const Expanded(
               child: TabBarView(

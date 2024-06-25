@@ -15,10 +15,14 @@ class ProfileCompanyEvent extends StatelessWidget {
             child: Card(
               elevation: 2.0,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16.0),
-              ),
+                  borderRadius: BorderRadius.circular(16.0),
+                  side: const BorderSide(
+                    color: Colors
+                        .grey, // Ganti dengan warna border yang diinginkan
+                    width: 2.0,
+                  )),
               child: const Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: EdgeInsets.only(right: 30.0, left: 30.0, top: 20.0, bottom: 20.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

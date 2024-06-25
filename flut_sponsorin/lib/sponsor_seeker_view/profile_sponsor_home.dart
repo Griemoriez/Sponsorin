@@ -19,7 +19,7 @@ class ProfileSponsorHome extends StatelessWidget {
     },
   ];
 
-   ProfileSponsorHome({super.key});
+  ProfileSponsorHome({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,16 +30,26 @@ class ProfileSponsorHome extends StatelessWidget {
         return Center(
           child: Container(
             width: MediaQuery.of(context).size.width * 0.7,
-            height: MediaQuery.of(context).size.height * 0.5, // Adjust height of the card
+            height: MediaQuery.of(context).size.height *
+                0.5, // Adjust height of the card
             margin: const EdgeInsets.symmetric(vertical: 10.0),
             child: Card(
               elevation: 5,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                side: BorderSide(
+                  color:
+                      Colors.grey, // Ganti dengan warna border yang diinginkan
+                  width: 2.0,
+                ),
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.3, // Increase the height of the image container
+                    height: MediaQuery.of(context).size.height *
+                        0.3, // Increase the height of the image container
                     child: Image.asset(
                       items[index]['image']!,
                       fit: BoxFit.cover,

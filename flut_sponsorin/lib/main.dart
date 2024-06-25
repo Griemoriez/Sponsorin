@@ -51,7 +51,7 @@ class MainApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'SponsorIn',
-      home: discover_company(),
+      home: LoginScreen(),
     );
   }
 }

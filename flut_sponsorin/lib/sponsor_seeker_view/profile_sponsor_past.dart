@@ -31,10 +31,18 @@ class SponsorCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        width: MediaQuery.of(context).size.width * 0.9, // Set the width of the card here
+        width: MediaQuery.of(context).size.width *
+            0.9, // Set the width of the card here
         margin: const EdgeInsets.symmetric(vertical: 10.0),
         child: Card(
           elevation: 5,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            side: BorderSide(
+              color: Colors.grey, // Ganti dengan warna border yang diinginkan
+              width: 2.0,
+            ),
+          ),
           child: Padding(
             padding: const EdgeInsets.all(20),
             child: Column(
@@ -70,7 +78,9 @@ class SponsorCard extends StatelessWidget {
                       children: List.generate(
                         5,
                         (index) => Icon(
-                          index < (sponsor.rating ?? 0) ? Icons.star : Icons.star_border,
+                          index < (sponsor.rating ?? 0)
+                              ? Icons.star
+                              : Icons.star_border,
                           color: Colors.amber,
                         ),
                       ),
@@ -146,21 +156,24 @@ List<Sponsor> sponsors = [
   Sponsor(
     name: "PT Bank Central Asia",
     time: "3h ago",
-    description: "Berkembangnya teknologi membuka banyak peluang karir. Jadinya, semakin banyak lowongan baru di bidang teknologi yang bisa dijalani deh Buat kamu yang tertarik jadi #TeamITBCAslik, klik link ini untuk cari tahu lowongan yang sedang dibuka https://lnkd.in/gk35qqikt",
+    description:
+        "Berkembangnya teknologi membuka banyak peluang karir. Jadinya, semakin banyak lowongan baru di bidang teknologi yang bisa dijalani deh Buat kamu yang tertarik jadi #TeamITBCAslik, klik link ini untuk cari tahu lowongan yang sedang dibuka https://lnkd.in/gk35qqikt",
     url: "https://youtube.com",
     rating: 5,
   ),
   Sponsor(
     name: "PT ABC",
     time: "3h ago",
-    description: "Berkembangnya teknologi membuka banyak peluang karir. Jadinya, semakin banyak lowongan baru di bidang teknologi yang bisa dijalani deh Buat kamu yang tertarik jadi #TeamITBCAslik, klik link ini untuk cari tahu lowongan yang sedang dibuka https://lnkd.in/gk35qqikt",
+    description:
+        "Berkembangnya teknologi membuka banyak peluang karir. Jadinya, semakin banyak lowongan baru di bidang teknologi yang bisa dijalani deh Buat kamu yang tertarik jadi #TeamITBCAslik, klik link ini untuk cari tahu lowongan yang sedang dibuka https://lnkd.in/gk35qqikt",
     url: "https://lnkd.in/gk35qqikt",
     rating: 5,
   ),
   Sponsor(
     name: "PT Bango",
     time: "3h ago",
-    description: "Berkembangnya teknologi membuka banyak peluang karir. Jadinya, semakin banyak lowongan baru di bidang teknologi yang bisa dijalani deh Buat kamu yang tertarik jadi #TeamITBCAslik, klik link ini untuk cari tahu lowongan yang sedang dibuka https://lnkd.in/gk35qqikt",
+    description:
+        "Berkembangnya teknologi membuka banyak peluang karir. Jadinya, semakin banyak lowongan baru di bidang teknologi yang bisa dijalani deh Buat kamu yang tertarik jadi #TeamITBCAslik, klik link ini untuk cari tahu lowongan yang sedang dibuka https://lnkd.in/gk35qqikt",
     url: "https://lnkd.in/gk35qqikt",
     rating: 2,
   ),

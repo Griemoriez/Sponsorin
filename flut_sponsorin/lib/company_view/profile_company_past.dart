@@ -8,24 +8,24 @@ class ProfileCompanyPast extends StatelessWidget {
     return const SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child: Padding(
-      padding: EdgeInsets.all(16.0),
-      child: Column(
-        children: [
-          SponsorCard(
-            imageUrl: 'lib/assets/event_logo.jpg',
-            title: 'IRGL 2023',
-            subtitle: 'Universitas Kristen Petra\nSurabaya, Indonesia',
-            rating: 5.0,
-          ),
-          SponsorCard(
-            imageUrl: 'lib/assets/event_logo.jpg',
-            title: 'Dies Natalis',
-            subtitle: 'Universitas Ciputra\nSurabaya, Indonesia',
-            rating: 5.0,
-          ),
-        ],
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            SponsorCard(
+              imageUrl: 'lib/assets/event_logo.jpg',
+              title: 'IRGL 2023',
+              subtitle: 'Universitas Kristen Petra\nSurabaya, Indonesia',
+              rating: 5.0,
+            ),
+            SponsorCard(
+              imageUrl: 'lib/assets/event_logo.jpg',
+              title: 'Dies Natalis',
+              subtitle: 'Universitas Ciputra\nSurabaya, Indonesia',
+              rating: 5.0,
+            ),
+          ],
+        ),
       ),
-    ),
     );
   }
 }
@@ -52,8 +52,11 @@ class SponsorCard extends StatelessWidget {
         margin: const EdgeInsets.symmetric(vertical: 10.0),
         elevation: 2.0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16.0),
-        ),
+            borderRadius: BorderRadius.circular(16.0),
+            side: const BorderSide(
+              color: Colors.grey, // Ganti dengan warna border yang diinginkan
+              width: 2.0,
+            )),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Row(

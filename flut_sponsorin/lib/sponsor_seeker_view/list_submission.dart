@@ -7,7 +7,8 @@ class list_submission extends StatefulWidget {
   _ListSubmissionState createState() => _ListSubmissionState();
 }
 
-class _ListSubmissionState extends State<list_submission> with SingleTickerProviderStateMixin{
+class _ListSubmissionState extends State<list_submission>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
   final TextEditingController _searchController = TextEditingController();
   List<Map<String, String>> proposals = [
@@ -77,8 +78,9 @@ class _ListSubmissionState extends State<list_submission> with SingleTickerProvi
       results = sourceList;
     } else {
       results = sourceList
-          .where((event) =>
-              event['companyName']!.toLowerCase().contains(_searchController.text.toLowerCase()))
+          .where((event) => event['companyName']!
+              .toLowerCase()
+              .contains(_searchController.text.toLowerCase()))
           .toList();
       print("Filtered results: $results");
     }
@@ -121,21 +123,26 @@ class _ListSubmissionState extends State<list_submission> with SingleTickerProvi
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Detail Proposal',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                ),
+                // const Text(
+                //   'Detail Proposal',
+                //   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                // ),
                 const SizedBox(height: 16),
                 const Text(
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor.',
-                  style: TextStyle(fontSize: 16),
+                  'Proposal anda telah disetujui oleh perusahaan!',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
                 ),
                 const SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Close'),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text('Close'),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -226,24 +233,16 @@ class _ListSubmissionState extends State<list_submission> with SingleTickerProvi
                     itemCount: filteredProposals.length,
                     itemBuilder: (context, index) {
                       var proposal = filteredProposals[index];
-                      return buildProposalCard(
-                        proposal['companyName']!,
-                        proposal['location']!,
-                        proposal['status']!,
-                        context
-                      );
+                      return buildProposalCard(proposal['companyName']!,
+                          proposal['location']!, proposal['status']!, context);
                     },
                   ),
                   ListView.builder(
                     itemCount: filteredIncomingProposals.length,
                     itemBuilder: (context, index) {
                       var proposal = filteredIncomingProposals[index];
-                      return buildProposalCard(
-                        proposal['companyName']!,
-                        proposal['location']!,
-                        proposal['status']!,
-                        context
-                      );
+                      return buildProposalCard(proposal['companyName']!,
+                          proposal['location']!, proposal['status']!, context);
                     },
                   ),
                 ],
@@ -294,7 +293,8 @@ class _ListSubmissionState extends State<list_submission> with SingleTickerProvi
     // );
   }
 
-  Widget buildProposalCard(String companyName, String location, String status, BuildContext context) {
+  Widget buildProposalCard(String companyName, String location, String status,
+      BuildContext context) {
     Color statusColor;
     // Menentukan warna berdasarkan nilai status
     if (status == 'ACCEPTED') {
@@ -311,7 +311,8 @@ class _ListSubmissionState extends State<list_submission> with SingleTickerProvi
       margin: const EdgeInsets.symmetric(vertical: 8),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: ListTile(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         title: Text(companyName,
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         subtitle: Column(
@@ -331,7 +332,8 @@ class _ListSubmissionState extends State<list_submission> with SingleTickerProvi
             Padding(
               padding: const EdgeInsets.only(top: 5),
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                 decoration: BoxDecoration(
                   color: statusColor,
                   borderRadius: BorderRadius.circular(8),
@@ -363,9 +365,13 @@ class _ListSubmissionState extends State<list_submission> with SingleTickerProvi
           if (status == 'ACCEPTED') {
             showDetailModal(context, status);
           } else if (status == 'PENDING') {
-            showInfoDialog(context, "Proposal anda sudah terkirim dan sedang dalam proses.", status);
+            showInfoDialog(
+                context,
+                "Proposal anda sudah terkirim dan sedang dalam proses.",
+                status);
           } else if (status == 'DECLINED') {
-            showInfoDialog(context, "Proposal anda sudah ditolak oleh perusahaan.", status);
+            showInfoDialog(context,
+                "Proposal anda sudah ditolak oleh perusahaan.", status);
           }
         },
       ),

@@ -50,29 +50,12 @@ class list_overall_events extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      "All Events",
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xff008037),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        padding: const EdgeInsets.all(12),
-                      ),
-                      onPressed: () {},
-                      child: const Text(
-                        "Sort By",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ],
+                const SizedBox(height: 10.0),
+                const Text(
+                  "All Events",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
+                
                 const SizedBox(height: 10.0),
                 Expanded(
                   child: ListView.builder(

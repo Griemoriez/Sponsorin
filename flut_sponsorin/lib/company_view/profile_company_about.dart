@@ -12,8 +12,11 @@ class ProfileCompanyAbout extends StatelessWidget {
         child: Card(
           elevation: 2.0,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.0),
-          ),
+              borderRadius: BorderRadius.circular(16.0),
+              side: const BorderSide(
+                color: Colors.grey, // Ganti dengan warna border yang diinginkan
+                width: 2.0,
+              )),
           child: const Padding(
             padding: EdgeInsets.all(16.0),
             child: Column(
