@@ -3,7 +3,6 @@ import 'package:flut_sponsorin/sponsor_seeker_view/discovery_sponsor_home.dart';
 import 'package:flut_sponsorin/sponsor_seeker_view/list_company.dart';
 import 'package:flut_sponsorin/sponsor_seeker_view/list_submission.dart';
 import 'package:flut_sponsorin/sponsor_seeker_view/profile_sponsor.dart';
-import 'package:flut_sponsorin/sponsor_seeker_view/submit_proposal.dart';
 import 'package:flutter/material.dart';
 
 class discover_event extends StatefulWidget {
@@ -16,10 +15,10 @@ class discover_event extends StatefulWidget {
 class _discover_sponsor_state extends State<discover_event> {
   int _page = 0;
   final List<Widget> _pages = [
-    discover_sponsor_home(),
-    list_company(),
-    list_submission(),
-    ProfileSponsor(),
+    const discover_sponsor_home(),
+    const ListCompany(),
+    const list_submission(),
+    const ProfileSponsor(),
   ];
 
   @override

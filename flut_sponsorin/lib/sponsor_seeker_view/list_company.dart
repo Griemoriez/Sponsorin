@@ -1,30 +1,24 @@
-import 'package:flut_sponsorin/company_view/profile_company.dart';
 import 'package:flut_sponsorin/sponsor_seeker_view/detail_company.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import '../models/user.dart';
 
-class list_company extends StatefulWidget {
-  const list_company({super.key});
+class ListCompany extends StatefulWidget {
+  const ListCompany({super.key});
 
   @override
   _ListCompanyState createState() => _ListCompanyState();
 }
 
-class _ListCompanyState extends State<list_company> {
+class _ListCompanyState extends State<ListCompany> {
   final TextEditingController _searchController = TextEditingController();
-  List<Map<String, String>> companies = [
-    {'name': 'PT Mandira', 'location': 'Surabaya, Indonesia'},
-    {'name': 'PT Lamuda', 'location': 'Jakarta, Indonesia'},
-    {'name': 'PT Corknews', 'location': 'Surabaya, Indonesia'},
-    {'name': 'PT Alpha', 'location': 'Surabaya, Indonesia'},
-    {'name': 'PT Beta', 'location': 'Surabaya, Indonesia'},
-    {'name': 'PT Charlie', 'location': 'Surabaya, Indonesia'},
-  ];
+  List<Map<String, String>> companies = [];
   List<Map<String, String>> filteredCompanies = [];
 
   @override
   void initState() {
     super.initState();
-    filteredCompanies = companies;
+    _loadCompanies();
     _searchController.addListener(_filterCompanies);
   }
 
@@ -34,12 +28,40 @@ class _ListCompanyState extends State<list_company> {
     super.dispose();
   }
 
+  Future<void> _loadCompanies() async {
+    var userBox = await Hive.openBox<User>('userBox');
+    List<Map<String, String>> tempCompanies = [];
+
+    for (var userKey in userBox.keys) {
+      var user = userBox.get(userKey) as User;
+      if (user.role == 'sponsor') {
+        tempCompanies.add({
+          'name': user.name ?? 'Unknown Company',
+          'address': user.address ?? 'No Address',
+          'picture': user.picture ?? 'lib/assets/logo.png',
+        });
+      }
+    }
+
+    setState(() {
+      companies = tempCompanies;
+      filteredCompanies = companies;
+
+      // Debug print to check loaded companies
+      print("Loaded Companies: $companies");
+    });
+  }
+
   void _filterCompanies() {
     String query = _searchController.text.toLowerCase();
     setState(() {
       filteredCompanies = companies
-          .where((company) => company['name']!.toLowerCase().contains(query))
+          .where((company) =>
+          (company['name'] ?? '').toLowerCase().contains(query))
           .toList();
+
+      // Debug print to check filtered companies
+      print("Filtered Companies: $filteredCompanies");
     });
   }
 
@@ -62,14 +84,16 @@ class _ListCompanyState extends State<list_company> {
               filled: true,
             ),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           const Text(
             'Company List',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Expanded(
-            child: ListView.builder(
+            child: filteredCompanies.isEmpty
+                ? const Center(child: Text('No companies found'))
+                : ListView.builder(
               itemCount: filteredCompanies.length,
               itemBuilder: (context, index) {
                 var company = filteredCompanies[index];
@@ -77,10 +101,15 @@ class _ListCompanyState extends State<list_company> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => detail_company()),
+                      MaterialPageRoute(
+                          builder: (context) => const detail_company()),
                     );
                   },
-                  child: companyCard(company['name']!, company['location']!),
+                  child: companyCard(
+                    company['name'] ?? 'Unknown Company',
+                    company['address'] ?? 'No Address',
+                    company['picture'] ?? 'lib/assets/logo.png',
+                  ),
                 );
               },
             ),
@@ -90,20 +119,19 @@ class _ListCompanyState extends State<list_company> {
     );
   }
 
-  Widget companyCard(String name, String location) {
+  Widget companyCard(String name, String location, String picture) {
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 8),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: ListTile(
-        contentPadding: EdgeInsets.all(16),
+        contentPadding: const EdgeInsets.all(16),
         leading: Container(
           width: 60,
           height: 60,
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Colors.blue, Colors.red],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
+            image: DecorationImage(
+              image: AssetImage(picture),
+              fit: BoxFit.cover,
             ),
             borderRadius: BorderRadius.circular(12),
           ),

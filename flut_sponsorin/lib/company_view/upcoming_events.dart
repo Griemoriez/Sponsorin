@@ -87,7 +87,7 @@ class _upcoming_eventsState extends State<upcoming_events> {
                   alignment: Alignment.centerRight,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xff008037),
+                      backgroundColor: const Color(0xff008037),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15),
                       ),

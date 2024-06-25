@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:hive/hive.dart';
+import 'package:intl/intl.dart';
+import 'package:flut_sponsorin/company_view/upload_status.dart';
+import '../models/user.dart';
+import '../models/post.dart';
 
-import '../company_view/upload_status.dart';
+import '../globals.dart' as globals;
 
 class discover_sponsor_home extends StatefulWidget {
   const discover_sponsor_home({super.key});
@@ -11,49 +15,54 @@ class discover_sponsor_home extends StatefulWidget {
 }
 
 class _discover_sponsor_homeState extends State<discover_sponsor_home> {
-  bool isFavorite = false;
-
-  final List<Map<String, dynamic>> cardData = [
-    {
-      'title': 'PT Bank Central Asia',
-      'time': '3h ago',
-      'description':
-          'Berkembangnya teknologi membuka banyak peluang karir. Jadinya, semakin banyak lowongan baru di bidang teknologi yang bisa dijalani deh! Buat kamu yang tertarik jadi hashtag',
-      'imagePath': 'assets/logo.png',
-      'isFavorite': false
-    },
-    {
-      'title': 'PT Asia',
-      'time': '5h ago',
-      'description':
-          'Acara ini akan menghadirkan pembicara dari berbagai perusahaan teknologi terkemuka. Ayo datang dan tambahkan wawasanmu tentang teknologi terbaru!',
-      'imagePath': 'assets/logo.png',
-      'isFavorite': false
-    },
-    {
-      'title': 'PT Mandira',
-      'time': '1d ago',
-      'description':
-          'Diskusikan perkembangan terbaru dalam bidang kecerdasan buatan bersama para ahli dan praktisi di AI Summit 2024.',
-      'imagePath': 'assets/logo.png',
-      'isFavorite': false
-    }
-  ];
-
+  bool isLoading = true;
+  List<Map<String, dynamic>> cardData = [];
   List<Map<String, dynamic>> filteredCardData = [];
 
   @override
   void initState() {
     super.initState();
-    filteredCardData = cardData;
+    _loadData();
+  }
+
+  void _loadData() async {
+    var postBox = await Hive.openBox<Post>('postBox');
+    var userBox = await Hive.openBox<User>('userBox');
+
+    List<Map<String, dynamic>> tempCardData = [];
+
+    for (var postKey in postBox.keys) {
+      var post = postBox.get(postKey) as Post;
+      var user = userBox.get(post.poster) as User;
+
+      if (user.role == globals.loggedInUser?.role) {
+        continue;
+      } else {
+        tempCardData.add({
+          'title': user.name,
+          'time': DateFormat('dd MMM yyyy, HH:mm').format(post.time_posted),
+          'event': post.title,
+          'description': post.description,
+          'imagePath': user.picture ?? 'lib/assets/logo.png', // Use placeholder if null,
+          'isFavorite': "false", // Initialize isFavorite as false
+        });
+      }
+    }
+
+    setState(() {
+      cardData = tempCardData;
+      filteredCardData = cardData;
+      isLoading = false;
+    });
   }
 
   void _filterCards(String query) {
     final results = cardData.where((card) {
-      final title = card['title']?.toLowerCase() ?? '';
+      final title = card['title']!.toLowerCase();
+      final event = card['event']!.toLowerCase();
       final searchLower = query.toLowerCase();
 
-      return title.contains(searchLower);
+      return title.contains(searchLower) || event.contains(searchLower);
     }).toList();
 
     setState(() {
@@ -63,132 +72,153 @@ class _discover_sponsor_homeState extends State<discover_sponsor_home> {
 
   void _toggleFavorite(int index) {
     setState(() {
-      filteredCardData[index]['isFavorite'] = !filteredCardData[index]['isFavorite'];
+      filteredCardData[index]['isFavorite'] = (filteredCardData[index]['isFavorite'] == 'true')? "false": "true";
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("lib/assets/BG.jpg"),
-                fit: BoxFit.cover,
-              ),
+    return Stack(
+      children: [
+        Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("lib/assets/BG.jpg"),
+              fit: BoxFit.cover,
             ),
           ),
-          SingleChildScrollView(
+        ),
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          body: isLoading
+              ? const Center(child: CircularProgressIndicator())
+              : SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: SizedBox(
-                    height: 45.0,
-                    width: double.infinity,
-                    child: TextField(
-                      onChanged: (value) {
-                        _filterCards(value);
-                      },
-                      decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.search),
-                        hintText: 'Search here...',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 10.0),
-                        fillColor: Colors.white,
-                        filled: true,
+                  padding: const EdgeInsets.only(
+                      left: 17.0, top: 20.0, right: 17.0, bottom: 20.0),
+                  child: TextField(
+                    onChanged: (value) {
+                      _filterCards(value);
+                    },
+                    decoration: const InputDecoration(
+                      focusColor: Colors.orange,
+                      labelText: 'Search',
+                      prefixIcon: Icon(Icons.search),
+                      border: OutlineInputBorder(
+                        borderRadius:
+                        BorderRadius.all(Radius.circular(20.0)),
+                        borderSide: BorderSide(color: Colors.orange),
                       ),
                     ),
                   ),
                 ),
                 ListView.builder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: filteredCardData.length,
                   itemBuilder: (context, index) {
                     final item = filteredCardData[index];
+                    String isFavorite = (item['isFavorite'] == 'true')? "false": "true";
+
                     return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 15.0, vertical: 7.5),
+                      padding: const EdgeInsets.only(
+                          right: 15.0, left: 15.0, bottom: 15.0),
                       child: Card(
                         elevation: 4,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                           side: const BorderSide(
-                              color: Colors.grey,
-                              width: 1), // Menambahkan border
+                              color: Colors.grey, width: 1),
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.all(20.0),
+                          padding: const EdgeInsets.all(15.0),
                           child: Column(
-                            mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Row(
                                 children: <Widget>[
                                   CircleAvatar(
-                                    backgroundImage: AssetImage(item['imagePath']), // Ganti dengan path gambar Anda
+                                    backgroundImage: AssetImage(
+                                        item['imagePath']!),
                                     radius: 20,
                                   ),
-                                  SizedBox(width: 10),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Text(
-                                        item['title'] ?? 'No Title',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
+                                  const SizedBox(width: 10),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Text(
+                                          item['title']!,
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
+                                        Text(
+                                          item['time']!,
+                                          style: const TextStyle(
+                                            color: Colors.grey,
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  PopupMenuButton(
+                                    itemBuilder: (context) => [
+                                      const PopupMenuItem(
+                                        value: 'Option 1',
+                                        child: Text('Option 1'),
                                       ),
-                                      Text(
-                                        item['time'] ?? 'No Time',
-                                        style: TextStyle(
-                                          color: Colors.grey,
-                                          fontSize: 12,
-                                        ),
+                                      const PopupMenuItem(
+                                        value: 'Option 2',
+                                        child: Text('Option 2'),
                                       ),
                                     ],
                                   ),
-                                  Spacer(),
-                                  Icon(Icons.more_vert),
                                 ],
                               ),
-                              SizedBox(height: 5),
+                              const SizedBox(height: 10),
                               Text(
-                                item['description'] ?? 'No Description',
+                                item['event']!,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                              SizedBox(height: 10),
-                              Row(
-                                children: <Widget>[
-                                  IconButton(
-                                    icon: Icon(
-                                      item['isFavorite']
+                              const SizedBox(height: 5),
+                              Text(
+                                item['description']!,
+                              ),
+                              const SizedBox(height: 10),
+                              GestureDetector(
+                                onTap: () {
+                                  _toggleFavorite(index);
+                                },
+                                child: Row(
+                                  children: <Widget>[
+                                    Icon(
+                                      item['isFavorite'] == 'true'
                                           ? Icons.favorite
                                           : Icons.favorite_border,
-                                      color: item['isFavorite']
+                                      color: item['isFavorite'] == 'true'
                                           ? Colors.red
                                           : Colors.grey,
                                     ),
-                                    onPressed: () {
-                                      _toggleFavorite(index);
-                                    },
-                                  ),
-                                  SizedBox(width: 5),
-                                  Text(
-                                    'Like',
-                                    style: TextStyle(
-                                      color: Colors.grey,
+                                    const SizedBox(width: 5),
+                                    const Expanded(
+                                      child: Text(
+                                        'Like',
+                                        style: TextStyle(
+                                          color: Colors.grey,
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
+                                  ],
+                                ),
+                              )
                             ],
                           ),
                         ),
@@ -199,17 +229,18 @@ class _discover_sponsor_homeState extends State<discover_sponsor_home> {
               ],
             ),
           ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => upload_status()),
-          );
-        },
-        backgroundColor: Colors.green,
-        child: Icon(Icons.add),
-      ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const upload_status()),
+              );
+            },
+            backgroundColor: Colors.green,
+            child: const Icon(Icons.add),
+          ),
+        ),
+      ],
     );
-  }}
+  }
+}

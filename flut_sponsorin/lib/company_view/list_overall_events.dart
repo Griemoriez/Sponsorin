@@ -4,7 +4,7 @@ import 'package:flut_sponsorin/components/overall_event_card.dart'; // Import ov
 
 class list_overall_events extends StatelessWidget {
   final List<Event> events; // Change EventData to Event
-  const list_overall_events({Key? key, required this.events}) : super(key: key);
+  const list_overall_events({super.key, required this.events});
 
   @override
   Widget build(BuildContext context) {

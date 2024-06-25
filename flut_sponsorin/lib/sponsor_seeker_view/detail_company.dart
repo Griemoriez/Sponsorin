@@ -1,9 +1,5 @@
-import 'package:flut_sponsorin/sponsor_seeker_view/submit_proposal.dart';
 import 'package:flut_sponsorin/sponsor_seeker_view/submit_proposal_to_comp.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 
 class detail_company extends StatefulWidget {
   const detail_company({super.key});
@@ -130,7 +126,7 @@ class _DetailCompanyState extends State<detail_company>
                     ),
                   ),
                   // TabBarView
-                  Container(
+                  SizedBox(
                     height: MediaQuery.of(context).size.height - 250,
                     child: TabBarView(
                       controller: _tabController,
@@ -188,8 +184,8 @@ class _DetailCompanyState extends State<detail_company>
                           ),
                         ),
                         // About Tab
-                        Padding(
-                          padding: const EdgeInsets.all(16.0),
+                        const Padding(
+                          padding: EdgeInsets.all(16.0),
                           child: AboutCompany(),
                         ),
                         // Past Sponsorship Tab
@@ -295,10 +291,10 @@ class _DetailCompanyState extends State<detail_company>
             floatingActionButton: FloatingActionButton(
               onPressed: () {Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => submit_proposal_to_comp()),
+                      MaterialPageRoute(builder: (context) => const submit_proposal_to_comp()),
                     );},
               backgroundColor: Colors.green,
-              child: Icon(Icons.add),
+              child: const Icon(Icons.add),
             ),
           ),
         ],
@@ -314,12 +310,12 @@ class SponsorCard extends StatelessWidget {
   final double rating;
 
   const SponsorCard({
-    Key? key,
+    super.key,
     required this.imageUrl,
     required this.title,
     required this.subtitle,
     required this.rating,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -344,7 +340,7 @@ class SponsorCard extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,
                     ),
@@ -360,11 +356,11 @@ class SponsorCard extends StatelessWidget {
                   const SizedBox(height: 4.0),
                   Row(
                     children: [
-                      Icon(Icons.star, color: Colors.green, size: 20.0),
+                      const Icon(Icons.star, color: Colors.green, size: 20.0),
                       const SizedBox(width: 4.0),
                       Text(
                         rating.toString(),
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 14.0,
                           fontWeight: FontWeight.bold,
                         ),
@@ -378,7 +374,7 @@ class SponsorCard extends StatelessWidget {
                             borderRadius: BorderRadius.circular(12.0),
                           ),
                         ),
-                        child: Text(
+                        child: const Text(
                           'See Comments',
                           style: TextStyle(fontSize: 12.0),
                         ),
@@ -389,7 +385,7 @@ class SponsorCard extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 16.0),
-            Icon(Icons.more_vert),
+            const Icon(Icons.more_vert),
           ],
         ),
       ),
@@ -398,6 +394,8 @@ class SponsorCard extends StatelessWidget {
 }
 
 class AboutCompany extends StatelessWidget {
+  const AboutCompany({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -405,8 +403,8 @@ class AboutCompany extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16.0),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
+      child: const Padding(
+        padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -417,15 +415,15 @@ class AboutCompany extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 8.0),
+            SizedBox(height: 8.0),
             Text(
               'Berdiri sejak tahun 1968, PT Mandiri telah menjadi Bank Swasta terbesar kedua di Indonesia. Berkomitmen untuk memberikan pelayanan terbaik kepada nasabah dan menjadi bank yang dapat dipercaya oleh seluruh nasabah.',
             ),
-            const SizedBox(height: 8.0),
+            SizedBox(height: 8.0),
             Text(
               'Mandira terus bertumbuh dengan puluhan ribu karyawan yang tersebar di berbagai cabang yang ada di seluruh Indonesia.',
             ),
-            const SizedBox(height: 8.0),
+            SizedBox(height: 8.0),
             Text(
               'Website',
               style: TextStyle(
@@ -433,9 +431,9 @@ class AboutCompany extends StatelessWidget {
                 decoration: TextDecoration.underline,
               ),
             ),
-            const SizedBox(height: 4.0),
+            SizedBox(height: 4.0),
             Text('http://www.mandira.co.id'),
-            const SizedBox(height: 8.0),
+            SizedBox(height: 8.0),
             Text(
               'Email',
               style: TextStyle(
@@ -443,9 +441,9 @@ class AboutCompany extends StatelessWidget {
                 decoration: TextDecoration.underline,
               ),
             ),
-            const SizedBox(height: 4.0),
+            SizedBox(height: 4.0),
             Text('mandira@gmail.co.id'),
-            const SizedBox(height: 8.0),
+            SizedBox(height: 8.0),
             Text(
               'Nomor Telepon',
               style: TextStyle(
@@ -453,7 +451,7 @@ class AboutCompany extends StatelessWidget {
                 decoration: TextDecoration.underline,
               ),
             ),
-            const SizedBox(height: 4.0),
+            SizedBox(height: 4.0),
             Text('+6281123456789'),
           ],
         ),

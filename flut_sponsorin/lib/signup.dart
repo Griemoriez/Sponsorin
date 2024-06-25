@@ -10,7 +10,7 @@ class signup extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage("lib/assets/startupandroid.png"),
                   fit: BoxFit.cover)),
@@ -23,9 +23,9 @@ class signup extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Image(image: AssetImage('lib/assets/logo.png')),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 30),
+                  const Image(image: AssetImage('lib/assets/logo.png')),
+                  const Padding(
+                    padding: EdgeInsets.only(bottom: 30),
                     child: Text(
                       "Sign Up as",
                       style:
@@ -38,17 +38,17 @@ class signup extends StatelessWidget {
                       alignment: Alignment.center,
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => SignupAsCompany()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => const SignupAsCompany()));
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xff008037),
-                          padding: EdgeInsets.symmetric(
+                          backgroundColor: const Color(0xff008037),
+                          padding: const EdgeInsets.symmetric(
                               horizontal: 30, vertical: 25),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
                           ),
                         ),
-                        child: Align(
+                        child: const Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             'Company / Sponsor',
@@ -65,17 +65,17 @@ class signup extends StatelessWidget {
                       alignment: Alignment.center,
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => SignupAsSponsor()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => const SignupAsSponsor()));
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xff008037),
-                          padding: EdgeInsets.symmetric(
+                          backgroundColor: const Color(0xff008037),
+                          padding: const EdgeInsets.symmetric(
                               horizontal: 30, vertical: 25),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
                           ),
                         ),
-                        child: Align(
+                        child: const Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             'Sponsor Seeker',

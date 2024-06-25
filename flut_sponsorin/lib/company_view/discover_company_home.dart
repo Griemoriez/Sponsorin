@@ -5,8 +5,10 @@ import 'package:flut_sponsorin/company_view/upload_status.dart';
 import '../models/user.dart';
 import '../models/post.dart';
 
+import '../globals.dart' as globals;
+
 class DiscoverCompanyHome extends StatefulWidget {
-  const DiscoverCompanyHome({Key? key}) : super(key: key);
+  const DiscoverCompanyHome({super.key});
 
   @override
   State<DiscoverCompanyHome> createState() => _DiscoverCompanyHomeState();
@@ -33,14 +35,18 @@ class _DiscoverCompanyHomeState extends State<DiscoverCompanyHome> {
       var post = postBox.get(postKey) as Post;
       var user = userBox.get(post.poster) as User;
 
-      tempCardData.add({
-        'title': user.name,
-        'time': DateFormat('dd MMM yyyy, HH:mm').format(post.time_posted),
-        'event': post.title,
-        'description': post.description,
-        'imagePath': user.picture ?? 'lib/assets/logo.png', // Use placeholder if null,
-        'isFavorite': "false", // Initialize isFavorite as false
-      });
+      if (user.role == globals.loggedInUser?.role) {
+        continue;
+      } else {
+        tempCardData.add({
+          'title': user.name,
+          'time': DateFormat('dd MMM yyyy, HH:mm').format(post.time_posted),
+          'event': post.title,
+          'description': post.description,
+          'imagePath': user.picture ?? 'lib/assets/logo.png', // Use placeholder if null,
+          'isFavorite': "false", // Initialize isFavorite as false
+        });
+      }
     }
 
     setState(() {
@@ -85,7 +91,7 @@ class _DiscoverCompanyHomeState extends State<DiscoverCompanyHome> {
         Scaffold(
           backgroundColor: Colors.transparent,
           body: isLoading
-              ? Center(child: CircularProgressIndicator())
+              ? const Center(child: CircularProgressIndicator())
               : SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Column(
@@ -111,7 +117,7 @@ class _DiscoverCompanyHomeState extends State<DiscoverCompanyHome> {
                 ),
                 ListView.builder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: filteredCardData.length,
                   itemBuilder: (context, index) {
                     final item = filteredCardData[index];
@@ -147,13 +153,13 @@ class _DiscoverCompanyHomeState extends State<DiscoverCompanyHome> {
                                       children: <Widget>[
                                         Text(
                                           item['title']!,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
                                         Text(
                                           item['time']!,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             color: Colors.grey,
                                             fontSize: 12,
                                           ),
@@ -163,13 +169,13 @@ class _DiscoverCompanyHomeState extends State<DiscoverCompanyHome> {
                                   ),
                                   PopupMenuButton(
                                     itemBuilder: (context) => [
-                                      PopupMenuItem(
-                                        child: Text('Option 1'),
+                                      const PopupMenuItem(
                                         value: 'Option 1',
+                                        child: Text('Option 1'),
                                       ),
-                                      PopupMenuItem(
-                                        child: Text('Option 2'),
+                                      const PopupMenuItem(
                                         value: 'Option 2',
+                                        child: Text('Option 2'),
                                       ),
                                     ],
                                   ),
@@ -178,7 +184,7 @@ class _DiscoverCompanyHomeState extends State<DiscoverCompanyHome> {
                               const SizedBox(height: 10),
                               Text(
                                 item['event']!,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -201,8 +207,8 @@ class _DiscoverCompanyHomeState extends State<DiscoverCompanyHome> {
                                           ? Colors.red
                                           : Colors.grey,
                                     ),
-                                    SizedBox(width: 5),
-                                    Expanded(
+                                    const SizedBox(width: 5),
+                                    const Expanded(
                                       child: Text(
                                         'Like',
                                         style: TextStyle(
@@ -227,11 +233,11 @@ class _DiscoverCompanyHomeState extends State<DiscoverCompanyHome> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => upload_status()),
+                MaterialPageRoute(builder: (context) => const upload_status()),
               );
             },
-            child: const Icon(Icons.add),
             backgroundColor: Colors.green,
+            child: const Icon(Icons.add),
           ),
         ),
       ],

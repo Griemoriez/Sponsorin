@@ -1,8 +1,6 @@
-import 'package:flut_sponsorin/company_view/discover_company.dart';
 import 'package:flutter/material.dart';
 import 'package:flut_sponsorin/login.dart';
 
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -61,12 +59,11 @@ class MainApp extends StatelessWidget {
 Future<void> populateUserBox() async {
   var userBox = await Hive.openBox<User>('userBox');
   var startIndex = Hive.box<User>('userBox').length;
-  
 
   final users = [
     User(
       id: startIndex+1,
-      role: 'sponsor',
+      role: 'seeker',
       picture: 'lib/assets/picture_user1.png',
       name: 'Admin',
       password: 'qwerty',
@@ -77,7 +74,7 @@ Future<void> populateUserBox() async {
     ),
     User(
       id: startIndex+2,
-      role: 'sponsor',
+      role: 'seeker',
       picture: 'lib/assets/picture_user2.jpeg',
       name: 'Petra Christian University',
       password: '12345',
@@ -88,7 +85,7 @@ Future<void> populateUserBox() async {
     ),
     User(
       id: startIndex+3,
-      role: 'sponsor',
+      role: 'seeker',
       picture: 'lib/assets/picture_user3.jpg',
       name: 'Informatics Rally Games and Logic',
       password: '12345',
@@ -96,17 +93,65 @@ Future<void> populateUserBox() async {
       email: 'irgl@mail.com',
       phone: '081234563333',
       website: 'irgl.petra.ac.id',
+      brief: 'Informatics Rally Games and Logic (IRGL) adalah lomba tahunan dari Universitas Kristen Petra Surabaya untuk tingkat SMA dan sederajat.',
+      about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent fermentum euismod eros, in tempor lacus laoreet at. Morbi in elit quis leo fermentum suscipit vitae.',
+      address: 'Jl. Siwalankerto No.121-131, Siwalankerto'
     ),
     User(
       id: startIndex+4,
-      role: 'seeker',
-      picture: 'lib/assets/picture_user4.jpg',
-      name: 'Savio Enoson',
+      role: 'sponsor',
+      picture: 'lib/assets/mandira.png',
+      name: 'PT. Mandira',
       password: '1212',
-      company: 'UK Petra',
-      email: 'C14210278@john.petra.ac.id',
-      phone: null,
-      website: null,
+      company: 'Mandira',
+      email: 'mandira@gmail.com',
+      phone: "081123456789",
+      website: "www.mandira.co.id",
+      brief: "Mandira terus bertumbuh dengan puluhan ribu karyawan yang tersebar di berbagai cabang yang ada di seluruh Indonesia.",
+      about: "Berdiri sejak tahun 1968, PT Mandiri telah menjadi Bank Swasta terbesar kedua di Indonesia. Berkomitmen untuk memberikan pelayanan terbaik kepada nasabah dan menjadi bank yang dapat dipercaya oleh seluruh nasabah.",
+      address: 'Jl. Raya Surabaya No.123, Surabaya, East Java, Indonesia'
+    ),
+    User(
+        id: startIndex+5,
+        role: 'sponsor',
+        picture: 'lib/assets/alpha.jpeg',
+        name: 'PT. Alpha',
+        password: '1212',
+        company: 'Alpha Company',
+        email: 'alpha@mail.com',
+        phone: "081123456789",
+        website: "www.alpha.co.id",
+        brief: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit.",
+        about: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent fermentum euismod eros, in tempor lacus laoreet at. Morbi in elit quis leo fermentum suscipit vitae.",
+        address: 'Jl. Alpha 1'
+    ),
+    User(
+        id: startIndex+6,
+        role: 'sponsor',
+        picture: 'lib/assets/beta.jpeg',
+        name: 'PT. Beta',
+        password: '1212',
+        company: 'Beta Company',
+        email: 'beta@mail.com',
+        phone: "081123456789",
+        website: "www.beta.co.id",
+        brief: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit.",
+        about: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent fermentum euismod eros, in tempor lacus laoreet at. Morbi in elit quis leo fermentum suscipit vitae.",
+        address: 'Jl. Beta 1'
+    ),
+    User(
+        id: startIndex+7,
+        role: 'sponsor',
+        picture: 'lib/assets/charlie.jpeg',
+        name: 'PT. Charlie',
+        password: '1212',
+        company: 'Charlie Company',
+        email: 'charlie@mail.com',
+        phone: "081123456789",
+        website: "www.charlie.co.id",
+        brief: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit.",
+        about: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent fermentum euismod eros, in tempor lacus laoreet at. Morbi in elit quis leo fermentum suscipit vitae.",
+        address: 'Jl. Charlie 1'
     ),
   ];
 
@@ -139,6 +184,41 @@ Future<void> populatePosts() async {
         poster: 2,
         title: "ARTIFICIAL INTELLIGENCE SUMMIT",
         description: "Diskusikan perkembangan terbaru dalam bidang kecerdasan buatan bersama para ahli dan praktisi di AI Summit 2024.",
+        time_posted: DateTime.timestamp()
+    ),
+    Post(
+        id: startIndex+4,
+        poster: 4,
+        title: "Peluncuran Produk Baru",
+        description: "📢 PT. Mandira dengan bangga mengumumkan peluncuran produk terbaru kami, MandiraFlex! 🎉 Dengan MandiraFlex, Anda dapat menikmati fleksibilitas finansial yang lebih besar dengan bunga kompetitif dan proses persetujuan yang cepat. Segera kunjungi cabang terdekat atau akses melalui aplikasi mobile kami untuk informasi lebih lanjut. Investasikan masa depan Anda bersama MandiraFlex! #MandiraFlex #InvestasiMasaDepan #KeuanganMandira",
+        time_posted: DateTime.timestamp()
+    ),
+    Post(
+        id: startIndex+5,
+        poster: 4,
+        title: "Edukasi Keuangan",
+        description: "Tahukah Anda? Mengelola keuangan dengan bijak adalah kunci untuk mencapai stabilitas dan kebebasan finansial. PT. Mandira berkomitmen untuk membantu Anda melalui program edukasi keuangan kami. Ikuti webinar gratis kami tentang Perencanaan Keuangan Pribadi pada hari Sabtu ini pukul 10.00 WIB. Daftar sekarang dan mulailah perjalanan finansial Anda dengan langkah yang tepat! #EdukasiKeuangan #MandiraEdu #WebinarFinansial",
+        time_posted: DateTime.timestamp()
+    ),
+    Post(
+        id: startIndex+6,
+        poster: 4,
+        title: "Program CSR",
+        description: "PT. Mandira kembali hadir dengan program Corporate Social Responsibility (CSR) kami yang bertujuan meningkatkan kesejahteraan masyarakat. Kali ini, kami mendukung pendidikan anak-anak kurang mampu dengan menyumbangkan 1.000 paket perlengkapan sekolah. Bersama kita bisa membuat perubahan positif. Terima kasih atas dukungan Anda yang terus menerus! #MandiraPeduli #CSR #PendidikanUntukSemua",
+        time_posted: DateTime.timestamp()
+    ),
+    Post(
+        id: startIndex+7,
+        poster: 5,
+        title: "New Store",
+        description: "📸✨ Say hello to your new favorite shopping destination! Alpha Corp’s newest retail store is opening in the heart of Chicago this Saturday. Expect exclusive discounts, fun activities, and a special gift for the first 100 customers. Tag your shopping buddy and mark your calendar! #AlphaCorp #GrandOpening #RetailHeaven #Chicago",
+        time_posted: DateTime.timestamp()
+    ),
+    Post(
+        id: startIndex+8,
+        poster: 5,
+        title: "We Are Hiring",
+        description: "We are excited to share that Alpha Corp is expanding! Our latest retail store is set to open in downtown Chicago this Saturday. This new location will feature a wide range of our premium products and exceptional customer service that our brand is known for. We invite you to join us for the grand opening celebration, which includes exclusive discounts, special gifts for the first 100 customers, and various exciting activities. Looking forward to serving the Chicago community! #AlphaCorp #RetailExpansion #GrandOpening #CustomerFirst",
         time_posted: DateTime.timestamp()
     ),
   ];

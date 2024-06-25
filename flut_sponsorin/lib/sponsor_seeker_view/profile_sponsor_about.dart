@@ -11,6 +11,8 @@ class ProfileSponsorAbout extends StatelessWidget {
     'address': 'Jl. Raya Surabaya No.123, Surabaya, East Java, Indonesia'
   };
 
+  ProfileSponsorAbout({super.key});
+
   Future<void> _launchUrl(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
@@ -28,12 +30,12 @@ class ProfileSponsorAbout extends StatelessWidget {
         children: [
           Text(
             sponsor['name']!,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Text(
             sponsor['description']!,
             style: TextStyle(
@@ -41,49 +43,49 @@ class ProfileSponsorAbout extends StatelessWidget {
               color: Colors.grey[600],
             ),
           ),
-          SizedBox(height: 20),
-          Text(
+          const SizedBox(height: 20),
+          const Text(
             'Contact Information:',
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           GestureDetector(
             onTap: () => _launchUrl('mailto:${sponsor['email']}'),
             child: Text(
               'Email: ${sponsor['email']}',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
                 color: Colors.blue,
                 decoration: TextDecoration.underline,
               ),
             ),
           ),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           GestureDetector(
             onTap: () => _launchUrl(sponsor['website']!),
             child: Text(
               'Website: ${sponsor['website']}',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
                 color: Colors.blue,
                 decoration: TextDecoration.underline,
               ),
             ),
           ),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           Text(
             'Phone: ${sponsor['phone']}',
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
             ),
           ),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           Text(
             'Address: ${sponsor['address']}',
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
             ),
           ),

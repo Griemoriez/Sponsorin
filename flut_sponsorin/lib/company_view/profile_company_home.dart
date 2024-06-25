@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
 
 class ProfileCompanyHome extends StatelessWidget {
-  const ProfileCompanyHome({Key? key}) : super(key: key);
+  const ProfileCompanyHome({super.key});
 
   final List<Map<String, String>> posts = const [
     {
-      'avatar': 'lib/assets/profile_picture.jpg',
+      'avatar': 'lib/assets/mandira.png',
       'name': 'PT Mandira',
       'time': '1h ago',
       'description': 'Jadi pemimpin dengan anggota yang banyak dan tersebar merupakan sebuah keahlian yang harus dimiliki oleh seluruh mahasiswa. Yuk, simak cerita Akmal untuk tahu tips dan tricks mencari sponsor yang baik dan mudah!!!',
     },
     {
-      'avatar': 'lib/assets/profile_picture.jpg',
+      'avatar': 'lib/assets/mandira.png',
       'name': 'PT Mandira',
       'time': '2h ago',
       'description': 'Menjadi panitia sponsor merupakan salah satu keahlian yang penting. Simak cerita Akmal untuk tahu tips dan tricks mencari sponsor yang baik dan mudah!!!',
     },
     {
-      'avatar': 'lib/assets/profile_picture.jpg',
+      'avatar': 'lib/assets/mandira.png',
       'name': 'PT Mandira',
       'time': '5h ago',
       'description': 'Pemimpin yang baik harus bisa mengelola anggota yang banyak. Pelajari lebih lanjut dari pengalaman Akmal mencari sponsor!',
     },
     {
-      'avatar': 'lib/assets/profile_picture.jpg',
+      'avatar': 'lib/assets/mandira.png',
       'name': 'PT Mandira',
       'time': '1d ago',
       'description': 'Simak tips dan tricks dari Akmal tentang cara mencari sponsor yang baik dan mudah. Informasi penting bagi seluruh mahasiswa!',

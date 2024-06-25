@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flut_sponsorin/models/event.dart';
 import 'package:intl/intl.dart'; // Import intl package for date formatting
+import 'package:flut_sponsorin/sponsor_seeker_view/submit_proposal_to_comp.dart';
 
 class upcoming_events_card extends StatelessWidget {
   final Event cardData;
 
-  const upcoming_events_card({Key? key, required this.cardData}) : super(key: key);
+  const upcoming_events_card({super.key, required this.cardData});
 
   void _showDescriptionDialog(BuildContext context) {
     showDialog(
@@ -54,7 +55,7 @@ class upcoming_events_card extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.only(top: 10.0),
                               child: Text(
-                                'CP: ' + (cardData.contact ?? ''),
+                                'CP: ${cardData.contact ?? ''}',
                                 style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                               ),
                             )
@@ -138,10 +139,10 @@ class upcoming_events_card extends StatelessWidget {
                         ),
                         child: cardData.poster != null
                             ? Image(image: AssetImage(cardData.poster!))
-                            : Center(
+                            : const Center(
                           child: Text(
                             'No Poster',
-                            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),
@@ -158,7 +159,7 @@ class upcoming_events_card extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(top: 8),
                         child: Text(
-                          'Venue: ' + (cardData.venue ?? 'Unknown Venue'), // Handle null venue
+                          'Venue: ${cardData.venue ?? 'Unknown Venue'}', // Handle null venue
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w400,
@@ -178,7 +179,14 @@ class upcoming_events_card extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(top: 16.0),
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => submit_proposal_to_comp(),
+                              ),
+                            );
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.green,
                             shape: RoundedRectangleBorder(

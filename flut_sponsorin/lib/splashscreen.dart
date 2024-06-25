@@ -1,7 +1,6 @@
 import 'package:flut_sponsorin/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -18,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen>
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     Future.delayed(const Duration(seconds: 5), () {
       Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (context) => LoginScreen()));
+          .pushReplacement(MaterialPageRoute(builder: (context) => const LoginScreen()));
     });
   }
 
@@ -41,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen>
             // Colors.green.shade100
           ], begin: Alignment.topRight, end: Alignment.bottomLeft),
         ),
-        child: Column(
+        child: const Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image(image: AssetImage('lib/assets/logo.png')),

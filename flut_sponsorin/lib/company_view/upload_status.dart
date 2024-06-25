@@ -1,9 +1,8 @@
 import 'package:flut_sponsorin/company_view/discover_company.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 
 class upload_status extends StatefulWidget {
-  upload_status({super.key});
+  const upload_status({super.key});
 
   @override
   State<upload_status> createState() => _upload_statusState();

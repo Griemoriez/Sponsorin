@@ -4,7 +4,7 @@ import 'profile_sponsor_about.dart';
 import 'profile_sponsor_past.dart';
 
 class ProfileSponsor extends StatelessWidget {
-  const ProfileSponsor({Key? key}) : super(key: key);
+  const ProfileSponsor({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,25 +13,25 @@ class ProfileSponsor extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             // decoration: BoxDecoration(
             //   color: Colors.white.withOpacity(1), // Making the container transparent
             // ),
             child: Column(
               children: [
-                CircleAvatar(
+                const CircleAvatar(
                   radius: 50,
                   backgroundImage: AssetImage('lib/assets/irgl.png'), // Replace with your image URL
                 ),
-                SizedBox(height: 10),
-                Text(
+                const SizedBox(height: 10),
+                const Text(
                   'IRGL',
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 Text(
                   'Informatics Rally Games and Logic',
                   style: TextStyle(
@@ -39,7 +39,7 @@ class ProfileSponsor extends StatelessWidget {
                     color: Colors.grey[600],
                   ),
                 ),
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 Text(
                   'Surabaya, East Java, Indonesia',
                   style: TextStyle(
@@ -50,7 +50,7 @@ class ProfileSponsor extends StatelessWidget {
               ],
             ),
           ),
-          TabBar(
+          const TabBar(
             labelColor: Colors.green,
             unselectedLabelColor: Colors.grey,
             indicatorColor: Colors.green,
