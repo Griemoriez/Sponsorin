@@ -1,13 +1,13 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flut_sponsorin/sponsor_seeker_view/discovery_sponsor_home.dart';
 import 'package:flut_sponsorin/sponsor_seeker_view/list_company.dart';
 import 'package:flut_sponsorin/sponsor_seeker_view/list_submission.dart';
 import 'package:flut_sponsorin/sponsor_seeker_view/profile_sponsor.dart';
 import 'package:flut_sponsorin/sponsor_seeker_view/submit_proposal.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class submit_proposal_to_comp extends StatefulWidget {
+  const submit_proposal_to_comp({super.key});
+
   @override
   _SubmitProposalState createState() => _SubmitProposalState();
 }
@@ -17,15 +17,15 @@ class _SubmitProposalState extends State<submit_proposal_to_comp> {
 
   String? _selectedEvent;
   String? _selectedSponsorType;
-  TextEditingController _nominalController = TextEditingController();
+  final TextEditingController _nominalController = TextEditingController();
 
-  int _page = 0;
+  final int _page = 0;
   final List<Widget> _pages = [
-    discover_sponsor_home(),
-    ListCompany(),
-    submit_proposal(),
-    list_submission(),
-    ProfileSponsor(),
+    const discover_sponsor_home(),
+    const ListCompany(),
+    const submit_proposal(),
+    const list_submission(),
+    const ProfileSponsor(),
   ];
 
   @override
@@ -43,14 +43,14 @@ class _SubmitProposalState extends State<submit_proposal_to_comp> {
             borderRadius: BorderRadius.circular(12),
           ),
           backgroundColor: Colors.green[200],
-          title: Text('Submission Successful'),
-          content: Text('Waiting for news from the company!'),
+          title: const Text('Submission Successful'),
+          content: const Text('Waiting for news from the company!'),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         );
@@ -109,12 +109,12 @@ class _SubmitProposalState extends State<submit_proposal_to_comp> {
                 key: _formKey,
                 child: Column(
                   children: [
-                    Text(
+                    const Text(
                       'Pilih Proposal',
                       style: TextStyle(
                           fontSize: 24, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     DropdownButtonFormField<String>(
                       value: _selectedEvent,
                       items: ['IRGL 2021', 'IRGL 2022', 'IRGL 2023']
@@ -140,7 +140,7 @@ class _SubmitProposalState extends State<submit_proposal_to_comp> {
                       validator: (value) =>
                           value == null ? 'Please select an event' : null,
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     DropdownButtonFormField<String>(
                       value: _selectedSponsorType,
                       items: ['Bebas', 'Produk', 'Tunai']
@@ -166,7 +166,7 @@ class _SubmitProposalState extends State<submit_proposal_to_comp> {
                       validator: (value) =>
                           value == null ? 'Please select a sponsor type' : null,
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     TextFormField(
                       controller: _nominalController,
                       decoration: InputDecoration(
@@ -185,7 +185,7 @@ class _SubmitProposalState extends State<submit_proposal_to_comp> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 32),
+                    const SizedBox(height: 32),
                     Center(
                       child: ElevatedButton(
                         onPressed: () {
@@ -195,13 +195,13 @@ class _SubmitProposalState extends State<submit_proposal_to_comp> {
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.green,
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                               horizontal: 32, vertical: 12),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
                         ),
-                        child: Text('Submit'),
+                        child: const Text('Submit'),
                       ),
                     ),
                   ],

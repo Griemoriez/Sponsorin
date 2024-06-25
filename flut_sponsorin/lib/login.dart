@@ -42,12 +42,12 @@ class _LoginScreenState extends State<LoginScreen> {
       if (role == 'sponsor') {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => discover_company()),
+          MaterialPageRoute(builder: (context) => const discover_company()),
         );
       } else if (role == 'seeker') {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => discover_event()),
+          MaterialPageRoute(builder: (context) => const discover_event()),
         );
       }
     } else {
@@ -143,7 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           onPressed: () {
                             Navigator.pushReplacement(
                               context,
-                              MaterialPageRoute(builder: (context) => signup()),
+                              MaterialPageRoute(builder: (context) => const signup()),
                             );
                           },
                           child: const Text(

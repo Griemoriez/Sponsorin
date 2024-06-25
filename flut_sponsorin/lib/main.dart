@@ -1,8 +1,6 @@
-import 'package:flut_sponsorin/company_view/discover_company.dart';
 import 'package:flutter/material.dart';
 import 'package:flut_sponsorin/login.dart';
 
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 

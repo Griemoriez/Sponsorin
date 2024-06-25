@@ -9,14 +9,14 @@ class homePage extends StatefulWidget {
 }
 
 class _homePageState extends State<homePage> {
-  int _page = 0;
+  final int _page = 0;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage("lib/assets/BG.jpg"),
               fit: BoxFit.cover,
@@ -28,8 +28,8 @@ class _homePageState extends State<homePage> {
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
-            title: Padding(
-              padding: const EdgeInsets.only(top: 20),
+            title: const Padding(
+              padding: EdgeInsets.only(top: 20),
               child: Center(
                 child: Text(
                   "Sponsorin",
@@ -38,7 +38,7 @@ class _homePageState extends State<homePage> {
               ),
             ),
           ),
-          body: Center(
+          body: const Center(
             child: Text(
               'Hello, Flutter!',
               style: TextStyle(fontSize: 24, color: Colors.black),

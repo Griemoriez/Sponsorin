@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ProfileCompanyPast extends StatelessWidget {
-  const ProfileCompanyPast({Key? key}) : super(key: key);
+  const ProfileCompanyPast({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +37,12 @@ class SponsorCard extends StatelessWidget {
   final double rating;
 
   const SponsorCard({
-    Key? key,
+    super.key,
     required this.imageUrl,
     required this.title,
     required this.subtitle,
     required this.rating,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

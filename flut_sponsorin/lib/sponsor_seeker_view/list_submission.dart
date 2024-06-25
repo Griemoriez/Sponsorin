@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class list_submission extends StatefulWidget {
+  const list_submission({super.key});
+
   @override
   _ListSubmissionState createState() => _ListSubmissionState();
 }
@@ -114,26 +116,26 @@ class _ListSubmissionState extends State<list_submission> with SingleTickerProvi
               color: backgroundColor,
               borderRadius: BorderRadius.circular(12),
             ),
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'Detail Proposal',
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 16),
-                Text(
+                const SizedBox(height: 16),
+                const Text(
                   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor.',
                   style: TextStyle(fontSize: 16),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text('Close'),
+                  child: const Text('Close'),
                 ),
               ],
             ),
@@ -167,7 +169,7 @@ class _ListSubmissionState extends State<list_submission> with SingleTickerProvi
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('Close'),
+              child: const Text('Close'),
             ),
           ],
         );
@@ -180,28 +182,28 @@ class _ListSubmissionState extends State<list_submission> with SingleTickerProvi
     return DefaultTabController(
       length: 2,
       child: Padding(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 15),
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 15),
               child: Text(
                 "Hi, IRGL!",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(bottom: 15),
+              padding: const EdgeInsets.only(bottom: 15),
               child: TextField(
                 controller: _searchController,
                 decoration: InputDecoration(
                   focusColor: Colors.green.shade100,
                   labelText: 'Search',
                   hintText: 'irgl, ...',
-                  prefixIcon: Icon(Icons.search),
+                  prefixIcon: const Icon(Icons.search),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                    borderRadius: const BorderRadius.all(Radius.circular(20.0)),
                     borderSide: BorderSide(color: Colors.green.shade100),
                   ),
                 ),
@@ -209,7 +211,7 @@ class _ListSubmissionState extends State<list_submission> with SingleTickerProvi
             ),
             TabBar(
               controller: _tabController,
-              tabs: [
+              tabs: const [
                 Tab(text: "Submitted Proposals"),
                 Tab(text: "Offered Proposals"),
               ],
@@ -309,15 +311,15 @@ class _ListSubmissionState extends State<list_submission> with SingleTickerProvi
       margin: const EdgeInsets.symmetric(vertical: 8),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: ListTile(
-        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         title: Text(companyName,
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(location),
-            SizedBox(height: 4),
-            Row(
+            const SizedBox(height: 4),
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
@@ -327,16 +329,16 @@ class _ListSubmissionState extends State<list_submission> with SingleTickerProvi
               ],
             ),
             Padding(
-              padding: EdgeInsets.only(top: 5),
+              padding: const EdgeInsets.only(top: 5),
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                 decoration: BoxDecoration(
                   color: statusColor,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
                   status,
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                 ),
               ),
             ),
@@ -349,7 +351,7 @@ class _ListSubmissionState extends State<list_submission> with SingleTickerProvi
             borderRadius: BorderRadius.circular(8),
             color: const Color.fromARGB(255, 17, 88, 146),
           ),
-          child: Center(
+          child: const Center(
             child: Icon(
               Icons.business,
               color: Colors.white,

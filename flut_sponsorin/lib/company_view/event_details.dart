@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 class EventDetail extends StatelessWidget {
   final Event event;
 
-  const EventDetail({Key? key, required this.event}) : super(key: key);
+  const EventDetail({super.key, required this.event});
 
   @override
   Widget build(BuildContext context) {

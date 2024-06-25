@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ProfileCompanyHome extends StatelessWidget {
-  const ProfileCompanyHome({Key? key}) : super(key: key);
+  const ProfileCompanyHome({super.key});
 
   final List<Map<String, String>> posts = const [
     {

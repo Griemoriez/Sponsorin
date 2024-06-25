@@ -4,8 +4,6 @@ import 'package:flut_sponsorin/company_view/profile_company.dart';
 import 'package:flut_sponsorin/company_view/proposal_page.dart';
 
 import 'package:flut_sponsorin/company_view/upcoming_events.dart';
-import 'package:flut_sponsorin/company_view/upload_status.dart';
-import 'package:flut_sponsorin/company_view/list_overall_events.dart';
 
 import 'package:flutter/material.dart';
 
@@ -19,10 +17,10 @@ class discover_company extends StatefulWidget {
 class _homePageState extends State<discover_company> {
   int _page = 0;
   final List<Widget> _pages = [
-    DiscoverCompanyHome(),
-    upcoming_events(),
-    ProposalPage(),
-    ProfileCompany(),
+    const DiscoverCompanyHome(),
+    const upcoming_events(),
+    const ProposalPage(),
+    const ProfileCompany(),
   ];
   @override
   Widget build(BuildContext context) {

@@ -19,24 +19,26 @@ class ProfileSponsorHome extends StatelessWidget {
     },
   ];
 
+   ProfileSponsorHome({super.key});
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      padding: EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(10.0),
       itemCount: items.length,
       itemBuilder: (context, index) {
         return Center(
           child: Container(
             width: MediaQuery.of(context).size.width * 0.7,
             height: MediaQuery.of(context).size.height * 0.5, // Adjust height of the card
-            margin: EdgeInsets.symmetric(vertical: 10.0),
+            margin: const EdgeInsets.symmetric(vertical: 10.0),
             child: Card(
               elevation: 5,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Container(
+                  SizedBox(
                     height: MediaQuery.of(context).size.height * 0.3, // Increase the height of the image container
                     child: Image.asset(
                       items[index]['image']!,
@@ -48,7 +50,7 @@ class ProfileSponsorHome extends StatelessWidget {
                     child: Text(
                       items[index]['title']!,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),

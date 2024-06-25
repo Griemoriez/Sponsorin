@@ -1,4 +1,3 @@
-import 'package:flut_sponsorin/company_view/profile_company.dart';
 import 'package:flut_sponsorin/sponsor_seeker_view/detail_company.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -85,15 +84,15 @@ class _ListCompanyState extends State<ListCompany> {
               filled: true,
             ),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           const Text(
             'Company List',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Expanded(
             child: filteredCompanies.isEmpty
-                ? Center(child: Text('No companies found'))
+                ? const Center(child: Text('No companies found'))
                 : ListView.builder(
               itemCount: filteredCompanies.length,
               itemBuilder: (context, index) {
@@ -103,7 +102,7 @@ class _ListCompanyState extends State<ListCompany> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => detail_company()),
+                          builder: (context) => const detail_company()),
                     );
                   },
                   child: companyCard(
@@ -125,7 +124,7 @@ class _ListCompanyState extends State<ListCompany> {
       margin: const EdgeInsets.symmetric(vertical: 8),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: ListTile(
-        contentPadding: EdgeInsets.all(16),
+        contentPadding: const EdgeInsets.all(16),
         leading: Container(
           width: 60,
           height: 60,

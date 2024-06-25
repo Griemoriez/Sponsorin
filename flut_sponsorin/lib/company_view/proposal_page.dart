@@ -1,7 +1,8 @@
-import 'package:flut_sponsorin/company_view/event_details.dart';
 import 'package:flut_sponsorin/components/EventData.dart';
 import 'package:flut_sponsorin/components/EventDataGlobals.dart';
 import 'package:flutter/material.dart';
+
+import 'event_details.dart';
 
 class ProposalPage extends StatefulWidget {
   const ProposalPage({super.key});
@@ -12,7 +13,7 @@ class ProposalPage extends StatefulWidget {
 
 class _ProposalPageState extends State<ProposalPage>
     with SingleTickerProviderStateMixin {
-  TextEditingController _search = TextEditingController();
+  final TextEditingController _search = TextEditingController();
   late TabController _tabController;
 
   List<EventData> filteredSubmittedEvents = [];
@@ -125,7 +126,7 @@ class _ProposalPageState extends State<ProposalPage>
     return DefaultTabController(
       length: 4,
       child: Padding(
-        padding: EdgeInsets.only(top: 20, right: 20, left: 20),
+        padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -237,7 +238,7 @@ class ProposalListView extends StatelessWidget {
               child: Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0),
-                  side: BorderSide(
+                  side: const BorderSide(
                     color: Colors.grey, // Warna border
                     width: 2.0, // Lebar border
                   ),
@@ -273,22 +274,22 @@ class ProposalListView extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Text(
-                        'Venue: ' + event.venue,
+                        'Venue: ${event.venue}',
                         style: TextStyle(
                           fontSize: 17,
                           color: Colors.grey[800],
                         ),
                       ),
                       Text(
-                        'Event Date: ' + event.time,
+                        'Event Date: ${event.time}',
                         style: TextStyle(
                             fontSize: 16,
                             color: Colors.grey[800],
                             fontWeight: FontWeight.w500),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       if (onAccept != null &&
                           onDecline != null &&
                           event.status == -1)
@@ -308,9 +309,9 @@ class ProposalListView extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(8.0),
                                   ),
                                 ),
-                                child: Text(
+                                child: const Text(
                                   'ACCEPT',
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.w800),
                                 ),
@@ -331,9 +332,9 @@ class ProposalListView extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(8.0),
                                   ),
                                 ),
-                                child: Text(
+                                child: const Text(
                                   'DECLINE',
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.w800),
                                 ),
@@ -417,7 +418,7 @@ class ProposalListView extends StatelessWidget {
                         Center(
                             child: Text(
                           'Accepted'.toUpperCase(),
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontWeight: FontWeight.w700,
                               fontSize: 20,
                               color: Colors.green),
@@ -426,7 +427,7 @@ class ProposalListView extends StatelessWidget {
                         Center(
                             child: Text(
                           'declined'.toUpperCase(),
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontWeight: FontWeight.w700,
                               fontSize: 20,
                               color: Colors.red),

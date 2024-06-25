@@ -21,7 +21,7 @@ class _SignupAsCompanyState extends State<SignupAsCompany> {
     return Stack(
       children: [
         Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage("lib/assets/startupandroid.png"),
                   fit: BoxFit.cover)),
@@ -34,16 +34,16 @@ class _SignupAsCompanyState extends State<SignupAsCompany> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 30),
+                  const Padding(
+                    padding: EdgeInsets.only(bottom: 30),
                     child: Text(
                       "Sign Up",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 30),
+                  const Padding(
+                    padding: EdgeInsets.only(bottom: 30),
                     child: Text(
                       "Company / Sponsor",
                       style:
@@ -62,7 +62,7 @@ class _SignupAsCompanyState extends State<SignupAsCompany> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 30.0),
                     child: TextField(
@@ -76,7 +76,7 @@ class _SignupAsCompanyState extends State<SignupAsCompany> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 30.0),
                     child: TextField(
@@ -90,7 +90,7 @@ class _SignupAsCompanyState extends State<SignupAsCompany> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 30.0),
                     child: TextField(
@@ -104,14 +104,14 @@ class _SignupAsCompanyState extends State<SignupAsCompany> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
+                  const Padding(
+                    padding: EdgeInsets.symmetric(
                         horizontal: 30.0, vertical: 10),
                     child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text("minimum 8 characters password")),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 30.0),
                     child: TextField(
@@ -125,24 +125,24 @@ class _SignupAsCompanyState extends State<SignupAsCompany> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Padding(
                     padding: const EdgeInsets.only(right: 30.0),
                     child: Align(
                       alignment: Alignment.centerRight,
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginScreen()));
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xff008037),
-                          padding: EdgeInsets.symmetric(
+                          backgroundColor: const Color(0xff008037),
+                          padding: const EdgeInsets.symmetric(
                               horizontal: 50, vertical: 15),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
                           ),
                         ),
-                        child: Text(
+                        child: const Text(
                           'Next',
                           style: TextStyle(color: Colors.white, fontSize: 15),
                         ),

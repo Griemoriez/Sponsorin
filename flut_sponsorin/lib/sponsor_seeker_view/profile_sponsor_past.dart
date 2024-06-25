@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProfileSponsorPast extends StatelessWidget {
+  const ProfileSponsorPast({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,37 +25,37 @@ class ProfileSponsorPast extends StatelessWidget {
 class SponsorCard extends StatelessWidget {
   final Sponsor sponsor;
 
-  SponsorCard({required this.sponsor});
+  const SponsorCard({super.key, required this.sponsor});
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Container(
         width: MediaQuery.of(context).size.width * 0.9, // Set the width of the card here
-        margin: EdgeInsets.symmetric(vertical: 10.0),
+        margin: const EdgeInsets.symmetric(vertical: 10.0),
         child: Card(
           elevation: 5,
           child: Padding(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   sponsor.name,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 Text(
                   sponsor.time,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14,
                     color: Colors.grey,
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -62,7 +64,7 @@ class SponsorCard extends StatelessWidget {
                         // Show modal with sponsor description
                         _showDescriptionDialog(context, sponsor);
                       },
-                      child: Text('Description'),
+                      child: const Text('Description'),
                     ),
                     Row(
                       children: List.generate(
@@ -93,12 +95,12 @@ class SponsorCard extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(sponsor.description),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               ElevatedButton(
                 onPressed: () {
                   _launchURL(sponsor.url);
                 },
-                child: Text('Open Link'),
+                child: const Text('Open Link'),
               ),
             ],
           ),
@@ -107,7 +109,7 @@ class SponsorCard extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('Close'),
+              child: const Text('Close'),
             ),
           ],
         );

@@ -21,17 +21,19 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class submit_proposal extends StatefulWidget {
+  const submit_proposal({super.key});
+
   @override
   _SubmitProposalState createState() => _SubmitProposalState();
 }
 
 class _SubmitProposalState extends State<submit_proposal> {
   final _formKey = GlobalKey<FormState>();
-  TextEditingController _eventNameController = TextEditingController();
-  TextEditingController _eventDescriptionController = TextEditingController();
-  TextEditingController _eventDateController = TextEditingController();
-  TextEditingController _idCardController = TextEditingController();
-  TextEditingController _uploadProposalController = TextEditingController();
+  final TextEditingController _eventNameController = TextEditingController();
+  final TextEditingController _eventDescriptionController = TextEditingController();
+  final TextEditingController _eventDateController = TextEditingController();
+  final TextEditingController _idCardController = TextEditingController();
+  final TextEditingController _uploadProposalController = TextEditingController();
 
   @override
   void dispose() {
@@ -66,14 +68,14 @@ class _SubmitProposalState extends State<submit_proposal> {
             borderRadius: BorderRadius.circular(12),
           ),
           backgroundColor: Colors.green[200],
-          title: Text('Submission Successful'),
-          content: Text('You Have Updated Your Proposal!'),
+          title: const Text('Submission Successful'),
+          content: const Text('You Have Updated Your Proposal!'),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         );
@@ -90,11 +92,11 @@ class _SubmitProposalState extends State<submit_proposal> {
           child: Column(
             // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Input Proposal',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               TextFormField(
                 controller: _eventNameController,
                 decoration: InputDecoration(
@@ -106,7 +108,7 @@ class _SubmitProposalState extends State<submit_proposal> {
                   ),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               TextFormField(
                 controller: _eventDescriptionController,
                 decoration: InputDecoration(
@@ -118,7 +120,7 @@ class _SubmitProposalState extends State<submit_proposal> {
                   ),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               TextFormField(
                 controller: _eventDateController,
                 decoration: InputDecoration(
@@ -129,7 +131,7 @@ class _SubmitProposalState extends State<submit_proposal> {
                     borderRadius: BorderRadius.circular(12),
                   ),
                   suffixIcon: IconButton(
-                    icon: Icon(Icons.calendar_today),
+                    icon: const Icon(Icons.calendar_today),
                     onPressed: () {
                       _selectDate(context);
                     },
@@ -138,7 +140,7 @@ class _SubmitProposalState extends State<submit_proposal> {
                 readOnly: true,
               ),
               
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               TextFormField(
                 controller: _uploadProposalController,
                 decoration: InputDecoration(
@@ -150,7 +152,7 @@ class _SubmitProposalState extends State<submit_proposal> {
                   ),
                 ),
               ),
-              SizedBox(height: 32),
+              const SizedBox(height: 32),
               Center(
                 child: ElevatedButton(
                   onPressed: () {
@@ -161,12 +163,12 @@ class _SubmitProposalState extends State<submit_proposal> {
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,
-                    padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                    padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  child: Text('Submit'),
+                  child: const Text('Submit'),
                 ),
               ),
             ],

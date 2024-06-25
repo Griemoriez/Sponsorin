@@ -5,7 +5,7 @@ import 'package:flut_sponsorin/company_view/profile_company_home.dart';
 import 'package:flut_sponsorin/company_view/profile_company_past.dart';
 
 class ProfileCompany extends StatelessWidget {
-  const ProfileCompany({Key? key}) : super(key: key);
+  const ProfileCompany({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +57,7 @@ class ProfileCompany extends StatelessWidget {
                 ],
               ),
             ),
-            Expanded(
+            const Expanded(
               child: TabBarView(
                 children: [
                   ProfileCompanyHome(),

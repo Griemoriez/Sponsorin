@@ -8,7 +8,7 @@ import '../models/post.dart';
 import '../globals.dart' as globals;
 
 class discover_sponsor_home extends StatefulWidget {
-  const discover_sponsor_home({Key? key}) : super(key: key);
+  const discover_sponsor_home({super.key});
 
   @override
   State<discover_sponsor_home> createState() => _discover_sponsor_homeState();
@@ -91,7 +91,7 @@ class _discover_sponsor_homeState extends State<discover_sponsor_home> {
         Scaffold(
           backgroundColor: Colors.transparent,
           body: isLoading
-              ? Center(child: CircularProgressIndicator())
+              ? const Center(child: CircularProgressIndicator())
               : SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Column(
@@ -117,7 +117,7 @@ class _discover_sponsor_homeState extends State<discover_sponsor_home> {
                 ),
                 ListView.builder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: filteredCardData.length,
                   itemBuilder: (context, index) {
                     final item = filteredCardData[index];
@@ -153,13 +153,13 @@ class _discover_sponsor_homeState extends State<discover_sponsor_home> {
                                       children: <Widget>[
                                         Text(
                                           item['title']!,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
                                         Text(
                                           item['time']!,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             color: Colors.grey,
                                             fontSize: 12,
                                           ),
@@ -169,13 +169,13 @@ class _discover_sponsor_homeState extends State<discover_sponsor_home> {
                                   ),
                                   PopupMenuButton(
                                     itemBuilder: (context) => [
-                                      PopupMenuItem(
-                                        child: Text('Option 1'),
+                                      const PopupMenuItem(
                                         value: 'Option 1',
+                                        child: Text('Option 1'),
                                       ),
-                                      PopupMenuItem(
-                                        child: Text('Option 2'),
+                                      const PopupMenuItem(
                                         value: 'Option 2',
+                                        child: Text('Option 2'),
                                       ),
                                     ],
                                   ),
@@ -184,7 +184,7 @@ class _discover_sponsor_homeState extends State<discover_sponsor_home> {
                               const SizedBox(height: 10),
                               Text(
                                 item['event']!,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -207,8 +207,8 @@ class _discover_sponsor_homeState extends State<discover_sponsor_home> {
                                           ? Colors.red
                                           : Colors.grey,
                                     ),
-                                    SizedBox(width: 5),
-                                    Expanded(
+                                    const SizedBox(width: 5),
+                                    const Expanded(
                                       child: Text(
                                         'Like',
                                         style: TextStyle(
@@ -233,11 +233,11 @@ class _discover_sponsor_homeState extends State<discover_sponsor_home> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => upload_status()),
+                MaterialPageRoute(builder: (context) => const upload_status()),
               );
             },
-            child: const Icon(Icons.add),
             backgroundColor: Colors.green,
+            child: const Icon(Icons.add),
           ),
         ),
       ],

@@ -30,9 +30,9 @@ class detail_submitted_events extends StatelessWidget {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      icon: Icon(Icons.arrow_back_ios),
+                      icon: const Icon(Icons.arrow_back_ios),
                     ),
-                    Expanded(
+                    const Expanded(
                       child: Align(
                         alignment: Alignment.center,
                         child: Text(
@@ -45,12 +45,12 @@ class detail_submitted_events extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                         width:
                             48),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 buildSectionTitle('EVENT NAME'),
@@ -58,7 +58,7 @@ class detail_submitted_events extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 10),
                   child: buildSectionContent(detailSubmitted.title),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 buildSectionTitle('EVENT DATE AND TIME :'),
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
@@ -69,30 +69,30 @@ class detail_submitted_events extends StatelessWidget {
                     'Final : 21 Oktober 2023',
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 buildSectionTitle('EVENT LOCATION'),
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: buildSectionContent(detailSubmitted.venue),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 buildSectionTitle('TARGET'),
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: buildSectionContent(
                       '70 team @3 anak SMA/SMK seluruh Indonesia'),
                 ),
-                SizedBox(height: 32),
+                const SizedBox(height: 32),
                 SizedBox(
                   width: double.infinity,
                   height: 50,
                   child: ElevatedButton.icon(
                     onPressed: () {},
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.file_copy,
                       color: Colors.black,
                     ),
-                    label: Text(
+                    label: const Text(
                       'PROPOSAL FILE',
                       style: TextStyle(color: Colors.black),
                     ),
@@ -104,7 +104,7 @@ class detail_submitted_events extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Row(
                   children: [
                     Expanded(
@@ -120,14 +120,14 @@ class detail_submitted_events extends StatelessWidget {
                               borderRadius: BorderRadius.circular(8.0),
                             ),
                           ),
-                          child: Text(
+                          child: const Text(
                             'DECLINE',
                             style: TextStyle(color: Colors.black),
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(width: 16),
+                    const SizedBox(width: 16),
                     Expanded(
                       child: SizedBox(
                         height: 50,
@@ -141,7 +141,7 @@ class detail_submitted_events extends StatelessWidget {
                               borderRadius: BorderRadius.circular(8.0),
                             ),
                           ),
-                          child: Text(
+                          child: const Text(
                             'ACCEPT',
                             style: TextStyle(color: Colors.black),
                           ),
@@ -161,7 +161,7 @@ class detail_submitted_events extends StatelessWidget {
   Widget buildSectionTitle(String title) {
     return Text(
       title,
-      style: TextStyle(
+      style: const TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.bold,
         color: Colors.black,
@@ -173,14 +173,14 @@ class detail_submitted_events extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: 100,
-      padding: EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(10.0),
       decoration: BoxDecoration(
         color: Colors.green[100],
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: Text(
         content,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 16,
           color: Colors.black,
         ),
@@ -193,16 +193,16 @@ class detail_submitted_events extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: Color(0xff579371),
+          backgroundColor: const Color(0xff579371),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.0),
           ),
-          content: Container(
+          content: SizedBox(
             height: 200,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   'ARE YOU SURE WANT TO TAKE SPONSOR OF THIS EVENT?',
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -210,7 +210,7 @@ class detail_submitted_events extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -224,8 +224,8 @@ class detail_submitted_events extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
+                      child: const Padding(
+                        padding: EdgeInsets.all(10.0),
                         child: Text(
                           'NO',
                           style: TextStyle(color: Colors.white),
@@ -242,8 +242,8 @@ class detail_submitted_events extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
+                      child: const Padding(
+                        padding: EdgeInsets.all(10.0),
                         child: Text(
                           'YES, SURE',
                           style: TextStyle(color: Colors.white),
@@ -269,13 +269,13 @@ class detail_submitted_events extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.0),
           ),
-          content: Container(
+          content: SizedBox(
             width: 400,
             height: 200,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   'ARE YOU SURE WANT TO DECLINE SPONSOR OF THIS EVENT?',
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -283,7 +283,7 @@ class detail_submitted_events extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -297,7 +297,7 @@ class detail_submitted_events extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                       ),
-                      child: Text(
+                      child: const Text(
                         'NO',
                         style: TextStyle(color: Colors.white),
                       ),
@@ -312,7 +312,7 @@ class detail_submitted_events extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                       ),
-                      child: Text(
+                      child: const Text(
                         'YES, SURE',
                         style: TextStyle(color: Colors.white),
                       ),
@@ -332,15 +332,15 @@ class detail_submitted_events extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: Color(0xff579371),
+          backgroundColor: const Color(0xff579371),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.0),
           ),
-          content: Container(
+          content: SizedBox(
             height: 200,
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Text(
+              const Text(
                 'EVENT SPONSORED',
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -348,7 +348,7 @@ class detail_submitted_events extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Text(
+              const Text(
                 'Please daily check your Whatsapp for further information from the sponsor seekers.',
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -356,11 +356,11 @@ class detail_submitted_events extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => discover_company()));
+                      builder: (context) => const discover_company()));
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green[600],
@@ -368,8 +368,8 @@ class detail_submitted_events extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
+                child: const Padding(
+                  padding: EdgeInsets.all(10.0),
                   child: Text(
                     'OK',
                     style: TextStyle(color: Colors.white),
@@ -392,12 +392,12 @@ class detail_submitted_events extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.0),
           ),
-          content: Container(
+          content: SizedBox(
             width: 400,
             height: 200,
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Text(
+              const Text(
                 'EVENT DECLINE',
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -405,7 +405,7 @@ class detail_submitted_events extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Text(
+              const Text(
                 'Thank you for your confirmation',
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -413,11 +413,11 @@ class detail_submitted_events extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => discover_company()));
+                      builder: (context) => const discover_company()));
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green[600],
@@ -425,8 +425,8 @@ class detail_submitted_events extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
+                child: const Padding(
+                  padding: EdgeInsets.all(10.0),
                   child: Text(
                     'OK',
                     style: TextStyle(color: Colors.white),
