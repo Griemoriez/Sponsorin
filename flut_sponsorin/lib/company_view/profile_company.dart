@@ -35,7 +35,7 @@ class ProfileCompany extends StatelessWidget {
                   const CircleAvatar(
                     radius: 50,
                     backgroundImage: AssetImage(
-                        'lib/assets/irgl.png'), // Replace with your image URL
+                        'lib/assets/mandira.png'), // Replace with your image URL
                   ),
                   const SizedBox(height: 10),
                   const Text(
