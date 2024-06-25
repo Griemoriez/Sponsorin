@@ -5,6 +5,8 @@ import 'package:flut_sponsorin/company_view/upload_status.dart';
 import '../models/user.dart';
 import '../models/post.dart';
 
+import '../globals.dart' as globals;
+
 class DiscoverCompanyHome extends StatefulWidget {
   const DiscoverCompanyHome({Key? key}) : super(key: key);
 
@@ -33,14 +35,18 @@ class _DiscoverCompanyHomeState extends State<DiscoverCompanyHome> {
       var post = postBox.get(postKey) as Post;
       var user = userBox.get(post.poster) as User;
 
-      tempCardData.add({
-        'title': user.name,
-        'time': DateFormat('dd MMM yyyy, HH:mm').format(post.time_posted),
-        'event': post.title,
-        'description': post.description,
-        'imagePath': user.picture ?? 'lib/assets/logo.png', // Use placeholder if null,
-        'isFavorite': "false", // Initialize isFavorite as false
-      });
+      if (user.role == globals.loggedInUser?.role) {
+        continue;
+      } else {
+        tempCardData.add({
+          'title': user.name,
+          'time': DateFormat('dd MMM yyyy, HH:mm').format(post.time_posted),
+          'event': post.title,
+          'description': post.description,
+          'imagePath': user.picture ?? 'lib/assets/logo.png', // Use placeholder if null,
+          'isFavorite': "false", // Initialize isFavorite as false
+        });
+      }
     }
 
     setState(() {

@@ -17,7 +17,7 @@ class _discover_sponsor_state extends State<discover_event> {
   int _page = 0;
   final List<Widget> _pages = [
     discover_sponsor_home(),
-    list_company(),
+    ListCompany(),
     list_submission(),
     ProfileSponsor(),
   ];

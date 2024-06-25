@@ -22,7 +22,7 @@ class _SubmitProposalState extends State<submit_proposal_to_comp> {
   int _page = 0;
   final List<Widget> _pages = [
     discover_sponsor_home(),
-    list_company(),
+    ListCompany(),
     submit_proposal(),
     list_submission(),
     ProfileSponsor(),

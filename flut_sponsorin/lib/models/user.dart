@@ -31,6 +31,15 @@ class User extends HiveObject {
   @HiveField(8)
   String? website;
 
+  @HiveField(9)
+  String? brief;
+
+  @HiveField(10)
+  String? about;
+
+  @HiveField(11)
+  String? address;
+
   User({
     required this.id,
     required this.role,
@@ -41,5 +50,8 @@ class User extends HiveObject {
     required this.email,
     this.phone,
     this.website,
+    this.brief,
+    this.about,
+    this.address
   });
 }
